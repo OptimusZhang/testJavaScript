@@ -1,0 +1,276 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>BarChart Sample</title>
+    <link rel="stylesheet" href="css/bootstrap/bootstrap.css"/>
+    <link rel="stylesheet" href="css/bootstrap-datepicker/bootstrap-datepicker3.css"/>
+    <link rel="stylesheet" href="css/bootstrap-dialog/bootstrap-dialog.css"/>
+    <link rel="stylesheet" href="css/bootstrap-select/bootstrap-select.css"/>
+    <script src="./js/Chart/Chart.js"></script>
+    <script src="./js/jquery/jquery.js"></script>
+    <script src="./js/bootstrap/bootstrap.js"></script>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <br/>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">Show BarChart</div>
+                <div class="panel-body">
+                    <br/>
+                    <canvas id="myChart"></canvas>
+                    <br/>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">Show BarChart Data</div>
+                <div class="panel-body">
+                    <div class="col-md-12">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="date">日付（X）</label>
+                                <input type="text" id="date" class="form-control" data-provide="datepicker"
+                                       data-date-format="yyyy/mm/dd" style="color:red;font-weight:bolder" value=""/>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="amount">数量（Y）</label>
+                                <input type="text" id="amount" class="form-control" style="color:red;font-weight:bolder"
+                                       value="" onblur="amountChangeFun()"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+    var barChartData = {
+        labels: ['2015/06/01', '2015/06/02', '2015/06/03', '2015/06/04',
+            '2015/06/05', '2015/06/06', '2015/06/07', '2015/06/08'
+            , '2015/06/09', '2015/06/10', '2015/06/11', '2015/06/12'],
+        datasets: [
+            {
+                label: "My First dataset",
+                fillColor: "rgba(151,187,205,0.5)",
+                strokeColor: "rgba(151,187,205,0.8)",
+                highlightFill: "rgba(0,0,128,1)",
+                highlightStroke: "rgba(0,0,1285,1)",
+                data: [1000, 0, 0, 1500, 400, 2000,
+                    0, 0, 0, 800, 100, 1921]
+            }
+        ]
+    };
+    var barChartOptionsOfModify = {
+        scaleShowGridLines: true,
+        scaleGridLineColor: "rgba(0,0,0,0.1)",
+        scaleGridLineWidth: 1,
+        animation: true,
+        tooltipEvents: [],
+        tooltipEventsColorUnchanged: ["touchstart", "touchmove", "mouseout"],
+        showTooltips: true,
+        onAnimationComplete: function(){
+            // ツールチップを表示する。
+            myBarChart.showTooltip([activeBar], true);
+        }
+    };
+
+    var helpers = Chart.helpers;
+
+    var canvas = $('#myChart');
+    canvas.height(250);
+    canvas.width(canvas.closest("div").width());
+    var ctx = canvas[0].getContext("2d");
+    var myBarChart = new Chart(ctx).Bar(barChartData, barChartOptionsOfModify);
+
+    // PopUp画面で選択した棒をハイライト表示する。
+    // TODO　Popupで選択した棒のindexはず、一旦「3」を設定する。
+    var activeBarIndex = 3;
+    var activeBar = myBarChart.datasets[0].bars[activeBarIndex];
+    $('#date').val(activeBar.label);
+    $('#amount').val(activeBar.value);
+    activeBar.fillColor = activeBar.highlightFill;
+    activeBar.strokeColor = activeBar.highlightStroke;
+    myBarChart.showTooltip([activeBar], true);
+
+    // Bar色が変わらなくてtooltipを表示する。
+    if (myBarChart.options.showTooltips) {
+        helpers.bindEvents(myBarChart, myBarChart.options.tooltipEventsColorUnchanged, function (evt) {
+            var activeBars = (evt.type !== 'mouseout') ? this.getBarsAtEvent(evt) : [];
+            myBarChart.showTooltip(activeBars, true);
+        });
+    }
+
+    // クリックで選択された棒のIndexを取得する。
+    var getBarsIndexAtEvent = function (e) {
+        var eventPosition = helpers.getRelativePosition(e),
+                barIndex;
+
+        for (var datasetIndex = 0; datasetIndex < myBarChart.datasets.length; datasetIndex++) {
+            for (barIndex = 0; barIndex < myBarChart.datasets[datasetIndex].bars.length; barIndex++) {
+                if (myBarChart.datasets[datasetIndex].bars[barIndex].inRange(eventPosition.x, eventPosition.y)) {
+                    return barIndex;
+                }
+            }
+        }
+    };
+
+
+    // 選択をしなければ、数量の調整が行わない、
+    // 選択したら（クリック済み）、数量の調整が行える。
+    // 初期処理で、PopUp画面で選択した棒も本画面にクリック済みとして扱う。
+
+    // MouseUpの時、clickedとして扱う。
+    var clickedFlg;
+    // どのBarを選択したかを標識
+    var clickedLabel = activeBar.label;
+    // MouseDownタイミングで、マウスのTargetはBarであるかを標識
+    var validAreaFlg = false;
+    // Barの長さの調整があるかを標識
+    var moveMovedFlg = false;
+
+    // Txt部品の数量が変わると、500msの延期連動を行う。
+    var waitingTime;
+
+    // イベント定義 ===========================================
+    // クリック開始
+    canvas[0].addEventListener("mousedown", function (evt) {
+
+        var newActiveBars = myBarChart.getBarsAtEvent(evt);
+        if (newActiveBars && newActiveBars.length > 0) {
+
+            validAreaFlg = true;
+
+            var newActiveBar = newActiveBars[0];
+            if (newActiveBar.label === clickedLabel) {
+                clickedFlg = true;
+            }
+            else if (newActiveBar.value > 0) {
+                // 昔Barのカラーを消して、新しいBarをHightLight表示する。
+                activeBar.fillColor = myBarChart.datasets[0].fillColor;
+                activeBar.strokeColor = myBarChart.datasets[0].strokeColor;
+                newActiveBar.fillColor = newActiveBar.highlightFill;
+                newActiveBar.strokeColor = newActiveBar.highlightStroke;
+                activeBar = newActiveBar;
+                // 調整したBarを再表示する。
+                myBarChart.draw();
+                // ツールチップを表示する。
+                myBarChart.showTooltip([activeBar], true);
+
+                // 計算した値を表示する。
+                $('#date').val(activeBar.label);
+                $('#amount').val(activeBar.value);
+
+                clickedFlg = false;
+            }
+        }
+        else {
+            validAreaFlg = false;
+//            clickedFlg = false;
+        }
+    }, false);
+
+    // クリック中
+    canvas[0].addEventListener("mousemove", function (evt) {
+
+        var newActiveBars =[];
+        // 選択済みとなるし、かつドラッグしながら、数量の調整が行える。
+        if (clickedFlg && validAreaFlg) {
+            var myBarChartScale = myBarChart.scale;
+            // 棒グラフを描いたエリア座標範囲（Y座標のMAX-Y座標MIN）
+            var htmlHeightOfDrawingArea = myBarChartScale.endPoint - myBarChartScale.startPoint;
+            // 棒の値の範囲（MAX値-MIN値）
+            var scaleHeightOfDrawingArea = myBarChartScale.max - myBarChartScale.min;
+            // マウスダウンところのY座標
+            var myBarChartPosition = canvas[0].getBoundingClientRect();
+            var htmlHeightOfMouseDownArea = myBarChartPosition.top + myBarChartScale.endPoint - evt.clientY;
+
+            // 棒の値 / 棒の値の範囲 = マウスダウンところのY座標　/　棒グラフを描いたエリア座標範囲
+            // 棒の値 = 棒の値の範囲 * (マウスダウンところのY座標　/　棒グラフを描いたエリア座標範囲)
+            var currentValue = scaleHeightOfDrawingArea * (htmlHeightOfMouseDownArea / htmlHeightOfDrawingArea);
+
+            // 整数でない場合、切り上げをする。
+            // 数量の調整範囲は「>=1」はず
+            activeBar.value = currentValue > 0 ? Math.ceil(currentValue) : 1;
+
+            // 計算した値を表示する。
+            $('#date').val(activeBar.label);
+            $('#amount').val(activeBar.value);
+            myBarChart.draw();
+
+            // 計算した値のツールチップを表示する。
+            newActiveBars.push(activeBar);
+            myBarChart.showTooltip(newActiveBars, true);
+            moveMovedFlg = true;
+        }
+        else {
+            // 選択がしていないならば、数量の調整が行わない。
+            // ツールチップを表示する。
+            newActiveBars = myBarChart.getBarsAtEvent(evt);
+            if (newActiveBars) {
+                myBarChart.showTooltip(newActiveBars, true);
+            }
+            moveMovedFlg = false;
+        }
+    }, false);
+
+    // クリック終了(マウスアップはどこでも良いのでdocumentから引っ張っている)
+    document.addEventListener("mouseup", function (evt) {
+
+        if (moveMovedFlg) {
+            // 調整したBarを再表示する。
+            myBarChart.update();
+            activeBar.fillColor = activeBar.highlightFill;
+            activeBar.strokeColor = activeBar.highlightStroke;
+
+            // ツールチップを表示する。
+            myBarChart.showTooltip([activeBar], true);
+        }
+        else {
+            if (validAreaFlg) {
+                // Barを選択した上で、clickedとして扱う。
+                clickedFlg = true;
+                clickedLabel = activeBar.label;
+            }
+            else {
+                // Barを選択しなければ、何もしない。
+                clickedFlg = false;
+//                clickedLabel = '';
+            }
+        }
+
+        // 各フラグをクリアする。
+        validAreaFlg = false;
+        moveMovedFlg = false;
+    }, false);
+
+    // Text値を変わると、Barの値を連動できる。
+    var amountChangeFun = function () {
+        var valueOfAmount = $('#amount').val();
+        if (valueOfAmount > 0) {
+            //　入力した数量より、選択されたBarの値を再設定。
+            activeBar.value = valueOfAmount;
+            // BarChartのScaleを再計算する。
+            myBarChart.update();
+            activeBar.fillColor = activeBar.highlightFill;
+            activeBar.strokeColor = activeBar.highlightStroke;
+        }
+    };
+
+</script>
+</body>
+</html>

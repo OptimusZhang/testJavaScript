@@ -1,0 +1,128 @@
+﻿<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8"/>
+        <title>Radar Sample</title>
+        <script src="./js/Chart/Chart.js"></script>
+    </head>
+    <body>
+        <canvas id="myChart" width="400" height="400"></canvas>
+        <script>
+         var data = {
+             labels: ["Akasaka", "MinatoMirai", "Kachidoki", "Sapporo", "Fukuoka", "Aizu"],
+             datasets: [
+                 {
+                     label: "My First dataset",
+                     fillColor: "rgba(220,220,220,0.2)",
+                     strokeColor: "rgba(220,220,220,1)",
+                     pointColor: "rgba(220,220,220,1)",
+                     pointStrokeColor: "#fff",
+                     pointHighlightFill: "#fff",
+                     pointHighlightStroke: "rgba(220,220,220,1)",
+                     data: [65, 59, 90, 81, 56, 55]
+                 },
+                 {
+                     label: "My Second dataset",
+                     fillColor: "rgba(151,187,205,0.2)",
+                     strokeColor: "rgba(151,187,205,1)",
+                     pointColor: "rgba(151,187,205,1)",
+                     pointStrokeColor: "#fff",
+                     pointHighlightFill: "#fff",
+                     pointHighlightStroke: "rgba(151,187,205,1)",
+                     data: [28, 48, 40, 19, 96, 27]
+                 }
+             ]
+         };
+         var canvas = document.getElementById("myChart");
+         var ctx = canvas.getContext("2d");
+         var myRadarChart = new Chart(ctx).Radar(data);
+
+         // 変数定義 ==============================================
+         var zero;
+         var unitValue;
+         var max = [0, 0, 0];
+         // イベント定義 ===========================================
+
+         // クリック開始
+         var clickedLabel = "";
+         canvas.addEventListener("mousedown", function(evt){
+
+             // TODO ここは関数化しよう -------------------------
+
+             // 中心座標(x=0,y=0)の座標データを取得する
+             zero = [
+                 0,
+                 document.getElementById("myChart").width / 2,
+                 document.getElementById("myChart").height / 2 + 8 // TODO この8別途0,0のデータを裏に作って算出する事
+             ]; // value, x, y
+             
+             // Max値&当該データの座標を取得する
+             //var max = [0, 0, 0]; // value, x, y
+             myRadarChart.datasets.forEach(function(dataset){
+                 dataset.points.forEach(function(data){
+                     if(max[0] < data.value){
+                         max = [data.value, data.x, data.y];
+                     }
+                 });
+             });
+
+             // 中心座標とMaxの距離を計算する
+             var maxDist = Math.sqrt(Math.pow(zero[1] - max[1], 2) +
+                                     Math.pow(zero[2] - max[2], 2)
+                     , 2); // 中学でやった計算だね！2点間の距離を求める公式
+             
+             // maxDistの距離->maxの実際の値。つまり、値を割れば、距離1当たりの実際の値が取得できる
+             unitValue = max[0] / maxDist;
+             // TODO ここまで --------------------------------
+             // 補足：なぜ最初の1回だけにせず、mousedownでやっているか
+             // canvasの描画が終わる前に取得してしまうと、座標が正しく取得できない
+             // また、画面リサイズの時も考慮すると、ここでやるのがよさそう
+
+             var activePoints = myRadarChart.getPointsAtEvent(evt);
+             if(activePoints.length){ // データが取得できない場合->データ外でクリックされた場合 は無視する
+                 clickedLabel = activePoints[0].label; // 当該データ種の特定
+             } else {
+                 clickedLabel = "";
+             }
+         }, false);
+
+         // クリック中
+         canvas.addEventListener("mousemove", function(evt){
+             // クリックされ、データを変更する対象が決まっている時のみデータを動かす
+             if(clickedLabel){
+                 // 中心との距離を算出
+                 var dist = Math.sqrt(
+                     Math.pow(zero[1] - evt.pageX - canvas.offsetLeft, 2) +
+                     Math.pow(zero[2] - evt.pageY - canvas.offsetTop, 2)
+                     , 2);
+                 // 距離から設定すべき値を算出
+                 var newVal = Math.floor(dist * unitValue);
+                 console.log(unitValue);
+                 // 新しい値でデータを入れ替える
+                 myRadarChart.datasets[0].points.forEach(function(data){
+                     if(data.label === clickedLabel){
+                         var activePointsCollection = myRadarChart.getPointsAtEvent(evt);
+                         data.value = newVal;
+                         if(activePointsCollection.length > 0){
+                             myRadarChart.activeElements = [];
+                         }
+//                         if(newVal > max[0]){
+//                             myRadarChart.update();
+//                         }
+                         console.log(newVal);
+                     }
+                 });
+                 
+             }
+         }, false);
+
+         // クリック終了(マウスアップはどこでも良いのでdocumentから引っ張っている)
+         document.addEventListener("mouseup", function(){
+             myRadarChart.update();
+             clickedLabel = "";
+         }, false);
+         
+         
+        </script>
+    </body>
+</html>

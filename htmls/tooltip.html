@@ -1,0 +1,104 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Tooltip</title>
+    <link rel="stylesheet" href="css/bootstrap/bootstrap.css"/>
+    <link rel="stylesheet" href="css/bootstrap-datepicker/bootstrap-datepicker3.css"/>
+    <link rel="stylesheet" href="css/bootstrap-dialog/bootstrap-dialog.css"/>
+    <link rel="stylesheet" href="css/bootstrap-select/bootstrap-select.css"/>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+    <script src="./js/jquery/jquery.js"></script>
+    <script src="./js/jquery-ui/jquery-ui.js"></script>
+    <script src="./js/bootstrap/bootstrap.js"></script>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <br/>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">jQueryUI slider</div>
+                <div class="panel-body">
+                    <br/>
+                    <p>
+                        <label for="amount">Price range:</label>
+                        <input type="text" id="amount" readonly style="border:0; color:#f6931f; font-weight:bold;">
+                    </p>
+
+                    <div id="slider-range"></div>
+                    <br/>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">Tooltip</div>
+                <div class="panel-body">
+                    <button id="confirm-button" type="button" data-toggle="tooltip" class="btn btn-default" title="Tooltip on left">確定<span class="glyphicon glyphicon-ok" aria-hidden="true"></span></button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function() {
+        $('#confirm-button').tooltip();
+
+        $( "#slider-range" ).slider({
+            range: true,
+            min: 0,
+            max: 51,
+            values: [10, 20],
+            // 初期化処理
+            create: function () {
+                $('.ui-slider-handle:last').attr('data-toggle','tooltip');
+                $('.ui-slider-handle:last').attr('data-original-title', 20);
+                $('.ui-slider-handle:last').tooltip({animation:true});
+                $('.ui-slider-handle:last').tooltip('show');
+            }.bind(this),
+
+            start: function() {
+                console.log('[★★★★★]start');
+                // Fade属性を削除
+                $('.ui-slider-handle:last').tooltip({animation:false});
+                $('.ui-slider-handle:last').data('bs.tooltip').options.animation = false;
+
+            }.bind(this),
+            slide: function( event, ui ) {
+                $( "#amount" ).val( "$" + ui.values[ 0 ] + " - $" + ui.values[ 1 ] );
+
+//
+//                var startDate = new Date('2015/05/10');
+//                startDate.setMonth(startDate.getMonth(), ui.values[ 0 ]);
+//                startDate = $.datepicker.formatDate("yy/mm/dd", startDate);
+//
+//                var endDate = new Date('2015/05/10');
+//                endDate.setMonth(endDate.getMonth(), ui.values[ 1 ]);
+//                endDate = $.datepicker.formatDate("yy/mm/dd", endDate);
+
+//                $('.ui-slider-handle:first').html('<div class="tooltip top" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner">' + '1111' + '</div></div>');
+//                $('.ui-slider-handle:last').html('<div class="tooltip top" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner">' + '2222' + '</div></div>');
+//                $('.ui-slider-handle:first').attr('data-toggle','tooltip');
+//                $('.ui-slider-handle:first').attr('data-original-title', startDate.toString());
+//                $('.ui-slider-handle:first').tooltip('show');
+
+
+                $('.ui-slider-handle:last').attr('data-original-title', ui.values[ 1 ]);
+                $('.ui-slider-handle:last').tooltip({animation:false});
+                $('.ui-slider-handle:last').tooltip('show');
+            }
+        });
+        $( "#amount" ).val( "$" + $( "#slider-range" ).slider( "values", 0 ) +
+                " - $" + $( "#slider-range" ).slider( "values", 1 ) );
+    });
+</script>
+</body>
+</html>

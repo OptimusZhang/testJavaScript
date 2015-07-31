@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>HTML5 Self Learning</title>
+    <script type="text/javascript" src="./js/jquery/jquery.js"></script>
+</head>
+<body>
+
+<p style="font-size:18pt; font-weight: bolder">The Advantages and disadvantages of HTML5</p>
+<div>
+    <span style="padding-left:25px">Advantages</span><br />
+    <span style="padding-left:50px">跨平台，兼容PC和移动端</span><br />
+    <span style="padding-left:50px">标准的统一，不必再考虑浏览器的兼容性，只要浏览器支持HTML5</span><br />
+    <span style="padding-left:50px">用户体验好，不用现在和安装APP，通过URL访问即可</span><br />
+    <br />
+    <span style="padding-left:25px">Disadvantages</span><br />
+    <span style="padding-left:50px">浏览器的通用性，有些旧的浏览器不支持HTML5，如IE9</span><br />
+    <span style="padding-left:50px">移动端领域发挥还不够出色，尤其是移动游戏，动画方面，Android不如IOS</span><br />
+</div>
+
+<p style="font-size:18pt; font-weight: bolder">The features of HTML5</p>
+<div>
+    <span style="padding-left:25px">添加了Canvas，用来绘图，和动画</span><br/>
+    <span style="padding-left:50px; font-weight: bolder">实例-线条</span><br/>
+    <canvas id="canvas_line"></canvas>
+    <script type="text/javascript">
+        // var canvas_line = document.getElementById("canvas_line");
+//        var $canvas_line = $.find("#canvas_line");
+//        var $canvas_line = $("#canvas_line");
+//        $canvas_line.width("550");
+//        $canvas_line.height("400");
+//
+//        var ctx_line = $canvas_line.get(0).getContext("2d");
+//        console.log("position:" + ctx_line.position());
+        var $canvas_line = $("#canvas_line");
+        $canvas_line.attr("width", "550");
+        $canvas_line.attr("height", "400");
+//        $canvas_line.css("background-color", "red");
+
+
+        var ctx_line = $canvas_line.get(0).getContext("2d");
+
+
+        // draw grid
+        for (var x = 0.5; x < 550; x += 10) {
+            ctx_line.moveTo(x, 0);
+            ctx_line.lineTo(x, 400);
+        }
+        ctx_line.strokeStyle = "#cecece";
+
+        ctx_line.strokeStyle = "#cecece";
+        ctx_line.stroke();
+//        ctx_line.beginPath();
+//        ctx_line.moveTo(50, 150);
+//        ctx_line.lineTo(300, 150);
+//        ctx_line.moveTo(250, 100);
+//        ctx_line.lineTo(300, 150);
+//        ctx_line.moveTo(300, 50);
+//        ctx_line.lineTo(250, 100);
+//        ctx_line.moveTo(450, 200);
+//        ctx_line.lineTo(300, 50);
+//
+//        /*symmetry*/
+//        ctx_line.moveTo(50, 250);
+//        ctx_line.lineTo(300, 250);
+//        ctx_line.moveTo(250, 300);
+//        ctx_line.lineTo(300, 250);
+//        ctx_line.moveTo(300, 350);
+//        ctx_line.lineTo(250, 300);
+//        ctx_line.moveTo(450, 200);
+//        ctx_line.lineTo(300, 350);
+//        /*end*/
+//        ctx_line.moveTo(50, 150);
+//        ctx_line.lineTo(50, 250);
+//
+//        /*write coordinate*/
+//        ctx_line.font = "bold 12px sans-serif";
+//        ctx_line.fillText("( 0 , 0 )", 8, 5);
+//        ctx_line.fillText("(50, 150)", 58, 155);
+//        ctx_line.fillText("(300, 150)", 308, 155);
+//        ctx_line.fillText("(250, 100)", 258, 105);
+//        ctx_line.fillText("(300, 150)", 308, 155);
+//        ctx_line.fillText("(300, 50)", 308, 55);
+//        ctx_line.fillText("(50, 250)", 58, 255);
+//        ctx_line.fillText("(300, 250)", 308, 255);
+//        ctx_line.fillText("(250, 350)", 258, 355);
+//        ctx_line.fillText("(450, 200)", 458, 205);
+//        ctx_line.strokeStyle = "#f00";
+//        ctx_line.stroke();
+    </script>
+    <br />
+
+
+    <span style="padding-left:25px">添加了媒介元素，video和Audio来支持视频和音频，摆脱了Flash等插件</span><br />
+    <span style="padding-left:25px">增加了本地离线存储的功能（local history）</span><br />
+    <span style="padding-left:25px;color:red">原先的标签更加分散和清晰（？？？）</span><br />
+    <span style="padding-left:25px">增加了新的表单元素（如：data,time,Email,url,search等）</span><br />
+</div>
+
+
+
+
+</body>
+</html>

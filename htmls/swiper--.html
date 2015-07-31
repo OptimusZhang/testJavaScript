@@ -1,0 +1,383 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Swiper demo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+
+    <!-- Link Swiper's CSS -->
+    <link rel="stylesheet" href="css/swiper/swiper.css">
+    <link rel="stylesheet" href="css/bootstrap/bootstrap.css"/>
+    <link rel="stylesheet" href="css/bootstrap-datepicker/bootstrap-datepicker3.css"/>
+    <link rel="stylesheet" href="css/bootstrap-dialog/bootstrap-dialog.css"/>
+    <link rel="stylesheet" href="css/bootstrap-select/bootstrap-select.css"/>
+    <script src="./js/Chart/Chart.js"></script>
+    <script src="./js/jquery/jquery.js"></script>
+    <script src="./js/bootstrap/bootstrap.js"></script>
+
+
+    <style>
+        .swiper-pagination-bullet {
+            width: 20px;
+            height: 20px;
+            text-align: center;
+            line-height: 20px;
+            font-size: 12px;
+            color:#000;
+            opacity: 1;
+            background: rgba(0,0,0,0.2);
+        }
+        .swiper-pagination-bullet-active {
+            color:#fff;
+            background: #007aff;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <br/>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">Show BarChart</div>
+                <div class="panel-body" style="padding-left:0;padding-right:0">
+                    <!-- Swiper -->
+                    <div class="swiper-container">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide" style="text-align:center">
+                                <canvas id="myChart1"></canvas>
+                            </div>
+                            <div class="swiper-slide" style="text-align:center">
+                                <canvas id="myChart2"></canvas>
+                            </div>
+                            <div class="swiper-slide" style="text-align:center">
+                                <canvas id="myChart3"></canvas>
+                            </div>
+                            <div class="swiper-slide" style="text-align:center">
+                                <canvas id="myChart4"></canvas>
+                            </div>
+                        </div>
+                        <!-- Add Pagination -->
+                        <div class="swiper-pagination"
+                             style="position:relative; padding-top:1em;padding-bottom:0;top:10%"></div>
+                        <!-- Add Arrows -->
+                        <div class="swiper-button-next" style="top:40%"></div>
+                        <div class="swiper-button-prev" style="top:40%"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Swiper JS -->
+<script src="js/swiper/swiper.min.js"></script>
+
+<!-- Initialize Swiper -->
+<script>
+    var swiper = new Swiper('.swiper-container',
+            {
+                pagination: '.swiper-pagination',
+                paginationClickable: true,
+                paginationBulletRender: function (index, className) {
+                    return '<span class="' + className + '">' + (index + 1) + '月'+ '</span>';
+                },
+                nextButton: '.swiper-button-next',
+                prevButton: '.swiper-button-prev'
+            }
+    );
+</script>
+
+<script>
+
+    var barChartData = {
+        labels: [],
+        datasets: [
+            {
+                label: "My First dataset",
+                fillColor: "rgba(151,187,205,0.5)",
+                strokeColor: "rgba(151,187,205,0.8)",
+                highlightFill: "rgba(0,0,128,1)",
+                highlightStroke: "rgba(0,0,1285,1)",
+                data: []
+            }
+        ]
+    };
+
+    var barChartOptionsOfModify = {
+        scaleShowGridLines: true,
+        scaleGridLineColor: "rgba(0,0,0,0.1)",
+        scaleGridLineWidth: 1,
+        animation: true,
+        tooltipEvents: [],
+        tooltipEventsColorUnchanged: ["touchstart", "touchmove", "mouseout"],
+        showTooltips: true
+    };
+
+    // 変数を定義
+    var helpers = Chart.helpers;
+    var activeBar;
+    var myChart;
+    var myBarChart;
+    // MouseUpの時、clickedとして扱う。
+    var clickedFlg;
+    // MouseDownタイミングで、マウスのTargetはBarであるかを標識
+    var validAreaFlg = false;
+    // Barの長さの調整があるかを標識
+    var moveMovedFlg = false;
+    // Inputエリアに対するModel
+    var inputInfoModel;
+    // どのBarを選択したかを標識
+    var clickedLabel;
+    // 選んだ棒のIndex
+    var activeBarIndex = 0;
+    // 選んだ棒の入庫日
+    var selectedDay;
+
+
+    // イベント定義
+    // MouseDownイベントを定義
+    var mouseDownFun = function (evt) {
+
+        //棒のBaseを再設定（Lableエリアも含む）
+        resetBarChartBase(myBarChart, evt.target);
+        var newActiveBars = myBarChart.getBarsAtEvent(evt);
+        if (newActiveBars && newActiveBars.length > 0) {
+
+            // Barを選択したので、validAreaFlgがTrueにする。
+            validAreaFlg = true;
+
+            var newActiveBar = newActiveBars[0];
+            if (newActiveBar.label === clickedLabel) {
+                clickedFlg = true;
+            }
+            else {
+                // Sliderを動かした場合、ActiveBarが表示しない場合もあるため、Undefineを考慮する必要
+                if (activeBar) {
+                    // 昔Barのカラーを消して、新しいBarをHightLight表示する。
+                    activeBar.fillColor = myBarChart.datasets[0].fillColor;
+                    activeBar.strokeColor = myBarChart.datasets[0].strokeColor;
+                }
+                newActiveBar.fillColor = newActiveBar.highlightFill;
+                newActiveBar.strokeColor = newActiveBar.highlightStroke;
+                activeBar = newActiveBar;
+                // 調整したBarを再表示する。
+                myBarChart.draw();
+                //棒のBaseを再設定（Lableエリアも含む）
+                resetBarChartBase(myBarChart, evt.target);
+                // ツールチップを表示する。
+                myBarChart.showTooltip([activeBar], true);
+
+//                // 新しい棒を選んだ場合、中間に表示しているため、15にする。
+//                activeBarIndex = 15;
+//
+//                // 選んだ棒を中心軸に棒グラフを再表示します。
+//                var id = this.selectedModel.get('id');
+//                var itemCode = this.searchResultModel.get('itemCode');
+//                selectedDay = activeBar.label;
+//
+//                this.getChartDate(id, itemCode, selectedDay);
+//
+//                // 選択したBarの値をLabelをInputエリアに表示する。
+//                inputInfoModel = new StockInspectionModel({
+//                    amount: activeBar.value,
+//                    stockInDate: activeBar.label
+//                });
+//                app.currentModule.moduleVent.trigger(
+//                        "StockInspectionAddModifyGraphItemView:canvasClick",
+//                        inputInfoModel);
+
+                clickedFlg = false;
+            }
+        }
+        else {
+            validAreaFlg = false;
+        }
+    };
+
+    // MouseMoveイベントを定義
+    var mouseMoveFun = function (evt) {
+        var newActiveBars =[];
+        // 選択済みとなるし、かつドラッグしながら、数量の調整が行える。
+        if (clickedFlg && validAreaFlg) {
+            var myBarChartScale = myBarChart.scale;
+            // 棒グラフを描いたエリア座標範囲（Y座標のMAX-Y座標MIN）
+            var htmlHeightOfDrawingArea = myBarChartScale.endPoint - myBarChartScale.startPoint;
+            // 棒の値の範囲（MAX値-MIN値）
+            var scaleHeightOfDrawingArea = myBarChartScale.max - myBarChartScale.min;
+            // マウスダウンところのY座標
+            var myBarChartPosition = evt.target.getBoundingClientRect();
+            var htmlHeightOfMouseDownArea = myBarChartPosition.top + myBarChartScale.endPoint - evt.clientY;
+
+            // 棒の値 / 棒の値の範囲 = マウスダウンところのY座標　/　棒グラフを描いたエリア座標範囲
+            // 棒の値 = 棒の値の範囲 * (マウスダウンところのY座標　/　棒グラフを描いたエリア座標範囲)
+            var currentValue = scaleHeightOfDrawingArea * (htmlHeightOfMouseDownArea / htmlHeightOfDrawingArea);
+
+            // 整数でない場合、切り上げをする。
+            // 数量の調整範囲は「>=1」はず
+            activeBar.value = currentValue > 0 ? Math.ceil(currentValue) : 1;
+
+            myBarChart.draw();
+
+            //棒のBaseを再設定（Lableエリアも含む）
+            resetBarChartBase(myBarChart, evt.target);
+
+            // 計算した値のツールチップを表示する。
+            newActiveBars.push(activeBar);
+            myBarChart.showTooltip(newActiveBars, true);
+            moveMovedFlg = true;
+        }
+        else {
+            // 選択がしていないならば、数量の調整が行わない。
+            // ツールチップを表示する。
+            //棒のBaseを再設定（Lableエリアも含む）
+            resetBarChartBase(myBarChart, evt.target);
+            newActiveBars = myBarChart.getBarsAtEvent(evt);
+            if (newActiveBars) {
+                myBarChart.showTooltip(newActiveBars, true);
+            }
+            moveMovedFlg = false;
+        }
+    };
+
+    // MouseUpイベントを定義
+    var mouseUpFun = function (evt) {
+        if (moveMovedFlg) {
+            // 調整したBarを再表示する。
+            myBarChart.update();
+            //棒のBaseを再設定（Lableエリアも含む）
+            resetBarChartBase(myBarChart, evt.target);
+            activeBar.fillColor = activeBar.highlightFill;
+            activeBar.strokeColor = activeBar.highlightStroke;
+
+            // ツールチップを表示する。
+            myBarChart.showTooltip([activeBar], true);
+
+//            // 変更したBarの値をLabelをInputエリアに表示する。
+//            inputInfoModel = new StockInspectionModel({
+//                amount: activeBar.value,
+//                stockInDate: activeBar.label
+//            });
+//            app.currentModule.moduleVent.trigger(
+//                    "StockInspectionAddModifyGraphItemView:canvasClick",
+//                    inputInfoModel);
+        }
+        else {
+            if (validAreaFlg) {
+                // Barを選択した上で、clickedとして扱う。
+                clickedLabel = activeBar.label;
+            }
+        }
+
+        // 各フラグをクリアする。
+        clickedFlg = false;
+        validAreaFlg = false;
+        moveMovedFlg = false;
+    };
+
+
+    var resetBarChartBase = function(barChart, pCanvas) {
+        var position = pCanvas.getBoundingClientRect();
+        barChart.eachBars(function(bar){
+            bar.base = position.bottom - position.top;
+        });
+    };
+
+    // 棒グラフを表示する。
+    var displayBarChart = function() {
+        // serverから取得するはず。
+        var arrayOfLabels = [
+            ['2015/06/01', '2015/06/02', '2015/06/03', '2015/06/04',
+                '2015/06/05', '2015/06/06', '2015/06/07', '2015/06/08'
+                , '2015/06/09', '2015/06/10', '2015/06/11', '2015/06/12'],
+            ['2015/07/01', '2015/07/02', '2015/07/03', '2015/07/04',
+                '2015/07/05', '2015/07/06', '2015/07/07', '2015/07/08'
+                , '2015/07/09', '2015/07/10', '2015/07/11', '2015/07/12'],
+            ['2015/08/01', '2015/08/02', '2015/08/03', '2015/08/04',
+                '2015/08/05', '2015/08/06', '2015/08/07', '2015/08/08'
+                , '2015/08/09', '2015/08/10', '2015/08/11', '2015/08/12'],
+            ['2015/09/01', '2015/09/02', '2015/09/03', '2015/09/04',
+                '2015/09/05', '2015/09/06', '2015/09/07', '2015/09/08'
+                , '2015/09/09', '2015/09/10', '2015/09/11', '2015/09/12']
+        ];
+
+        var arrayOfDatas = [
+            [1000, 0, 0, 1500, 0, 0,
+                0, 0, 0, 800, 100, 0],
+            [2000, 0, 0, 0, 400, 0,
+                0, 0, 0, 800, 100, 1921],
+            [3000, 0, 0, 0, 0, 0,
+                0, 0, 0, 0, 0, 1921],
+            [0, 0, 125, 0, 0, 0,
+                0, 0, 0, 0, 0, 1921]
+        ];
+
+
+        for (var i = 0; i < arrayOfLabels.length; i++) {
+            barChartData.labels = arrayOfLabels[i];
+            barChartData.datasets[0].data = arrayOfDatas[i];
+
+            var canvasID = '#myChart' + (i + 1).toString();
+            var $canvas = $(canvasID);
+            $canvas.height(500);
+            $canvas.width($canvas.closest("div").width());
+            var canvasDom = $canvas.get(0);
+            var myChart = new Chart(canvasDom.getContext("2d"));
+            myBarChart = myChart.Bar(barChartData, {
+                scaleShowGridLines: true,
+                scaleGridLineColor: "rgba(0,0,0,0.1)",
+                scaleGridLineWidth: 1,
+                animation: true,
+                tooltipEvents: [],
+                tooltipEventsColorUnchanged: ["touchstart", "touchmove", "mouseout"],
+                showTooltips: true,
+                onAnimationComplete: function () {
+                    // ツールチップを表示する。
+                    if (activeBar) {
+                        myBarChart.showTooltip([activeBar], true);
+                    }
+                }
+            });
+
+            //棒のBaseを再設定（Lableエリアも含む）
+            resetBarChartBase(myBarChart, canvasDom);
+
+            // PopUp画面で選択した棒をハイライト表示する。
+            activeBar = myBarChart.datasets[0].bars[activeBarIndex];
+            // Sliderを動かした場合、ActiveBarが表示しない場合もあるため、Undefineを考慮する必要
+            if (activeBar) {
+                activeBar.fillColor = activeBar.highlightFill;
+                activeBar.strokeColor = activeBar.highlightStroke;
+                myBarChart.showTooltip([activeBar], true);
+                clickedLabel = activeBar.label;
+            }
+
+            // Bar色が変わらなくてtooltipを表示する。
+            if (myBarChart.options.showTooltips) {
+                helpers.bindEvents(myBarChart, myBarChart.options.tooltipEventsColorUnchanged, function (evt) {
+                    var activeBars = (evt.type !== 'mouseout') ? this.getBarsAtEvent(evt) : [];
+                    myBarChart.showTooltip(activeBars);
+                });
+            }
+
+            // クリック開始
+            canvasDom.removeEventListener("mousedown", mouseDownFun, false);
+            canvasDom.addEventListener("mousedown", mouseDownFun, false);
+            // クリック中
+            canvasDom.removeEventListener("mousemove", mouseMoveFun, false);
+            canvasDom.addEventListener("mousemove", mouseMoveFun, false);
+            // クリック終了(マウスアップはどこでも良いのでdocumentから引っ張っている)
+            document.removeEventListener("mouseup", mouseUpFun, false);
+            document.addEventListener("mouseup", mouseUpFun, false);
+        }
+    }();
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!doctype html>
+<html>
+<head>
+    <script src="./js/Chart/Chart.js"></script>
+</head>
+<body>
+<canvas id="canvas" height="450" width="1000"></canvas>
+<script>
+    var data = {
+        labels: ["","","","","","","","","","","","","","","","","","","",""],
+        datasets: [
+            {
+                data: [10,15,5,10,12,6,19,10,5,7]
+            }
+        ]
+    };
+    options = {
+        animation: false,
+        barValueSpacing: 1
+    };
+    var chart = new Chart(document.getElementById("canvas").getContext("2d"));
+    chart.Bar(data, options);
+    function getRandomInt(min,max) {
+        return Math.floor(Math.random() * (max - min + 1) + min);
+    }
+//    setInterval(function () {
+//        data.datasets[0].data.unshift(getRandomInt(0,20));
+//        if(data.datasets[0].data.length >= 21) {
+//            data.datasets[0].data.pop();
+//        }
+//        chart.Bar(data, options);
+//    }, 1000);
+</script>
+</body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <style type="text/css">
+        #p { width: 300px; height: 300px; padding: 10px;  border: 1px solid black; }
+        #c { width: 100px; height: 100px; border: 1px solid red; }
+    </style>
+</head>
+<body>
+<div id="p">
+    parent
+    <div id="c">
+        child
+    </div>
+</div>
+<script type="text/javascript">
+    var p = document.getElementById('p'),
+            c = document.getElementById('c');
+    // target.addEventListener(type,listener,useCapture);
+    // useCapture:是否使用捕捉，true:捕捉,false:冒泡
+    c.addEventListener('click', function () {
+        alert('GetChildNodeEvent')
+    }, true);//捕捉
+
+    c.addEventListener('click', function () {
+        alert('BubbleChildNodeEvent')
+    }, false);//冒泡
+
+    p.addEventListener('click', function () {
+        alert('GetParentNodeEvent')
+    }, true);//捕捉
+
+    p.addEventListener('click', function () {
+        alert('BubbleParentNodeEvent')
+    }, false);//冒泡
+
+    document.addEventListener('click', function () {
+        alert('GetDocumentNodeEvent')
+    }, true);//捕捉
+
+    document.addEventListener('click', function () {
+        alert('BubbleDocumentNodeEvent')
+    }, false);//冒泡
+
+    document.addEventListener('keydown', function (e) {
+        // keyCode==32  SpaceBar in KeyBoard
+        if (e.keyCode == '32') {
+            var type = 'click'; //要触发的事件类型
+            var bubbles = true; //事件是否可以冒泡
+            var cancelable = true; //事件是否可以阻止浏览器默认事件
+            var view = document.defaultView; //与事件关联的视图，该属性默认即可，不管
+            var detail = 0;
+            var screenX = 0;
+            var screenY = 0;
+            var clientX = 0;
+            var clientY = 0;
+            var ctrlKey = false; //是否按下ctrl
+            var altKey = false; //是否按下alt
+            var shiftKey = false;
+            var metaKey = false;
+            var button = 0; //表示按下哪一个鼠标键
+            var relatedTarget = 0; //模拟mousemove或者out时候用到，与事件相关的对象
+            var event = document.createEvent('Events');
+            event.myFlag = '叶小钗';
+            event.initEvent(type, bubbles, cancelable, view, detail, screenX, screenY, clientX, clientY,
+                    ctrlKey, altKey, shiftKey, metaKey, button, relatedTarget);
+
+            console.log(event);
+            c.dispatchEvent(event);
+        }
+    }, false);
+</script>
+</body>
+</html>
