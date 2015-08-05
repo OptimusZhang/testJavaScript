@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+<script type="text/javascript">
+    function addEvent(dom, type, fn) {
+        if (document.addEventListener) {
+            dom.addEventListener(type, fn, false);
+        } else if (document.attachEvent) {
+            dom.attachEvent('on' + type, fn);
+        } else {
+            dom['on' + type] = fn;
+        }
+        dom["Listener-" + type] = !0;
+    }
+
+    function getDomEvent(o) {
+        var a = "blur focus focusin focusout load resize scroll unload click dblclick mousedown mouseup mousemove mouseover mouseout mouseenter mouseleave change select submit keydown keypress keyup error contextmenu".split(' ');
+        var b = [];
+        for (var i = 0; i < a.length; i++) {
+            if (o['on' + a[i]] || o["Listener-" + a[i]] || o.getAttribute('on' + a[i])) {
+                b.push(a[i]);
+            }
+        }
+        return b;
+    }
+    function x() {
+        alert('1')
+    }
+    window.onload = function () {
+        var o = document.getElementById("test");
+        o.onclick = function () {
+            alert('1');
+        };
+        o.onblur = function () {
+            alert('1');
+        };
+        addEvent(o, 'mouseover', x);//使用这种方式去临听事件
+
+        var b = getDomEvent(o);
+        alert(b);//绑定的事件列表
+    }
+</script>
+<input type="text" id="test" value="1"/>
+
+</body>
+</html>

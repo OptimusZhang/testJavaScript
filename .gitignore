@@ -1,6 +1,10 @@
-*.[oa] 			#ignore all files end with .a or .o
-.idea/			#ignore the webstorm config file
-*~			#ignoer the files end with ~
-node_modules/   	#npm installed pacakges
-bower_components/ 	#bower installed packages
-.git/			#git config
+#folders
+.idea
+node_modules
+bower_components
+
+#files
+
+
+#logs
+

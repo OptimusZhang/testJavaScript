@@ -20,22 +20,20 @@ $(function () {
             alert("'Save Changes' botton is Clicked.");
         };
 
-        $('#hogeModal').on('shown.bs.modal', function () {
+        $modal.on('shown.bs.modal', function () {
 
-            alert("shown.bs.modal");
             // モーダルのタイトルをカスタマイズする。
             $('#hogeModalLabel').html("Waring");
 
             // モーダルのタイトルをカスタマイズする。
             $('.modal-body').html("").append("<p>Congratulation!</p>").
                 append("<p>You have succeed to show the modal dialog.</p>")
-        }, false);
+        });
 
         // モーダルのタイトルをカスタマイズする。
-        $('#hogeModal').on('hidden.bs.modal', function () {
-            alert("hidden.bs.modal");
+        $modal.on('hidden.bs.modal', function () {
             alert("We have returned to home page.");
-        }, false);
+        });
 
         $('#close').on('click', closeBottonFun);
         $('#saveChanges').on('click', saveChangeBottonFun);
