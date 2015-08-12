@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<style>
+    .P1{
+        position: relative;
+        background-color: black;
+        width: 100%;
+        height: 500px;
+        top:10px;
+        left:50px;
+    }
+    .C1{
+        position: static;
+        background-color: red;
+    }
+    .C2{
+        position: fixed;
+        background-color: yellow;
+        width: 100px;
+        height: 100px;
+        right:0px;
+        top:0px
+    }
+    .C3{
+        position: absolute;
+        background-color: green;
+        width: 200px;
+        height: 50px;
+        top:10px;
+        left:20px
+    }
+    .C4{
+        position: relative;
+        background-color: blue;
+        width: 200px;
+        height: 50px;
+        top: 50%;
+        left: 20px;;
+        /*transform: translateY(-50%)*/
+    }
+    .C5{
+        position: static;
+        background-color: brown;
+        width: 200px;
+        height: 50px;
+    }
+
+</style>
+<body>
+<div class="P1">
+    <div class="C1">
+        C1-static<br />
+        C1－１<br />
+        C1－２<br />
+        C1－３<br />
+    </div>
+    <div class="C2">
+        C2-fixed
+    </div>
+    <div class="C3">
+        C3-absolute
+    </div>
+    <div class="C4">
+        C4-relative
+    </div>
+    <div class="C5">
+        C5-static
+    </div>
+</div>
+<div>
+    <pre>
+    結論：
+     top:（固定値）
+    　　fixedの場合、Windowに基づいて、位置を再調整。
+        staticの場合、無効
+        relativeの場合、自己に対して、staticとなるときの位置に対する位置に基づいて、位置を再調整、
+        absoluteの場合、直近のPositionがrelativeやabsoluteやfixedの親elementに基づいて、位置を再調整
+　　</pre>
+</div>
+
+</body>
+</html>
