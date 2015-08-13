@@ -22,13 +22,22 @@ requirejs.config({
 
     // set the [require-handlebars-plugin],//optional
     hbs:{
-        helpers: true,
-        i18n: false,
-        templateExtension: 'hbs',
-        partialsUrl: 'zjw/templates' // base url for loading partials so that you don't have to provide the full path every time you need to load a partial within a template.
+        helperPathCallback: function(name) {return 'zjw/templates/helpers/' + name;}
     }
 });
 
-requirejs(['jquery', 'zjw/app','bootstrap'], function ($) {
+requirejs(['jquery', 'zjw/app','bootstrap', 'i18next'], function ($, app) {
 
+    // init the i18next and load the json files
+    $.i18n.init({
+        // i18nのoptionsを設定する。
+        resGetPath: 'static/js/zjw/locales/__lng__/__ns__.json', // 国際化用ファイルパスを指定する。
+        lowerCaseLng:  true, // システムから取込された言語種類は小文字にする。
+        ns: 'spa', // 指定した場合、resGetPathに__ns__は「PageA」になる、デフォルト値は「translation」です。
+        getAsync: false, // Jsonファイルの取得は同期/非同期にする。　falseの場合、同期、trueの場合、非同期。
+        debug: true, // エラーが発生した場合、エラーログを出力する。
+        fallbackLng: 'ja' // システムから言語種類が取得できない場合など、デフォルト言語を設定する。
+    }, function() {});
+
+    app.start();
 });

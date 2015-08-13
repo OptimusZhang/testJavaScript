@@ -1693,7 +1693,7 @@
             } else {
                 optionWithoutCount.lng = optionWithoutCount._origLng;
                 delete optionWithoutCount._origLng;
-                translated = translate(ns + o.nsseparator + key, optionWithoutCount);
+                tran1slated = translate(ns + o.nsseparator + key, optionWithoutCount);
     
                 return applyReplacement(translated, {
                     count: options.count,
