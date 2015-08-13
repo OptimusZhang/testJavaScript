@@ -11,24 +11,30 @@ define(['hbs!templates/main',
                 // init the main page.
                 $('#mainRegion').html(mainTmpl());
 
-                // show the part of modal sample
+                // モーダルエリアを表示する。
                 showModal.show();
-                // show the part of i18next sample
+                // 多言語化エリアを表示する。
                 showI18n.show();
 
                 // bind the app to the window
                 window.app = this;
             },
 
+            // 英語へボタンをクリックした場合、システム言語をenに設定する。
             i18n_ChangeLng_En: function () {
+                //システム言語をenに設定する。
                 $.i18n.setLng('en', function () {
                 });
+                // 多言語化エリアを再表示する。
                 showI18n.show();
             },
 
+            // 日本語へボタンをクリックした場合、システム言語をjaに設定する。
             i18n_ChangeLng_Ja: function () {
+                //システム言語をjaに設定する。
                 $.i18n.setLng('ja', function () {
                 });
+                // 多言語化エリアを再表示する。
                 showI18n.show();
             }
         };
