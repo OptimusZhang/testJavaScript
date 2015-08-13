@@ -50,55 +50,55 @@
 
   "exportsOverride": {
     "jquery": {
-      "js": "dist/jquery.js"
+      "lib/js": "dist/jquery.js"
     },
     "underscore": {
-      "js": "underscore.js"
+      "lib/js": "underscore.js"
     },
     "backbone": {
-      "js": "backbone.js"
+      "lib/js": "backbone.js"
     },
     "backbone.babysitter": {
-      "js": "lib/backbone.babysitter.js"
+      "lib/js": "lib/backbone.babysitter.js"
     },
     "backbone.wreqr": {
-      "js": "lib/backbone.wreqr.js"
+      "lib/js": "lib/backbone.wreqr.js"
     },
     "marionette": {
-      "js": "lib/backbone.marionette.js"
+      "lib/js": "lib/backbone.marionette.js"
     },
     "requirejs": {
-      "js": "require.js"
+      "lib/js": "require.js"
     },
     "require-handlebars-plugin": {
-      "js": "hbs.js"
+      "lib/js": "hbs.js"
     },
     "bootstrap": {
-      "js": "dist/js/bootstrap.js",
-      "css": "dist/css/bootstrap.css*",
-      "css/fonts": "dist/fonts/*"
+      "lib/js": "dist/js/bootstrap.js",
+      "lib/css": "dist/css/bootstrap.css*",
+      "lib/css/fonts": "dist/fonts/*"
     },
     "chartjs": {
-      "js": "Chart.js"
+      "lib/js": "Chart.js"
     },
     "d3": {
-      "js": "d3.js"
+      "lib/js": "d3.js"
     },
     "i18next": {
-      "js": "i18next.js"
+      "lib/js": "i18next.js"
     },
     "jquery-ui": {
-      "js": "jquery-ui.js"
+      "lib/js": "jquery-ui.js"
     },
     "log4javascript": {
-      "js": "log4javascript.js"
+      "lib/js": "log4javascript.js"
     },
     "spinjs": {
-      "js": "spin.js"
+      "lib/js": "spin.js"
     },
     "swiper": {
-      "js": "dist/js/swiper.js",
-      "css": "dist/css/swiper.css",
+      "lib/js": "dist/js/swiper.js",
+      "lib/css": "dist/css/swiper.css"
     }
   }
 }

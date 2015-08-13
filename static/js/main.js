@@ -4,10 +4,10 @@
 requirejs.config({
     baseUrl: './static/js/',
     paths: {
-        'jquery': 'jquery/jquery',
-        'bootstrap': 'bootstrap/bootstrap',
-        'hbs' : 'require-handlebars-plugin/hbs',
-        'i18next': 'i18next/i18next'
+        'jquery': '../../lib/js/jquery/jquery',
+        'bootstrap': '../../lib/js/bootstrap/bootstrap',
+        'hbs' : '../../lib/js/require-handlebars-plugin/hbs',
+        'i18next': '../../lib/js/i18next/i18next'
     },
 
     shim:{
@@ -22,16 +22,16 @@ requirejs.config({
 
     // set the [require-handlebars-plugin],//optional
     hbs:{
-        helperPathCallback: function(name) {return 'zjw/templates/helpers/' + name;}
+        helperPathCallback: function(name) {return 'templates/helpers/' + name;}
     }
 });
 
-requirejs(['jquery', 'zjw/app','bootstrap', 'i18next'], function ($, app) {
+requirejs(['jquery', 'app','bootstrap', 'i18next'], function ($, app) {
 
     // init the i18next and load the json files
     $.i18n.init({
         // i18nのoptionsを設定する。
-        resGetPath: 'static/js/zjw/locales/__lng__/__ns__.json', // 国際化用ファイルパスを指定する。
+        resGetPath: 'static/js/locales/__lng__/__ns__.json', // 国際化用ファイルパスを指定する。
         lowerCaseLng:  true, // システムから取込された言語種類は小文字にする。
         ns: 'spa', // 指定した場合、resGetPathに__ns__は「PageA」になる、デフォルト値は「translation」です。
         getAsync: false, // Jsonファイルの取得は同期/非同期にする。　falseの場合、同期、trueの場合、非同期。

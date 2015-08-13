@@ -1,7 +1,7 @@
 /**
  * Created by jianwu.zhang on 2015/08/12.
  */
-define(['hbs!zjw/templates/modal'], function(modalTmpl){
+define(['hbs!templates/modal'], function(modalTmpl){
     return {
 
         show : function(){

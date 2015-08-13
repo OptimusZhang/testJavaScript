@@ -1,9 +1,9 @@
 /**
  * Created by jianwu.zhang on 2015/08/04.
  */
-define(['hbs!zjw/templates/main',
-        'zjw/handlers/showModal',
-        'zjw/handlers/showI18n'],
+define(['hbs!templates/main',
+        'handlers/showModal',
+        'handlers/showI18n'],
     function (mainTmpl, showModal, showI18n) {
 
         return {

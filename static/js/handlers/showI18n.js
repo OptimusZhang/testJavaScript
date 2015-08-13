@@ -1,7 +1,7 @@
 /**
  * Created by jianwu.zhang on 2015/08/12.
  */
-define(['hbs!zjw/templates/i18next'], function(i18nTmpl){
+define(['hbs!templates/i18next'], function(i18nTmpl){
 
     return {
         //TODO i18n‚ÌŽg‚¢—á
