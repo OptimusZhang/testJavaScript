@@ -1,7 +1,7 @@
 /**
  * Created by jianwu.zhang on 2015/08/12.
  */
-define(['hbs!templates/i18next'], function(i18nTmpl){
+define(['hbs!../templates/i18next-jquery'], function(i18nTmpl){
 
     return {
         //TODO i18nの使い例
@@ -10,7 +10,8 @@ define(['hbs!templates/i18next'], function(i18nTmpl){
 
             // htmlをロードする。
             $('#i18nextRegion').html(i18nTmpl());
-            $('#i18nextRegion').i18n();
+            // i18next-jquery.hbsを利用した場合、下記「$('#i18nextRegion').i18n()」をUncommandください。
+            //$('#i18nextRegion').i18n();
 
             // システム言語を設定する。
             $('#systemLang').html($.i18n.lng());
