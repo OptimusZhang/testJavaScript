@@ -2,19 +2,26 @@
  * Created by jianwu.zhang on 2015/08/04.
  */
 define(['hbs!templates/main',
+        'hbs!templates/main-fluid',
         'handlers/showModal',
-        'handlers/showI18n'],
-    function (mainTmpl, showModal, showI18n) {
+        'handlers/showI18n',
+        'handlers/showQrCode'],
+    function (mainTmpl, mainFluidTmpl, showModal, showI18n, showQrCode) {
 
         return {
             start : function() {
                 // init the main page.
-                $('#mainRegion').html(mainTmpl());
+
+                $('#mainRegion').html(mainFluidTmpl());
+
+                //$('#mainRegion').html(mainTmpl());
 
                 // モーダルエリアを表示する。
-                showModal.show();
-                // 多言語化エリアを表示する。
-                showI18n.show();
+                //showModal.show();
+                //// 多言語化エリアを表示する。
+                //showI18n.show();
+                //// Qrコードエリアを表示する。
+                //showQrCode.show();
 
                 // bind the app to the window
                 window.app = this;
