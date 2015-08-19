@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        /*sample1*/
+        #main {
+            display: table;
+            border-collapse: collapse;
+        }
+        #nav {
+            display: table-cell;
+            width: 180px;
+            background-color: #e7dbcd;
+        }
+        #extras {
+            display: table-cell;
+            width: 180px;
+            padding-left: 10px;
+            border-right: 1px dotted #d7ad7b;
+        }
+        #content {
+            display: table-cell;
+            width: 380px;
+            padding-left: 10px;
+        }
+
+        /*sample2*/
+        .title{
+            font-size: x-large;
+            color: red;
+        }
+
+        .container {
+            display: inline-table;
+        }
+        .row {
+            display: table-row;
+        }
+        .cell {
+            display: table-cell;
+            width: 100px;
+            height: 100px;
+            border: 1px solid blue;
+            padding: 1em;
+        }
+
+
+        /*sample3*/
+        .grid {
+            display: table;
+            border-spacing: 4px;
+        }
+        .row {
+            display: table-row;
+        }
+        .image {
+            display: table-cell;
+            width: 240px;
+            background-color: #000;
+            border: 8px solid #000;
+            vertical-align: top;
+            text-align: center;
+        }
+        .image p {
+            color: #fff;
+            font-size: 85%;
+            text-align: left;
+            padding-top: 8px;
+        }
+        img {
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+<p class="title">sample1</p>
+<div id="wrapper">
+    <div id="main">
+        <div id="nav">? navigation column content…</div>
+        <div id="extras">? news headlines column content…</div>
+        <div id="content">? main article content…</div>
+    </div>
+</div>
+<p class="title">sample2</p>
+
+<div class="container">
+    <div class="row">
+        <div class="cell">CELL A</div>
+        <div class="cell">CELL B</div>
+        <div class="cell">CELL C</div>
+        <div>CELL D</div>
+        <div>CELL E</div>
+        <div>CELL F</div>
+    </div>
+</div>
+
+
+<p class="title">sample3</p>
+<div class="grid">
+    <div class="row">
+        <div class="image"><img src="../lib/image/Hydrangeas.jpg" alt="A Lily" />
+            <p>A lily in the gardens of The Vyne Country House</p></div>
+        <div class="image"><img src="../lib/image/Jellyfish.jpg" alt="A Fuchsia plant" />
+            <p>Fuchsia plant in my garden</p></div>
+        <div class="image"><img src="../lib/image/Koala.jpg" alt="A crazy looking Allium flower" />
+            <p>A crazy looking flower</p></div>
+        <div class="image"><img src="../lib/image/Lighthouse.jpg" alt="A Robin sitting on a fence" />
+            <p>This robin has been visiting our garden over the summer.
+            He is very friendly and doesn't seem to be too worried about sharing the garden with us.</p></div>
+        <div class="image"><img src="../lib/image/Hydrangeas.jpg" alt="A Lily" />
+            <p>A lily in the gardens of The Vyne Country House</p></div>
+        <div class="image"><img src="../lib/image/Jellyfish.jpg" alt="A Fuchsia plant" />
+            <p>Fuchsia plant in my garden</p></div>
+        <div class="image"><img src="../lib/image/Koala.jpg" alt="A crazy looking Allium flower" />
+            <p>A crazy looking flower</p></div>
+        <div class="image"><img src="../lib/image/Lighthouse.jpg" alt="A Robin sitting on a fence" />
+            <p>This robin has been visiting our garden over the summer.
+                He is very friendly and doesn't seem to be too worried about sharing the garden with us.</p></div>
+    </div>
+</div>
+
+</body>
+</html>
