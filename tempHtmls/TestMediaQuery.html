@@ -1,0 +1,33 @@
+<!DOCTYPE>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <style type="text/css">
+        .container{
+            margin:10px 15px;
+            font-size: 24px;
+        }
+        .title{
+            color: black;
+        }
+        /*ウィンドウの幅は(401px～700px)となる場合、列数は2列になるようにする*/
+        @media screen and (min-width: 401px) and (max-width: 700px){
+            .title{
+                color: red;
+            }
+        }
+        /*ウィンドウの幅は(0px～400px)となる場合、列数は1列のみになるようにする*/
+        @media screen and (max-width: 400px){
+            .title{
+                color: blue;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <p class="title">Media Query Design Sample</p>
+</div>
+</body>
+</html>
+

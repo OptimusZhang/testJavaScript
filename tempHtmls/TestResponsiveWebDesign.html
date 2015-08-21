@@ -1,0 +1,108 @@
+<!DOCTYPE>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <style type="text/css">
+        *{
+            font-family: georgia, serif;
+            box-sizing: border-box;
+        }
+        .titles{
+            background-color: grey;
+        }
+        .clearFixed{
+            content: " ";
+            clear: both;
+        }
+        .container{
+            margin:5px;
+            background-color: grey;
+            padding: 10px;
+        }
+        #imgTitle{
+            font-size: 50px;
+            padding: 15px;
+        }
+        .contents{
+            /*box-sizing: content-box;*/
+            font-size: 50px;
+            background-color: lightseagreen;
+            width: 100%;
+            text-align: center;
+            vertical-align: middle;
+            margin: -1px 0px 0px -0px;
+            padding: 10px;
+            border: 10px solid grey;
+        }
+        .elements {
+            background-color: white;
+            box-sizing: border-box;
+        }
+        .elements .grid{
+            text-align: center;
+            vertical-align: middle;
+        }
+        .col_lg_1_in_2, .col_lg_1_in_3, .col_sm_1_in_1{
+            /*position: relative;*/
+            float: left;
+        }
+        .col_lg_1_in_3 p,
+        .col_lg_1_in_2 p,
+        .col_sm_1_in_1 p{
+            color: black;
+        }
+        img{
+            max-width: 100%;
+        }
+        /*パソコンの場合*/
+        .col_lg_1_in_2{
+            width: 50%;
+        }
+        .col_lg_1_in_3{
+            width: 33%;
+        }
+        /*モバイルの場合*/
+        @media screen and (max-width: 767px){
+            .col_sm_1_in_1{
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="titles">
+        <div class="col_lg_1_in_2 col_sm_1_in_1">
+            <img src="../lib/image/Responsive-Web-Design.jpg">
+        </div>
+        <div class="col_lg_1_in_2 col_sm_1_in_1">
+            <p id="imgTitle">The Sample Of Responsive Web Design.</p>
+        </div>
+        <div class="clearFixed"></div>
+    </div>
+    <div class="contents">
+        123123123123
+    </div>
+
+
+    <div class="elements">
+        <div class="grid col_lg_1_in_3 col_sm_1_in_1">
+            <img src="../lib/image/G.png">
+            <p>Fluid Grid</p>
+        </div>
+        <div class="grid col_lg_1_in_3 col_sm_1_in_1">
+            <img src="../lib/image/I.png">
+            <p>Fluid Image</p>
+        </div>
+        <div class="grid col_lg_1_in_3 col_sm_1_in_1">
+            <img src="../lib/image/M.png">
+            <p>Media Query</p>
+        </div>
+        <div class="clearFixed"></div>
+    </div>
+
+    <div class="clearFixed"></div>
+</div>
+</body>
+</html>
+
