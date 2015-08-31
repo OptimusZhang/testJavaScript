@@ -12,16 +12,16 @@ define(['hbs!templates/main',
             start : function() {
                 // init the main page.
 
-                $('#mainRegion').html(mainFluidTmpl());
+                //$('#mainRegion').html(mainFluidTmpl());
 
-                //$('#mainRegion').html(mainTmpl());
+                $('#mainRegion').html(mainTmpl());
 
-                // モーダルエリアを表示する。
-                //showModal.show();
-                //// 多言語化エリアを表示する。
-                //showI18n.show();
-                //// Qrコードエリアを表示する。
-                //showQrCode.show();
+                 //モーダルエリアを表示する。
+                showModal.show();
+                // 多言語化エリアを表示する。
+                showI18n.show();
+                // Qrコードエリアを表示する。
+                showQrCode.show();
 
                 // bind the app to the window
                 window.app = this;
