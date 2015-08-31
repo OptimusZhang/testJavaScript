@@ -12,7 +12,7 @@ define(['hbs!templates/main',
             start : function() {
                 // init the main page.
 
-                //$('#mainRegion').html(mainFluidTmpl());
+                // master
 
                 $('#mainRegion').html(mainTmpl());
 
