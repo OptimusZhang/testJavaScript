@@ -12,7 +12,7 @@ define(['hbs!templates/main',
             start : function() {
                 // init the main page.
 
-                // comment of fixed the bug of #001
+                // TODO comment of fixed the bug of #001 and tempBranch
 
                 $('#mainRegion').html(mainTmpl());
 
