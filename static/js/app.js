@@ -11,6 +11,7 @@ define(['hbs!templates/main',
         return {
             start : function() {
                 // init the main page.
+                // comment of app.js
                 $('#mainRegion').html(mainTmpl());
 
                  //モーダルエリアを表示する。
