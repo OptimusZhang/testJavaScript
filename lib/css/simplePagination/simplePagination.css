@@ -1,0 +1,65 @@
+/**
+* CSS themes for simplePagination.js
+* Author: Flavius Matis - http://flaviusmatis.github.com/
+* URL: https://github.com/flaviusmatis/simplePagination.js
+*/
+
+ul.simple-pagination {
+    list-style: none;
+}
+
+.simple-pagination {
+    display: block;
+    overflow: hidden;
+    padding: 0 5px 5px 0;
+    margin: 0;
+    position: relative;
+}
+
+.simple-pagination ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    position: relative;
+    float: left;
+    left: 50%;
+}
+
+.simple-pagination li {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    float: left;
+    position: relative;
+    left: -50%;
+}
+
+.compact-theme a, .compact-theme span {
+    float: left;
+    color: #ea5404;
+    font-size: 16px;
+    font-weight: bold;
+    font-family: "Helvetica Neue", "Helvetica", 'ƒqƒ‰ƒMƒmŠpƒS Pro W3', 'Hiragino Kaku Gothic Pro', sans-serif;
+    text-align: center;
+    border-left: 1px solid #AAA;
+    min-width: 18px;
+    padding: 0 7px;
+    text-decoration: none;
+}
+
+.compact-theme a:hover {
+    text-decoration: underline;
+}
+
+.compact-theme li:first-child a, .compact-theme li:first-child span {
+    border-left: none;
+    padding-right: 20px;
+}
+
+.compact-theme li:last-child a, .compact-theme li:last-child span {
+    padding-left: 20px;
+}
+
+.compact-theme .current {
+    color: black;
+}

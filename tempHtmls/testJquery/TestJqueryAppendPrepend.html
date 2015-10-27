@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="../../lib/js/jquery/jquery.js"></script>
+</head>
+<body>
+
+<h2>Greetings</h2>
+<div class="container">
+    <div class="inner"><strong>Hello</strong></div>
+    <div class="inner"><strong>Goodbye</strong></div>
+</div>
+
+<script>
+
+    //    insertAfter after
+    alert($('<p>Foot1</p>').insertAfter($('h2')).html());
+    alert($('h2').after($('<p>Foot2</p>')).html());
+
+    //    insertBefore before
+    alert($('<p>Head1</p>').insertBefore($('h2')).html());
+    alert($('h2').before($('<p>Head2</p>')).html());
+
+    // appendTo append
+    alert($('<span>●1</span>').appendTo($('.inner')).html());
+    alert($('.inner').append($('<span>●2</span>')).html());
+
+    // prependTo prepend
+    alert($('<span>★1</span>').prependTo($('.inner')).html());
+    alert($('.inner').prepend($('<span>★2</span>')).html());
+
+</script>
+
+</body>
+</html>

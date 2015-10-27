@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="../../lib/js/jquery/jquery.js"></script>
+    <style type="text/css">
+        .div1 {
+            background-color: red;
+        }
+
+        .div2 {
+            background-color: green;
+        }
+    </style>
+</head>
+<body>
+
+<!--Test .html()-->
+<div class="div1"><div class="div2"><p>Green!</p></div></div>
+<div class="div3">DIV3<div class="div4">DIV4<p>P</p></div></div>
+
+<script>
+    alert('Test .html()');
+    alert($('.div1').html());
+    $('.div1').html('Red!');
+    alert($('.div1').html());
+
+
+    alert('Test .text()');
+    alert($('.div3').text());
+    $('.div3').text('<p>NEWP</p>');
+
+//  TODO Html变为<div class="div3">&lt;p&gt;NEWP&lt;/p&gt;</div>
+    alert($('.div3').text());
+</script>
+
+
+</body>
+</html>

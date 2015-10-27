@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Test Simple Pagination</title>
+    <link type="text/css" rel="stylesheet" href="../lib/css/simplePagination/simplePagination.css"/>
+    <style>
+        .container {
+            width: 700px;
+            margin: 10px auto;
+            background-color: white;
+            border: 5px solid black;
+            padding: 10px;
+        }
+
+        .table {
+            display: table;
+            border: 1px solid black;
+            width: 100%;
+        }
+
+        .row {
+            display: table-row;
+        }
+
+        .cell {
+            display: table-cell;
+            border: 1px solid black;
+            padding: 5px 3px;
+        }
+
+        .paging {
+            padding: 20px 0px;
+        }
+
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1 style="padding-left: 10px">Show Pagination</h1>
+
+    <div>
+        <div class="table">
+            <div class="row">
+                <div class="cell" id="cell1">1</div>
+            </div>
+            <div class="row">
+                <div class="cell" id="cell2">2</div>
+            </div>
+            <div class="row">
+                <div class="cell" id="cell3">3</div>
+            </div>
+            <div class="row">
+                <div class="cell" id="cell4">4</div>
+            </div>
+            <div class="row">
+                <div class="cell" id="cell5">5</div>
+            </div>
+        </div>
+        <div class="paging" id="pagination"></div>
+    </div>
+</div>
+
+
+<script type="text/javascript" src="../lib/js/jquery/jquery.js"></script>
+<script type="text/javascript" src="../lib/js/simplePagination/jquery.simplePagination.js"></script>
+<script type="text/javascript">
+    $(function () {
+        var itemList = [];
+
+        for (var i = 1; i <= 100; i++) {
+            itemList.push(i);
+        }
+
+        var getDateCallback = function (pageNumber, event) {
+                    var startNum = COUNT_PAGE_CONSTANT * (pageNumber - 1) + 1;
+
+                    $('#cell1').html(startNum++);
+                    $('#cell2').html(startNum++);
+                    $('#cell3').html(startNum++);
+                    $('#cell4').html(startNum++);
+                    $('#cell5').html(startNum++);
+        };
+
+        var COUNT_PAGE_CONSTANT = 5;
+        var itemCount = itemList.length;
+        var pageCount = Math.ceil(itemCount / COUNT_PAGE_CONSTANT);
+
+        $('#pagination').pagination({
+            pages: pageCount,
+            cssStyle: 'compact-theme',
+            displayedPages: 9,
+            edges: 0,
+            prevText: "< 前の30件",
+            nextText: "次の30件 >",
+            onPageClick: getDateCallback,
+            onInit: function () {
+
+            }
+        });
+
+
+    });
+</script>
+</body>
+</html>
