@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Table Layout</title>
+
+    <style>
+        .container {
+            background-color: grey;
+            border: 1px solid black;
+            height: 700px;
+            margin: auto;
+            padding: 10px;
+            width: 700px;
+
+        }
+
+        .table {
+            display: table;
+            width: 100%;
+        }
+
+        .row {
+            display: table-row;
+        }
+
+        .cell {
+            display: table-cell;
+        }
+
+        .table, .cell {
+            border: 2px solid red;
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <p>两行两列的表格</p>
+    <div class="table">
+        <div class="row">
+            <div class="cell">This is the first colume in the first row!</div>
+            <div class="cell">This is the second colume in the first row!</div>
+        </div>
+        <div class="row">
+            <div class="cell">This is the first colume in the second row .</div>
+            <div class="cell">This is the second colume in the second row .</div>
+        </div>
+    </div>
+
+    <br />
+    <p>一行一表格</p>
+    <div class="table">
+        <div class="row">
+            <div class="cell">This is the first row!</div>
+        </div>
+    </div>
+    <div class="table">
+        <div class="row">
+            <div class="cell">This is the first colume in the second row .</div>
+            <div class="cell">This is the second colume in the second row .</div>
+        </div>
+    </div>
+
+
+</div>
+</body>
+</html>

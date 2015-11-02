@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Float Layout</title>
+
+    <style>
+        .container {
+            background-color: white;
+            border: 1px solid black;
+            height: 700px;
+            margin: auto;
+            padding: 10px;
+            width: 700px;
+        }
+
+        .positon_a {
+            position: absolute;
+            background-color: red;
+            width: 100px;
+            height: 100px;
+            left:0;
+            top:0
+        }
+
+        .positon_r {
+            position: relative;
+            background-color: green;
+            width: 100px;
+            height: 100px;
+            top:5px;
+            right:10px
+
+        }
+
+        .positon_s {
+            position: static;
+            background-color: yellow;
+            border:1px solid;
+        }
+
+        .positon_f {
+            position: fixed;
+            background-color: yellow;
+            width: 100px;
+            height: 100px;
+        }
+
+        .parent_none_position {
+            padding:30px;
+            background-color: lightcyan;
+
+        }
+
+        .parent_relative {
+            padding:30px;
+            background-color: lightsalmon;
+            position: relative;
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="parent_relative">
+        <p>parent_relative</p>
+        <div class="parent_none_position">
+            <p>parent_none_position</p>
+            <div class="positon_s">static1</div>
+            <div class="positon_a">absolute</div>
+            <div class="positon_r">relative</div>
+            <div class="positon_f">fixed</div>
+            <div class="positon_s">static2</div>
+
+        </div>
+
+    </div>
+
+</div>
+</body>
+</html>

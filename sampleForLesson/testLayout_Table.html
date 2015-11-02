@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Table Layout</title>
+    
+    <style>
+        .container{
+            background-color: grey;
+            border: 1px solid black;
+            height:700px;
+            margin: auto;
+            padding: 10px;
+            width:700px;
+        }
+
+        .grid{
+            width: 100%;
+        }
+
+        .grid, .grid td{
+            border: 2px solid red;
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <table class="grid" cellpadding="0" cellspacing="0">
+        <tr>
+            <td colspan="2"><p>This is the first row!</p></td>
+        </tr>
+        <tr>
+            <td><p>This is the first colume in the second row .</p></td>
+            <td><p>This is the second colume in the second row .</p></td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>
