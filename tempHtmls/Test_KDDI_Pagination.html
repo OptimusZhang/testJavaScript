@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="SHIFT_JIS">
     <title>Test Simple Pagination</title>
     <link type="text/css" rel="stylesheet" href="../lib/css/simplePagination/simplePagination.css"/>
     <style>
@@ -58,6 +58,7 @@
             </div>
         </div>
         <div class="paging" id="pagination"></div>
+        <div class="paging" id="pagination2"></div>
     </div>
 </div>
 
@@ -89,17 +90,33 @@
         $('#pagination').pagination({
             pages: pageCount,
             cssStyle: 'compact-theme',
-            displayedPages: 9,
+            displayedPages: 1,
             edges: 0,
-            prevText: "< 前の30件",
-            nextText: "次の30件 >",
+            prevText: "<",
+            nextText: ">",
+            toFirstLink: true,	// ZJW
+            toLastLink: true,	// ZJW
+            firstText: '<<',	// ZJW
+            lastText: '>>',	// ZJW
+            textBeforePageNum: "",
+            textAfterPageNum:"/" + pageCount +  "�y�[�W",
             onPageClick: getDateCallback,
             onInit: function () {
 
             }
         });
 
-
+        $('#pagination2').pagination({
+            pages: pageCount,
+            cssStyle: 'compact-theme',
+            displayedPages: 4,
+            edges: 1,
+            prevText: "<",
+            nextText: ">",
+            onPageClick: getDateCallback,
+            onInit: function () {
+            }
+        });
     });
 </script>
 </body>

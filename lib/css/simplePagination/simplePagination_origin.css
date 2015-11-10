@@ -11,7 +11,7 @@ ul.simple-pagination {
 .simple-pagination {
     display: block;
     overflow: hidden;
-    padding: 5px 5px 5px 0;
+    padding: 0 5px 5px 0;
     margin: 0;
     position: relative;
 }
@@ -62,19 +62,4 @@ ul.simple-pagination {
 
 .compact-theme .current {
     color: black;
-}
-.simple-pagination .first, {
-    border-left: none;
-}
-
-.simple-pagination .prev{
-    border-left: none;
-}
-
-.simple-pagination .next{
-    border-left: none;
-}
-
-.simple-pagination .last{
-    border-left: none;
 }

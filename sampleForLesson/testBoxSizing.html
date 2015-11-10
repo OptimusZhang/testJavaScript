@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        .container {
+            background-color: white;
+            border: 1px solid black;
+            margin: auto;
+            padding: 10px;
+        }
+
+        .borderBox {
+            box-sizing: border-box;
+            background-color: yellow;
+            border: 2px solid black;
+            height: 100px;
+            margin: 12px;
+            padding: 10px;
+            width: 100px;
+        }
+
+        .contentBox {
+            box-sizing: content-box;
+            background-color: red;
+            border: 2px solid black;
+            height: 100px;
+            margin: 15px;
+            padding: 10px;
+            width: 100px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="borderBox">
+        borderBox
+    </div>
+    <div class="contentBox">
+        contentBox
+    </div>
+</div>
+<script src="../lib/js/jquery/jquery.js"></script>
+<script type="text/javascript">
+    alert("borderBox:" + $(".borderBox").height());
+    alert("contentBox" + $(".contentBox").height());
+    alert("container" + $(".container").height());
+</script>
+
+
+</body>
+</html>
