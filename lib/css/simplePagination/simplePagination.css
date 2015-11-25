@@ -34,7 +34,10 @@ ul.simple-pagination {
     left: -50%;
 }
 
-.compact-theme a, .compact-theme span {
+/**
+* for computer style
+*/
+.kddi_pc a, .kddi_pc span {
     float: left;
     color: #ea5404;
     font-size: 16px;
@@ -47,34 +50,58 @@ ul.simple-pagination {
     text-decoration: none;
 }
 
-.compact-theme a:hover {
+.kddi_pc a:hover {
     text-decoration: underline;
 }
 
-.compact-theme li:first-child a, .compact-theme li:first-child span {
+.kddi_pc li:first-child a, .kddi_pc li:first-child span {
     border-left: none;
     padding-right: 20px;
 }
 
-.compact-theme li:last-child a, .compact-theme li:last-child span {
+.kddi_pc li:last-child a, .kddi_pc li:last-child span {
     padding-left: 20px;
 }
 
-.compact-theme .current {
+.kddi_pc .current {
     color: black;
 }
-.simple-pagination .first, {
-    border-left: none;
+
+/**
+* for smart phone style
+*/
+.kddi_sp a, .kddi_sp span {
+    float: left;
+    color: #ea5404;
+    font-size: 16px;
+    font-weight: bold;
+    font-family: "Helvetica Neue", "Helvetica", 'ƒqƒ‰ƒMƒmŠpƒS Pro W3', 'Hiragino Kaku Gothic Pro', sans-serif;
+    min-width: 18px;
+    padding: 0 7px;
+    text-decoration: none;
+    line-height: 32px;
+    vertical-align: middle;
+    text-align: center;
+    margin: 5px 5px;
 }
 
-.simple-pagination .prev{
-    border-left: none;
+.kddi_sp a.btn, .kddi_sp span.btn{
+    line-height: 30px;
+    vertical-align: middle;
+    text-align: center;
+    border: 1px solid rgba(191,191,191,1);
+    box-shadow: 1px 1px 4px rgba(191,191,191,1);
+    border-radius: 4px;
+    margin: 5px 5px;
+    background-color: rgba(240,240,240,1);
 }
 
-.simple-pagination .next{
-    border-left: none;
+.kddi_sp span.current {
+    color: grey;
+    box-shadow: none;
 }
 
-.simple-pagination .last{
-    border-left: none;
+.kddi_sp span.current:not(.btn) {
+    width: 110px;
+    padding: 0 0;
 }
