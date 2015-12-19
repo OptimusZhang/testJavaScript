@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link  rel="stylesheet" href="./jquery-ui.css" />
+    <script src="../../lib/js/jquery/jquery.js"></script>
+    <script src="./jquery-ui.js"></script>
+    <title>Title</title>
+</head>
+<body>
+<select id="aaa">
+    <option>1</option>
+    <option>2</option>
+    <option>3</option>
+    <option>4</option>
+</select>
+<input type="button" id="btn1" value="button">
+<script>
+    window.onload = function() {
+
+        $("#aaa").selectmenu();
+
+        document.getElementById("btn1").onclick =
+                function(){
+                    $("#aaa").focus();
+                }
+    }
+
+</script>
+</body>
+</html>
