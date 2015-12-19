@@ -1,0 +1,103 @@
+div.bgtest {
+    background: url("../images/img1.jpg") left top no-repeat,
+    url("../images/img2.jpg") right top no-repeat,
+    url("../images/img3.jpg") left bottom no-repeat,
+    url("../images/img4.jpg") right bottom no-repeat;
+    background-size: 100px 100px, 100px 100px, 100px 100px, 100px 100px;
+    background-origin: padding-box, content-box, border-box, border-box;
+    border: 20px solid greenyellow;
+    width: 400px;
+    height: 400px;
+    padding: 50px;
+}
+
+div.borderRadiusTest{
+    border: 20px solid black;
+    width: 100px;
+    height: 100px;
+    padding: 50px;
+    border-radius:10px 20px 40px 0;
+}
+
+div.textShadowTest{
+    background-color: lightblue;
+    font-size: 70px;
+    font-weight: bold;
+    color: black;
+    border: 1px solid black;
+    width: 400px;
+    height: 200px;
+    padding: 10px;
+    text-shadow: blue 5px 10px 7px,white 2px -2px 0;
+}
+
+div.boxShadowTest{
+    background-color: lightblue;
+    font-size: 70px;
+    font-weight: bold;
+    color: black;
+    border: 1px solid black;
+    width: 400px;
+    height: 200px;
+    padding: 10px;
+    box-shadow:2px -2px 0 grey , 20px 20px 7px lightgrey ;
+
+}
+div.opacity1Test{
+    opacity: 1;
+}
+
+div.opacity0Test{
+    opacity: 0;
+}
+
+div.opacity0_5Test{
+    opacity: 0.5;
+}
+
+div.slideContainer {
+    padding:5px;
+    width: 300px;
+    height: 50px;
+    border:1px solid black;
+    position: relative;
+}
+div.transitionTest {
+    width: 50px;
+    height: 50px;
+    line-height: 50px;
+    font-weight: bold;
+    background-color: red;
+    vertical-align: middle;
+    text-align: center;
+    position: absolute;
+    left: 5px;
+}
+
+div.slideContainer:hover .transitionTest {
+    background-color: green;
+    border-radius: 25px;
+    left: 250px;
+    transition: all 2s linear;
+}
+
+div.transformTest{
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    font-weight: bold;
+    background-color: red;
+    vertical-align: middle;
+    text-align: center;
+    position: absolute;
+    left: 5px;
+    top: 15px;
+}
+
+div.slideContainer:hover .transformTest {
+    background-color: green;
+    border-radius: 25px;
+    left: 270px;
+    transform: scale(1.5) rotate(720deg);
+    transition: all 2s ease-in-out;
+}
