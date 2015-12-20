@@ -17,7 +17,7 @@
             width:100px;
             height:100px;
             float: left;
-            background-color: grey;
+            background-color: lightgrey;
         }
 
         .t_float_big {
@@ -26,9 +26,17 @@
             float: left;
             background-color: darkgrey;
         }
+
+        .clearfix {
+            clear: both;
+            width:500px;
+            height:50px;
+            background-color:grey;
+        }
+
         p {
             background-color:black;
-            color: white
+            color: white;
         }
 
     </style>
@@ -40,10 +48,9 @@
     <div class="t_float_small">div-1</div>
     <div class="t_float_big">div-2</div>
     <div class="t_float_small">div-3</div>
-    <div class="">div-4</div>
+    <div class="clearfix">div-4</div>
     <p>The most common way of doing this is the "CSS sticky footer" approach demonstrated here, or a slightly slimmer variation here. This approach works great -- IF you have a fixed height footer.</p>
     <p>If you need a variable height footer that will appear at the bottom of the window if the content is too short, and at the bottom of the content if the window is too short, what do you do?</p>
-
 </div>
 </body>
 </html>

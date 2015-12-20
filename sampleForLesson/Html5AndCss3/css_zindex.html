@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>test z-index</title>
+</head>
+<style>
+    * {
+        margin: 0 0;
+        padding: 0 0;
+    }
+    .b_container {
+        background-color: lightgrey;
+        border: none;
+        position: fixed;
+        top: 0;
+        right: 0;;
+        bottom: 0;
+        left: 0;
+        overflow: auto;
+    }
+    .b_main_layout {
+        box-sizing: border-box;
+        background-color: white;
+        padding: 5px 10px;
+        margin: 0 auto;
+        width: 1000px;
+    }
+
+    [name="A"] {
+        width:200px;
+        height: 200px;
+        background-color: yellow;
+    }
+    [name="A-1"] {
+        background-color: brown;
+        left: 10px;
+        right: 10px;
+        top: 10px;
+        bottom: 10px;
+    }
+    [name="B"] {
+        width:200px;
+        height: 200px;
+        background-color: red;
+    }
+    [name="B-1"] {
+        background-color: pink;
+        left: 10px;
+        right: 10px;
+        top: 10px;
+        bottom: 10px;
+    }
+    [name="C"] {
+        width:200px;
+        height: 200px;
+        background-color: green;
+    }
+    [name="D"] {
+        width:200px;
+        height: 200px;
+        background-color: lightskyblue;
+    }
+    .sampleArea{
+        position: relative;
+    }
+    .position_a{
+        position: absolute;
+    }
+    .position_r{
+        position: relative;
+    }
+    .position_f{
+        position: fixed;
+    }
+    .index_1 {
+        z-index: 1;
+    }
+    .index_2 {
+        z-index: 2;
+    }
+    .index_3 {
+        z-index: 3;
+    }
+    .index_4 {
+        z-index: 4;
+    }
+</style>
+<body>
+
+<div class="b_container">
+    <div class="b_main_layout">
+        <h1>顺序规则</h1>
+        <p>在标签没有设定position属性的前提下，后面的元素会表示最上面。如下：</p>
+        <div class="sampleArea">
+            <div name="A">A no position</div>
+            <div name="B" style="margin: -200px 0 0 100px">B<br/>no position</div>
+        </div>
+        <h1>定位规则</h1>
+        <p>设定了position为absolute, relative, fixed的元素，会表示在未设定position元素的上面。</p>
+        <p>设定了position为absolute, relative, fixed的元素，会按照顺序规则，后面的元素表示在上面。如下：</p>
+        <div class="sampleArea">
+            <div name="A" class="position_a" style="margin: 0">A<br/>absolute</div>
+            <div name="B" class="position_r" style="margin: 0 0 0 50px">B<br/>relative</div>
+            <div name="C" class="position_f" style="margin: -200px 0 0 100px">C<br/>fixed</div>
+            <div name="D" class="margin_L" style="margin: -200px 0 0 150px">D<br/>no position</div>
+        </div>
+
+        <h1>参与规则</h1>
+        <p>不设定position属性的元素z-index是无效的。</p>
+        <div class="sampleArea">
+            <div name="A" class="index_2">A no position</div>
+            <div name="B" class="index_1" style="margin: -200px 0 0 100px">B<br/>no position</div>
+        </div>
+
+        <p>设定了position属性的元素，z-index大的元素在最上面。</p>
+        <div name="A" class="position_a index_3" style="margin: 0">A<br/>absolute</div>
+        <div name="B" class="position_r index_1" style="margin: 50px 0 0 50px">B<br/>relative</div>
+        <div name="C" class="position_r index_2" style="margin: -150px 0 0 100px">C<br/>relative</div>
+
+        <h1>默认值规则</h1>
+        <p>z-index=0和不设定z-index是等效的。<br />
+            z-index >= 1的元素将覆盖没有设定z-index的元素，<br />
+            z-index < 0的元素将被没有设定z-index的元素覆盖，</p>
+        <h1>从父规则</h1>
+        <p>如果两个元素都设定了z-index，那么z-index节点大的子元素将覆盖z-index小的节点的子元素（无z-index小节点内子节点的z-index）．</p>
+
+        <div class="sampleArea">
+            <div name="A" class="position_r index_2">A(2)
+                <div name="A-1" class="position_a index_3">A-1(3)</div>
+            </div>
+            <div name="B" class="position_r index_1" style="margin: -150px 0 0 100px">B(1)
+                <div name="B-1" class="position_a index_4">B-1(4)</div>
+            </div>
+        </div>
+        <p>如果两个元素的z-index一样大，按照顺序规则后面节点的子元素将覆盖前面节点的子元素（无视前面节点内子节点的z-index）．</p>
+        <div class="sampleArea">
+            <div name="A" class="position_r index_1">A(1)
+                <div name="A-1" class="position_a index_3">A-1(3)</div>
+            </div>
+            <div name="B" class="position_r index_1" style="margin: -150px 0 0 100px">B(1)
+                <div name="B-1" class="position_a index_2">B-1(2)</div>
+            </div>
+        </div>
+        <p>如果父节点没有设定z-index，那么从父规则将失效</p>
+        <div class="sampleArea">
+            <div name="A" class="position_r">A(无)
+                <div name="A-1" class="position_a index_3">A-1(3)</div>
+            </div>
+            <div name="B" class="position_r" style="margin: -150px 0 0 100px">B(无)
+                <div name="B-1" class="position_a index_2">B-1(2)</div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
