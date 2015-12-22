@@ -3,6 +3,9 @@ div.bgtest {
     url("../images/img2.jpg") right top no-repeat,
     url("../images/img3.jpg") left bottom no-repeat,
     url("../images/img4.jpg") right bottom no-repeat;
+    /*background-image: url("../images/img1.jpg") , url("../images/img2.jpg") ,   url("../images/img3.jpg") , url("../images/img4.jpg") ;*/
+    /*background-position: left top, right top, left bottom, right bottom;*/
+    /*background-repeat: no-repeat,no-repeat,no-repeat,no-repeat;*/
     background-size: 100px 100px, 100px 100px, 100px 100px, 100px 100px;
     background-origin: padding-box, content-box, border-box, border-box;
     border: 20px solid greenyellow;
@@ -16,7 +19,7 @@ div.borderRadiusTest{
     width: 100px;
     height: 100px;
     padding: 50px;
-    border-radius:10px 20px 40px 0;
+    border-radius:20px;
 }
 
 div.textShadowTest{
@@ -40,7 +43,7 @@ div.boxShadowTest{
     width: 400px;
     height: 200px;
     padding: 10px;
-    box-shadow:2px -2px 0 grey , 20px 20px 7px lightgrey ;
+    box-shadow:2px -2px 0 white , 20px 20px 7px lightgrey ;
 
 }
 div.opacity1Test{
@@ -99,5 +102,5 @@ div.slideContainer:hover .transformTest {
     border-radius: 25px;
     left: 270px;
     transform: scale(1.5) rotate(720deg);
-    transition: all 2s ease-in-out;
+    /*transition: all 2s ease-in-out;*/
 }

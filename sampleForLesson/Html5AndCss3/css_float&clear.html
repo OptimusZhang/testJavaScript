@@ -3,14 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <title>Float Layout</title>
-
     <style>
         .container {
             background-color: white;
             border: 1px solid black;
             margin: auto;
             padding: 10px;
-            width: 700px;
+            width: 400px;
         }
 
         .t_float_small {
@@ -29,7 +28,6 @@
 
         .clearfix {
             clear: both;
-            width:500px;
             height:50px;
             background-color:grey;
         }
@@ -45,8 +43,8 @@
 
 <div class="container">
     <p>Actually, the accepted answer by @User will only work if the window is tall and the content is short. But if the content is tall and the window is short, it will put the copyright info over the page content, and then scrolling down to see the content will leave you with a floating copyright notice. That makes this solution useless for most pages (like this page, actually).</p>
-    <div class="t_float_small">div-1</div>
-    <div class="t_float_big">div-2</div>
+    <div class="t_float_small" style="float: left;">div-1</div>
+    <div class="t_float_big" style="float: left;">div-2</div>
     <div class="t_float_small">div-3</div>
     <div class="clearfix">div-4</div>
     <p>The most common way of doing this is the "CSS sticky footer" approach demonstrated here, or a slightly slimmer variation here. This approach works great -- IF you have a fixed height footer.</p>

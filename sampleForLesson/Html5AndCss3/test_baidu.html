@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="../../lib/js/jquery/jquery.js"></script>
+    <style>
+        .container {
+            min-width: 800px;
+            width: 100%;
+        }
+        table {
+            width:100%;
+        }
+        .title {
+            font-size:13px;
+            text-align: right;
+            padding-top:5px;
+        }
+        .title_link {
+            text-align: center;
+            vertical-align: ;
+            width:50px;
+            color: black;
+        }
+        .title_hao123 {
+            width:60px;
+            color: black;
+        }
+        .title_moreProduct {
+            width:70px;
+            color: black;
+        }
+
+        .title_moreProduct a {
+            display: inline-block;
+            line-height: 24px;
+            width: 60px;
+            background: #38f;
+            color: white;
+            text-decoration:none;
+        }
+        .title_moreProduct:hover a {
+            display: inline-block;
+            line-height: 24px;
+            width: 60px;
+            background: #38f;
+            color: white;
+            text-decoration:none;
+        }
+        .title_setting {
+            position: relative;
+        }
+        .a_parent {
+            position: absolute;
+            width:70px;
+            height: 120px;
+            text-align: center;
+            top:30px;
+            left:0;
+            opacity:0;
+        }
+        .a_parent a {
+            display: block;
+            width:70px;
+            height: 30px;
+            line-height: 30px;
+            border: 1px solid;
+            vertical-align: middle;
+        }
+        .a_parent a:hover {
+            background-color:blue ;
+            color: white;
+        }
+        .show {
+            opacity: 1;
+        }
+
+        .hide {
+            opacity: 0;
+        }
+    </style>
+</head>
+<body>
+<table cellpadding="0" cellspacing="0">
+
+    <tr>
+        <td class="title">
+            <table cellpadding="0" cellspacing="0">
+                <tr>
+                    <td></td>
+                    <td class="title_link"><a href=""><strong>糯米</strong></a></td>
+                    <td class="title_link"><a href=""><strong>新闻</strong></a></td>
+                    <td class="title_link title_hao123"><a href=""><strong>hao123</strong></a></td>
+                    <td class="title_link"><a href=""><strong>地图</strong></a></td>
+                    <td class="title_link"><a href=""><strong>视频</strong></a></td>
+                    <td class="title_link"><a href=""><strong>贴吧</strong></a></td>
+                    <td class="title_link"><a href="">登录</a></td>
+                    <td class="title_link title_setting">
+                        <a href="">设置</a>
+                        <div class="a_parent">
+                            <a>设置1</a>
+                            <a>设置2</a>
+                            <a>设置3</a>
+                            <a>设置4</a>
+                        </div>
+                    </td>
+                    <td class="title_link title_moreProduct">
+                        <a href="">更多产品</a>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+
+    <tr>
+        <td>2</td>
+    </tr>
+    <tr>
+        <td>3</td>
+    </tr>
+</table>
+<script>
+    document.querySelector(".title_setting").addEventListener("mouseover", function () {
+        var className = document.querySelector(".a_parent").className;
+
+        if (className.toLowerCase().indexOf("hide") >= 0) {
+            $('.a_parent').removeClass("hide");
+        }
+
+        if (className.toLowerCase().indexOf("show") >= 0) {
+            $('.a_parent').removeClass("show");
+        }
+
+        $('.a_parent').addClass("show");
+    }, false);
+    document.querySelector(".title_setting").addEventListener("mouseout", function () {
+        var className = document.querySelector(".a_parent").className;
+
+
+        if (className.toLowerCase().indexOf("hide") >= 0) {
+            $('.a_parent').removeClass("hide");
+        }
+
+        if (className.toLowerCase().indexOf("show") >= 0) {
+            $('.a_parent').removeClass("show");
+        }
+        $('.a_parent').addClass("hide");
+    }, false);
+</script>
+</body>
+</html>
