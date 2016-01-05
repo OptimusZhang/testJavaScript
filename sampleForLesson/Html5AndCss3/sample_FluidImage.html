@@ -1,0 +1,47 @@
+<!DOCTYPE>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <style type="text/css">
+        *{
+            font-family: georgia, serif;
+        }
+        .title{
+            font-size: 24px;
+            color: black;
+        }
+        .container{
+            margin:10px 15px;
+        }
+        .col{
+            background-color: black;
+            box-sizing: border-box;
+            float: left;
+            width: 50%;
+            border: 4px solid grey;
+            padding: 10px;
+        }
+        .col p{
+            color: #fff;
+        }
+        img{
+            max-width: 100%;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <p class="title">Fluid Image Design Sample</p>
+    <div id="col_1" class="col">
+        <img src="../../lib/image/Koala.jpg">
+        <p>This is the first image.</p>
+        <p>max-width=100%</p>
+    </div>
+    <div id="col_2" class="col">
+        <img src="../../lib/image/Jellyfish.jpg">
+        <p>This is the second image.</p>
+        <p>max-width=100%</p>
+    </div>
+</div>
+</body>
+</html>

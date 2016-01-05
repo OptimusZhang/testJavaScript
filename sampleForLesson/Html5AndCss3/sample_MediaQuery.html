@@ -1,0 +1,65 @@
+<!DOCTYPE>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <style type="text/css">
+        .container{
+            margin:10px 15px;
+            font-size: 24px;
+        }
+        .title{
+            color: black;
+        }
+        .scale{
+            width:50%;
+            height: 200px;
+        }
+        .standard{
+            background-color: yellow;
+            margin:0 auto;
+            border: 1px solid;
+            box-sizing: border-box;
+        }
+        /*ウィンドウの幅は(401px～700px)となる場合、列数は2列になるようにする*/
+        @media screen and (min-width: 401px) and (max-width: 700px){
+            .title{
+                color: red;
+            }
+            .largeLeftSmallRight {
+                background-image: url("../../lib/image/Koala.jpg");
+                background-size: cover;
+                float: left;
+            }
+            .largeRightSmallLeft{
+                background-image: url("../../lib/image/Jellyfish.jpg");
+                background-size: cover;
+                float: right;
+            }
+        }
+        /*ウィンドウの幅は(0px～400px)となる場合、列数は1列のみになるようにする*/
+        @media screen and (max-width: 400px){
+            .title{
+                color: blue;
+            }
+            .largeLeftSmallRight {
+                background-image: url("../../lib/image/Koala.jpg");
+                background-size: cover;
+                float: right;
+            }
+            .largeRightSmallLeft{
+                background-image: url("../../lib/image/Jellyfish.jpg");
+                background-size: cover;
+                float: left;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <p class="title">Media Query Design Sample</p>
+    <div class="largeLeftSmallRight scale standard">Large:Left<br /> Small:Right</div>
+    <div class="largeRightSmallLeft scale standard">Large:Right<br /> Small:Left</div>
+</div>
+</body>
+</html>
+

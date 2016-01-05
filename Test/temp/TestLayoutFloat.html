@@ -1,0 +1,105 @@
+<!DOCTYPE>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <style type="text/css">
+        #header{background-color: gray;}
+        #content1{background-color: red;}
+        #content2{background-color: orange;}
+        #sidebar{background-color: blue;}
+        #sidebar2{background-color: green;}
+        #footer{background-color: yellow;}
+        #sidebar{
+            float: left;
+            width: 200px;
+        }
+        #sidebar2{
+            float: left;
+            width: 200px;
+        }
+        #content1{
+            float: left;
+            width: 200px;
+            /*margin-left: 160px;*/
+            /*margin-right: 100px;*/
+        }
+        #content2{
+            float: left;
+            width: 100px;
+            /*margin-left: 160px;*/
+            /*margin-right: 100px;*/
+        }
+        #footer:before,
+        #footer:after{
+            content: '※';
+            display: table;
+        }
+        #footer{
+            clear: both;
+        }
+
+        /*sample2*/
+        .title{
+            font-size: x-large;
+            color: red;
+        }
+        .btn1 {
+            /*float: left;*/
+            display: inline-block;
+            background: url(../../lib/image/Hydrangeas.jpg) no-repeat left top;
+            background-size: cover;
+            padding: 10px 10px;
+            color: #000000;
+            font-size: 12px;
+            text-decoration: none;
+        }
+
+        .btn1 cite {
+            display: block;
+            line-height: 30px;
+            padding: 0 13px 0 10px;
+            /*background: url(../lib/image/Koala.jpg) no-repeat right top;*/
+            background-color: red;
+        }
+
+    </style>
+
+
+
+</head>
+<body>
+<p class="title">sample1</p>
+<div id="page">
+    <div id="header"><h1>这里是标题</h1></div>
+    <div id="sidebar">
+        <p>侧边栏</p>
+    </div>
+
+
+    <div id="content1">
+        <p>这里是一些文字</P>
+        <p>再来一大段文字</P>
+    </div>
+    <div id="sidebar2">
+        <p>侧边栏2：地图投影，是将地球表面投影到地图平面的过程，将地理坐标转换为平面直角坐
+            标的过程。因为毕业论文需要，我重新回顾了一下地图投影的知识并且作了比较全面且简洁的总
+            结。</p>
+    </div>
+
+    <div id="content2">
+        <p>这里是一些文字</P>
+        <p>再来一大段文字</P>
+        <p>地图投影，是将地球表面投影到地图平面的过程，将地理坐标转换为平面直角坐标的过程。
+            因为毕业论文需要，我重新回顾了一下地图投影的知识并且作了比较全面且简洁的总结。如果你
+            之前未系统了解过地图投影，又对地图投影感兴趣，这篇博文也许能成为一篇简洁务实的阅读材
+            料。
+        </p>
+    </div>
+
+
+    <div id="footer"><p>没人关注的页脚</P></div>
+</div>
+<p class="title">sample2</p>
+<a href="javascript:void(0);" class="btn1"><cite>inline-block方法</cite></a>
+</body>
+</html>

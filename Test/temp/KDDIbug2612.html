@@ -1,0 +1,3246 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html class="bgwhite">
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!--<title>商品一覧（特集）</title>-->
+    <title>au WALLET Market（auショップ）</title>
+    <meta name="description" content="auショップで提供するこだわり商品やいつもの日用品をご購入いただけるサイトになります。" />
+    <meta name="keywords" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="format-detection" content="telephone=no">
+    <link rel="stylesheet" href="../css_pc/base.css" type="text/css" media="all" />
+    <link rel="stylesheet" href="../css_pc/popup.css" type="text/css" media="all" />
+
+
+    <link rel="stylesheet" href="../css_pc/single_window.css" media="all">
+
+    <link rel="stylesheet" href="../css_pc/simplePagination.css" media="all">
+
+    <link rel="stylesheet" href="../css_pc/kddi_wave2.css" type="text/css" media="all" />
+    <script type="text/javascript" src="../js_pc/jquery-2.1.3.min.js"></script>
+    <script type="text/javascript" src="../js_pc/popup_shortwindow2.js"></script>
+    <script type="text/javascript" src="../js_pc/kddi_wave2.js"></script>
+    <script type="text/javascript" src="../js_pc/disp.js"></script>
+    <script type="text/javascript" src="../js_pc/async.js"></script>
+
+
+
+    <script type="text/javascript" src="../js_pc/tap.js"></script>
+
+    <script type="text/javascript" src="../js_pc/products_list.js"></script>
+
+    <script type="text/javascript" src="../js_pc/simplePagination.js"></script>
+
+    <script type="text/javascript" src="../js_pc/popup_shortwindow_header.js"></script>
+
+    <script type="text/javascript">
+        // MOD by deshuang.wang 2015/11/24 begin
+        //$(document).ready(function() {
+        //	$('#cat_special_tab a').click(function() {
+        //		return !$(this).hasClass('active_cat_select');
+        //	});
+        //});
+        $(document).ready(function() {
+            // 選択中のリンクは、再読み込みしない。
+            $('#cat_special_tab a, #chart_tab a, #chart_tab_super a').on('click', function() {
+                return !$(this).hasClass('active_cat_select');
+            });
+            $('#buy_tab a').on('click', function() {
+                return !$(this).hasClass('active_btab_select');
+            });
+            // 遷移元と遷移先が同じ場合、再読み込みしない。
+            // プラス会員申込、カート、検索
+            $('#premier_register, #cart_i, #search_i').on('click', function(elem) {
+                var currentPage = getFileNameFromURL(location.pathname);
+                var nextPage	= getFileNameFromURL($(this).attr('href'));
+                return nextPage != '' && nextPage != currentPage;
+            });
+            // マイページは、基本情報・定期購入中・購入履歴が表示されている場合、再読み込みしない。
+            $('#mypage_i').on('click', function(elem) {
+
+                var currentPage	= getFileNameFromURL(location.pathname);
+                var nextPage	= getFileNameFromURL($(this).attr('href'));
+
+                var shouldChangePage = (nextPage != '' && nextPage != currentPage);
+                if (shouldChangePage) {
+                    var SUB_LINK_PAGES = [
+                        'CVMmRegularPurchaseGoodsList.jsp',
+                        'CVMmOrderHistory.jsp',
+                    ];
+                    shouldChangePage = $.inArray(currentPage, SUB_LINK_PAGES) == -1;
+                }
+
+                return shouldChangePage;
+            });
+        });
+
+        function getFileNameFromURL(urlString) {
+            var matches = urlString.match(".+/([^\?#;/]+).*$");
+            if (matches == undefined || matches.length == 0) {
+                return '';
+            }
+            return matches[matches.length-1];
+        }
+        // MOD by deshuang.wang 2015/11/24 end
+    </script>
+
+
+</head>
+<body>
+
+
+<noscript><div style="border:1px solid #F00;background-color:#FEE;color:#F00;padding:4px;margin:4px 0px">当サイトを正常に閲覧いただくにはJavaScriptを有効にする必要があります。</div>
+</noscript>
+
+
+
+
+
+
+<form class="single_form" action="../cart/CCtAddGoodsToCart.jsp" method="post" name="Goods">
+    <div class="overlayPopup" style="display: none;">
+        <div class="content_own">
+            <div class="close_btn"><img src="../images_pc/icon/close.svg" alt=""></div>
+            <div class="content"></div>
+        </div>
+    </div>
+    <input type="hidden" name="CFM_ID" value="3414bcee172671ea546abe6b0b3e5456b10b0bd2">
+</form>
+
+<script type="text/javascript" src="../js_pc/adobe_acn.js"></script>
+<script type="text/javascript">
+
+    $(document).ready(function() {
+        var form = $("form[name='Goods']");
+        var startTime = null;
+        function isCompleteToDownloadImg() {
+            var image	= window['s_i_kddi_2'];
+            var isExpired	= ((new Date().getTime() - startTime) > AdobeAnalytics.constants.delayForHttpRequest);
+            if ((image != null && image.complete) || isExpired) {
+                // ページ遷移する。
+                form.off("submit");
+                form.submit();
+                return true;
+            }
+            setTimeout(function() {
+                isCompleteToDownloadImg();
+            }, 0);
+        }
+        form.on("submit", function(event) {
+            startTime = new Date().getTime();
+            event.preventDefault();
+
+            var type = $("[name='DELI_TYPE']:checked").val() == 1 ?  '単一' : '定期';
+            aa_addCart('nostore',$('[name="GOODS_NO"]').val(),'scAdd,event26='+$('[name="COMM_025"]').val(), type);
+            isCompleteToDownloadImg();
+            return true;
+        });
+    });
+
+</script>
+<!-- Adobe Analytics start -->
+<div id="scimage" style="visibility: hidden;z-index:2;position:absolute;top:-100px;left:-100px;">
+</div>
+<!-- Adobe Analytics end -->
+
+
+
+<div id="container_pc">
+    <div id="container_child">
+        <div id="fixed_products" class="">
+            <div id="header_area" class="btn_line">
+                <!-- ロゴ -->
+                <header class="logo_pop">
+                    <!-- MOD 共通ヘッダの対応 by jianwu.zhang 2015/10/16 Start -->
+                    <!--<h1><img src="../images/header/au_vartualmall.png" alt=""></h1>-->
+                    <a href="../top/CSfTop.jsp" class="special ma_icon">
+                        <img src="../images_pc/header/au_vartualmall.png" alt="" width="132" height="38">
+                    </a>
+                    <!-- MOD 共通ヘッダの対応 by jianwu.zhang 2015/10/16 End -->
+                </header>
+
+                <!-- カテゴリ・特集 -->
+                <div id="cat_special_tab">
+                    <!-- MOD 共通ヘッダの対応 by jianwu.zhang 2015/10/16 Start -->
+                    <!-- MOD マージ by jianwu.zhang 2015/10/30 Start -->
+                    <!-- いつものタブがクリックできるかの判定 -->
+
+
+
+
+                    <a href="http://127.0.0.1:18080/defaultShop/disp/CVSfDispSearchSuper.jsp?firstAccessParam=" class="search_super ma_tab">いつもの</a>
+
+
+
+                    <!-- カテゴリタブがクリックできるかの判定 -->
+
+
+                    <a href="http://127.0.0.1:18080/defaultShop/disp/CVSfDispCategory.jsp" class="category ma_tab">こだわり</a>
+
+
+                    <!-- トップタブがクリックできるかの判定 -->
+
+
+                    <a class="special active_cat_select">トップ</a>
+
+
+
+
+                </div>
+                <!-- お客様メニュー -->
+                <div id="menu">
+
+
+
+                    <div id="login_register">
+                        <div><a class="login_txt ma_a" id="memregister" href="#" >会員登録 ></a></div>
+                        <div style="margin-top: 5px;"><a class="login_txt ma_a" id="aulogin1" href="#" >au IDでログイン ></a></div>
+                    </div>
+
+
+                    <a href="http://127.0.0.1:18080/defaultShop/cart/CCtViewCart_001.jsp" id="cart_i" class="ma_icon">
+
+                        <span class="cart_inner_num">2</span>
+
+                        <img src="../images_pc/header/cart_icon.svg" alt=""> <!-- MOD by NanBJ 2015/10/16 -->
+                        <span class="icontxt">カート</span>
+                    </a>
+
+                    <a href="http://127.0.0.1:18080/defaultShop/disp/CVSfDispSearch.jsp" id="search_i" class="ma_icon">
+                        <img class="searchsize" src="../images_pc/header/search_icon.svg" alt="">
+                        <span class="icontxt">検索</span>
+                    </a>
+                    <a href="https://127.0.0.1:18443/defaultShop/common/CVCoAuWalletReplace.jsp" id="update_i" class="ma_icon">
+                        <img src="../images_pc/header/reload_icon.svg" alt=""> <!-- MOD by NanBJ 2015/10/16 -->
+                        <span class="icontxt">更新</span>
+                    </a>
+                </div>
+            </div>
+
+
+            <div id="scroll_hide">
+                <div class="slide_left">
+                    <div class="image_left">
+                        <img class="block" src="../images_pc/icon/pagenation/arrow_left.png" alt="" width="12" height="12"/>
+                    </div>
+                </div>
+                <div id="special_wrap">
+                    <div class="flick_slide_wrap">
+
+                        <ul id="special">
+
+
+                            <!-- 前回表示したバナー（prevDispNo）をオレンジ枠で囲む。prevDispNoがなければ、最初のバナーをオレンジ枠で囲む。 -->
+                            <li class="active" data-dispNo="003001">
+                                <div class="ma_categori"></div>
+                                <a>
+                                    <img src="../images_pc/template/01.jpg" alt="003001" width="588" height="176">
+                                </a>
+                            </li>
+
+                            <!-- 前回表示したバナー（prevDispNo）をオレンジ枠で囲む。prevDispNoがなければ、最初のバナーをオレンジ枠で囲む。 -->
+                            <li class="" data-dispNo="003002">
+                                <div class="ma_categori"></div>
+                                <a>
+                                    <img src="../images_pc/template/02.jpg" alt="003002" width="588" height="176">
+                                </a>
+                            </li>
+
+                            <!-- 前回表示したバナー（prevDispNo）をオレンジ枠で囲む。prevDispNoがなければ、最初のバナーをオレンジ枠で囲む。 -->
+                            <li class="" data-dispNo="003003">
+                                <div class="ma_categori"></div>
+                                <a>
+                                    <img src="../images_pc/template/03.jpg" alt="003003" width="588" height="176">
+                                </a>
+                            </li>
+
+                            <!-- 前回表示したバナー（prevDispNo）をオレンジ枠で囲む。prevDispNoがなければ、最初のバナーをオレンジ枠で囲む。 -->
+                            <li class="" data-dispNo="003004">
+                                <div class="ma_categori"></div>
+                                <a>
+                                    <img src="../images_pc/template/04.jpg" alt="003004" width="588" height="176">
+                                </a>
+                            </li>
+
+                            <!-- 前回表示したバナー（prevDispNo）をオレンジ枠で囲む。prevDispNoがなければ、最初のバナーをオレンジ枠で囲む。 -->
+                            <li class="" data-dispNo="003005">
+                                <div class="ma_categori"></div>
+                                <a>
+                                    <img src="../images_pc/template/05.jpg" alt="003005" width="588" height="176">
+                                </a>
+                            </li>
+
+                            <!-- 前回表示したバナー（prevDispNo）をオレンジ枠で囲む。prevDispNoがなければ、最初のバナーをオレンジ枠で囲む。 -->
+                            <li class="" data-dispNo="003006">
+                                <div class="ma_categori"></div>
+                                <a>
+                                    <img src="../images_pc/template/06.jpg" alt="003006" width="588" height="176">
+                                </a>
+                            </li>
+
+                            <!-- 前回表示したバナー（prevDispNo）をオレンジ枠で囲む。prevDispNoがなければ、最初のバナーをオレンジ枠で囲む。 -->
+                            <li class="" data-dispNo="003007">
+                                <div class="ma_categori"></div>
+                                <a>
+                                    <img src="../images_pc/template/07.jpg" alt="003007" width="588" height="176">
+                                </a>
+                            </li>
+
+                            <!-- 前回表示したバナー（prevDispNo）をオレンジ枠で囲む。prevDispNoがなければ、最初のバナーをオレンジ枠で囲む。 -->
+                            <li class="" data-dispNo="003008">
+                                <div class="ma_categori"></div>
+                                <a>
+                                    <img src="../images_pc/template/08.jpg" alt="003008" width="588" height="176">
+                                </a>
+                            </li>
+
+                            <!-- 前回表示したバナー（prevDispNo）をオレンジ枠で囲む。prevDispNoがなければ、最初のバナーをオレンジ枠で囲む。 -->
+                            <li class="" data-dispNo="003009">
+                                <div class="ma_categori"></div>
+                                <a>
+                                    <img src="../images_pc/template/09.jpg" alt="003009" width="588" height="176">
+                                </a>
+                            </li>
+
+                            <!-- 前回表示したバナー（prevDispNo）をオレンジ枠で囲む。prevDispNoがなければ、最初のバナーをオレンジ枠で囲む。 -->
+                            <li class="" data-dispNo="003010">
+                                <div class="ma_categori"></div>
+                                <a>
+                                    <img src="../images_pc/template/10.jpg" alt="003010" width="588" height="176">
+                                </a>
+                            </li>
+
+                            <!-- 前回表示したバナー（prevDispNo）をオレンジ枠で囲む。prevDispNoがなければ、最初のバナーをオレンジ枠で囲む。 -->
+                            <li class="" data-dispNo="003014">
+                                <div class="ma_categori"></div>
+                                <a>
+                                    <img src="../images_pc/template/" alt="003014" width="588" height="176">
+                                </a>
+                            </li>
+
+                            <!-- 前回表示したバナー（prevDispNo）をオレンジ枠で囲む。prevDispNoがなければ、最初のバナーをオレンジ枠で囲む。 -->
+                            <li class="" data-dispNo="003013">
+                                <div class="ma_categori"></div>
+                                <a>
+                                    <img src="../images_pc/template/" alt="003013" width="588" height="176">
+                                </a>
+                            </li>
+
+                        </ul>
+
+                    </div>
+                </div>
+                <div class="slide_right">
+                    <div class="image_right">
+                        <img class="block" src="../images_pc/icon/pagenation/arrow_right.png" alt="" width="12" height="12"/>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+
+
+
+        </div>
+
+
+
+        <div class="popupwrap1" style="display: none;">
+            <div class="popupwindow">
+                <p class="pop_text1" style="font-size:14px;padding-bottom:0;">au IDをお持ちの方は簡単に会員登録いただけます</p>
+                <p class="pop_text2" style="font-size:11px;padding-top:0;">ご購入やお得な情報を受け取るには会員登録が必要です</p>
+                <div class="bottom_center" style="padding-left: 60px;">
+                    <button class="noregister cancel ma_btn1" type="button" name="" >登録しない</button>
+                    <button class="goregister yes_btn ma_btn2" type="button" name="" onclick="location.href='https://127.0.0.1:18443/defaultShop/member/CVMmLogin.jsp'">au IDを利用して 登録する</button>
+                </div>
+                <a href="https://127.0.0.1:18443/defaultShop/member/CVMmLogin.jsp" ><p class="loginlink ma_a">既に会員の方はこちらからログイン</p></a>
+            </div>
+        </div>
+
+        <div class="popupwrap2" style="display: none;">
+            <div class="popupwindow">
+                <p class="pop_text">au IDでログインするには<br/>事前に<a href="https://127.0.0.1:18443/defaultShop/order/CVOdMemberAdd.jsp" class="loginlink ma_a">会員登録</a>が必要です</p>
+                <div class="bottom_center" style="padding-left: 60px;"">
+                <button class="nologin cancel ma_btn1" type="button" name="" >au IDでログインしない</button>
+                <button class="gologin yes_btn ma_btn2" type="button" name="" onclick="location.href='https://127.0.0.1:18443/defaultShop/member/CVMmLogin.jsp'">au IDでログインする</button>
+            </div>
+            <a href="" onclick="window.open('https://id.auone.jp/id/pc/guide/', '', ''); return false;"><p class="loginlink ma_a">au IDとは</p></a>
+        </div>
+    </div>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $("#memregister").click(function () {
+                $(".popupwrap1").fadeIn(200);
+                $(".popupwrap1").css('overflow','auto');
+                $("body").css('overflow','hidden');
+            });
+
+            $(".noregister").click(function () {
+                $(".popupwrap1").fadeOut(200);
+                $("body").css("overflow", "auto");
+            });
+
+            $("#aulogin1").click(function () {
+                $(".popupwrap2").fadeIn(200);
+                $(".popupwrap2").css('overflow','auto');
+                $("body").css('overflow','hidden');
+            });
+
+            $(".nologin").click(function () {
+                $(".popupwrap2").fadeOut(200);
+                $("body").css("overflow", "auto");
+            });
+        });
+    </script>
+
+
+
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $("#dialog1").click(function (){
+                $(".popup_lgn3").addClass("top_popup");   // MOD by NanBJ 2015/10/30
+
+                $("body").css({"overflow":"hidden","padding-right":"17px"});
+
+                $(".popup_lgn3").fadeIn(200, function() {
+                    $('.popup_lgn3 button.yes_btn').click(function() {
+                        var dispNo = $('#special li.active').data('dispno');
+                        location.href = "../member/CVMmLogin.jsp?isDispContractModal=true&dispNo=" + dispNo;
+                    });
+                });
+            });
+
+            $(".cancel_lgn").click(function () {
+                $(".popup_lgn3").fadeOut(200);
+
+                $("body").css({"overflow":"auto","padding-right":""});
+
+            });
+
+            $("#dialog2").click(function () {
+                $(".popup_lgn4").addClass("top_popup");  // MOD by NanBJ 2015/10/30
+                $(".popup_lgn4").fadeIn(200);
+
+                $("body").css({"overflow":"hidden","padding-right":"17px"});
+
+            });
+
+            $(".yes_btn").click(function () {
+                $(".popup_lgn4").fadeOut(200);
+
+                $("body").css({"overflow":"auto","padding-right":""});
+
+            });
+        });
+    </script>
+
+    <div id="main_wrap">
+
+        <script type="text/javascript">
+
+            var current_scrollY = 0;
+            $(function(){
+                $('.regularSelect').click(function(){
+                    dispNo = $('[name=dispNo]').val();
+                    goodsNoJson = '../ajax/CVMmRegularSelect_J.jsp';
+                    $.ajax({
+                        type: "GET",
+                        url: goodsNoJson,
+                        data: {dispNo: dispNo},
+                        scriptCharset: 'utf-8',
+                        dataType:'json',
+                        cache : true,
+                        beforeSend : function( xhr ){
+                            xhr.setRequestHeader("If-Modified-Since", "");
+                        },
+                        success: function(data){
+                            $("#regularContents").html("");
+                            var dataArray = data.result;
+                            console.log(dataArray);
+                            $.each(dataArray, function(i){
+                                $("#regularContents").append("<tr>" +
+                                        "<td rowspan='5'>" +
+                                        "<div class='style2wrap' style='margin:3px 5px 3px 3px' id='radioDiv'><label><input type='radio' class='radio_style3' name='regularRadio' value='" + dataArray[i].dtl_goods_no + "' data-goods-nm='" + dataArray[i].org_goods_nm + "' data-regular-no='" + dataArray[i].regular_no + "' ><span class='style2txt'></span></label></div>" +
+                                        "</td>" +
+                                        "<td rowspan='5'>" +
+                                        "<img src='" + dataArray[i].goods_img_cart + "' alt='' width='204' height='124'>" +
+                                        "</td>" +
+                                        "<td rowspan='5' id='goodsNameTd' style='width:276px'><h4>" +
+                                        dataArray[i].goods_nm +
+                                        "</h4><br>" +
+                                        dataArray[i].entr_nm +
+                                        "</td>" +
+                                        "<td>" +
+                                        "<h4>お届け先住所</h4>" +
+                                        "</td>" +
+                                        "</tr>" +
+                                        "<tr>" +
+                                        "<td>" +
+                                        dataArray[i].rcvr_nm_fst +
+                                        dataArray[i].rcvr_nm_mid +
+                                        "</td>" +
+                                        "</tr>" +
+                                        "<tr>" +
+                                        "<td>" +
+                                        "〒" + dataArray[i].zip_cd +
+                                        "</td>" +
+                                        "</tr>" +
+                                        "<tr>" +
+                                        "<td>" +
+                                        dataArray[i].zip_addr1 +
+                                        dataArray[i].zip_addr2 +
+                                        dataArray[i].zip_addr3 +
+                                        dataArray[i].dtl_addr +
+                                        "</td>" +
+                                        "</tr>" +
+                                        "<tr>" +
+                                        "<td>" +
+                                        dataArray[i].tel_no +
+                                        "</td>" +
+                                        "</tr>");
+                            });
+
+                            $("body").css("overflow","hidden");
+                            $(".modal.wd1 .overlayPopup").css("overflow","auto");
+                        },
+                        error:function(){alert("ajax error");}
+                    });
+                    document.getElementById("decision").disabled = "disabled";
+                    removeClass(document.getElementById('decision'), 'yes_btn ma_btn2');
+                    addClass(document.getElementById('decision'), 'yes_btn_disabled');
+
+                    //モーダル表示
+                    wn = '.' + $(this).data('tgt');
+                    //var mW = $(wn).find('.modalBody').innerWidth() / 2;
+                    //var mH = $(wn).find('.modalBody').innerHeight() / 2;
+                    //$(wn).find('.modalBody').css({'margin-left':-mW,'margin-top':-mH});
+
+                    current_scrollY = $( window ).scrollTop();
+                    current_width   = $( '.boxes-group' ).width();
+                    $(".boxes-group").css("position", "fixed");
+                    $(".boxes-group").css("width"   , current_width);
+                    $('.boxes-group, #scroll_hide, #addOrderLinkDiv1').hide();
+
+                    $(wn).fadeIn(300, function() {
+                        $('.boxes-group, #scroll_hide, #addOrderLinkDiv1').show();
+                        // Adobe Analytics start
+                        aa_modalPage('nostore', '契約選択画面');
+                        // Adobe Analytics end
+                    })
+                });
+
+                $('#decision').click(function() {
+                    var $selectedRadioElem	= $('input[name="regularRadio"]:checked');
+                    var goodsNo				= $selectedRadioElem.val();
+                    var goodsNm				= $selectedRadioElem.data('goods-nm');
+                    var regularNo			= $selectedRadioElem.data('regular-no');
+                    if ((goodsNo != undefined && goodsNo != '') &&
+                            (regularNo != undefined && regularNo != '')) {
+                        location.href = '../disp/CSfDispListPage_001.jsp?GOODS_NO=' + goodsNo + '&GOODS_NM=' + goodsNm + '&REGULAR_NO=' + regularNo;
+                    }
+                });
+
+                $('.cancelBtn').click(function(){
+                    $('.boxes-group, #scroll_hide, #addOrderLinkDiv1').hide();
+                    $(".boxes-group").css("position","");
+                    $("html, body").prop( { scrollTop: current_scrollY } );
+                    $(wn).fadeOut(300, function() {
+                        $('.boxes-group, #scroll_hide, #addOrderLinkDiv1').show();
+                    });
+                });
+
+                $(document).on('change', 'input[name="regularRadio"]', function() {
+                    $("#decision")
+                            .prop('disabled', false)
+                            .removeClass('yes_btn_disabled')
+                            .addClass('yes_btn ma_btn2');
+                });
+            });
+
+            function gotoPage(){
+                var radioList = document.getElementsByName("regularRadio");
+                var goodsNo = "";
+                for(var i=0; i<radioList.length; i++){
+                    if (radioList[i].checked) {
+                        goodsNo = radioList[i].value
+                        break;
+                    }
+                }
+                if(goodsNo != ""){
+                    //検索一覧画面に遷移
+                    location.href= "../disp/CSfDispListPage_001.jsp?GOODS_NO=" + goodsNo;
+                }
+            }
+
+            //クラス追加処理
+            function addClass(element, className){
+                if (!element || !className){
+                    return;
+                }
+                var classString = element.className, nameIndex = classString.indexOf(className);
+                if (nameIndex == -1) {
+                    classString += ' ' + className;
+                }
+                element.className = classString;
+            }
+            //クラス削除処理
+            function removeClass(element, className){
+                if (!element || !className){
+                    return;
+                }
+
+                var classString = element.className, nameIndex = classString.indexOf(className);
+                if (nameIndex != -1) {
+                    classString = classString.substr(0, nameIndex) + classString.substr(nameIndex+className.length);
+                }
+                element.className = classString;
+            }
+
+        </script>
+        <style type="text/css">
+            .modal {
+                display: none;
+                overflow:auto;
+                width: 100%;
+                height: 100%;
+                position: fixed;
+                top: 0;
+                right: 0;
+                bottom: 0;
+                left: 0;
+                background: rgba(0,0,0,0.6);
+                z-index: 99999;
+            }
+
+            .overlayPopup2 {
+                display: table;
+                width: 100%;
+                height: 100%;
+                position: absolute;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                top: 0;
+                z-index: 9998;
+            }
+
+            .contentContainer {
+                display: table-cell;
+                vertical-align: middle;
+                position: relative;
+                height:100%;
+                padding: 40px 0;
+            }
+
+            .modalBody {
+                position: relative;
+                z-index: 10000;
+                background: #FFFFFF;
+                width: 1000px;
+                margin: 0 auto;
+                height: 600px;
+            }
+
+            #regularContentsDiv {
+                overflow: scroll; /* スクロール表示 */
+                height: 80%;
+                overflow-x: hidden;
+                border-style: solid;
+                border-width: 1px;
+                border-color: #E5E5E5;
+                width: 95%;
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .buttonDiv {
+                width: 400px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            #goodsNameTd {
+                vertical-align: top;
+            }
+
+            #radioDiv {
+                padding-right: 0px;
+            }
+        </style>
+        <div class="modal wd1">
+            <div class="overlayPopup2">
+                <div class="contentContainer">
+                    <div class="modalBody">
+                        <br>
+                        <h4>　お申込み中の契約を1つ選択してください</h4>
+                        <br>
+                        <div id="regularContentsDiv">
+                            <table frame="border" id="regularContents" rules="none">
+                            </table>
+                        </div>
+                        <div class="buttonDiv">
+                            <br>
+                            <input type="button" value="キャンセル" class="cancelBtn cancel_lgn ma_btn1" />
+                            <input type="button" value="決定" id="decision" class="yes_btn_disabled" disabled/>
+                            <input type="hidden" value="null" id="backPage" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <script type="text/javascript">
+            $(document).ready(function() {
+                var prevDispNo = "";
+                if (prevDispNo != '') {
+                    // 契約選択画面を表示するイベントを実行する。
+                    var addLink = $('.add_link').filter(function(){ return $(this).css('display') == 'block'; });
+                    addLink.click();
+                }
+            });
+        </script>
+
+        <style type="text/css">
+            #addOrderLinkDiv1 {
+                margin: 0px 14px 10px 0px;
+                text-align: right;
+            }
+        </style>
+
+        <div id="products_wrap">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <!-- ボックス -->
+            <div id="addOrderLinkDiv1" style="display: none; ">
+                <a id="dialog1" class="add_link ma_a" style="display:block; "></a>
+                <a id="dialog2" class="dialog2 add_link ma_a" style="display: none; "></a>
+                <a id="regularcount_link" class="add_link ma_a" href="http://127.0.0.1:18080/defaultShop/disp/CSfDispListPage_001.jsp?GOODS_NO=&GOODS_NM=&REGULAR_NO=" style="display: none; "></a>
+
+                <a id="addOrderLink4" data-tgt="wd1" class="regularSelect add_link ma_a" style="display: none; "></a>
+
+
+                <input type="hidden" name="dispNo" value="003001">
+
+
+
+            </div>
+
+            <!-- ページ表示件数 -->
+            <div id="products_header" class="products_header">
+                <span id="header_s">1</span>-<span id="header_e">30</span>件(全<span id="header_t">112</span>件)を表示
+            </div>
+            <script>
+                var domheader_t = document.querySelector('#header_t');
+                alert("domheader_t1:" + domheader_t.innerHTML);
+            </script>
+
+            <!-- 商品一覧 -->
+            <div class="boxes-group" style="">
+
+
+
+
+
+
+
+                <a class="box" data-goodsNo="8" data-sub-goodsno="9">
+                    <div class="ma_img"></div>
+
+                    <div class="icon_area">
+
+                        <img src="../images/goodsiconTA/list/icon_001.png" class="au_limit" alt="">
+
+                        <img src="../images/goodsiconTA/list/icon_003.png" class="au_limit" alt="">
+
+                        <img src="../images/goodsiconTA/list/icon_008.png" class="au_limit" alt="">
+
+                        <img src="../images/goodsiconTA/list/icon_cp_dc_10.png" class="au_limit" alt="">
+
+                    </div>
+
+
+                    <div class="icon_bottom">
+
+
+
+
+
+                        <div class="icon_bottom1"><img src="../images_pc/icon/bottom/regular_single_icon.png" class="regular_icon" alt=""></div>
+
+
+
+                        <div class="icon_bottom2"><img src="../images_pc/icon/bottom/icon_list_product_detail_arrow.png" class="regular_icon" alt=""></div>
+
+                    </div>
+
+                    <div class="photo_box">
+                        <img src="../images_pc/noimage/main.jpg" class="photo" alt="" >
+                    </div>
+                    <div class="txtbox txt_el">
+
+
+                        <!-- 水の場合 -->
+
+
+
+
+
+
+
+                        <div class="txtbox_line1">
+                            <span class="goods_name" style="width: 48%">ST_test0701_2</span>
+                            <span class="regular_price">2,700円</span>
+                        </div>
+                        <div class="txtbox_line2">
+                            <span class="goods_demands">ST用検証</span>
+                            <span class="regular_price">2,700円～</span>
+                        </div>
+                        <div class="txtbox_line3">
+                        </div>
+
+
+                    </div>
+                </a>
+
+
+
+
+
+                <a class="box" data-goodsNo="5000" >
+                    <div class="ma_img"></div>
+
+                    <div class="icon_area">
+
+                        <img src="../images/goodsiconTA/list/icon_001.png" class="au_limit" alt="">
+
+                        <img src="../images/goodsiconTA/list/icon_003.png" class="au_limit" alt="">
+
+                        <img src="../images/goodsiconTA/list/icon_008.png" class="au_limit" alt="">
+
+                        <img src="../images/goodsiconTA/list/icon_cp_dc_10.png" class="au_limit" alt="">
+
+                    </div>
+
+
+                    <div class="icon_bottom">
+
+
+
+
+
+                        <div class="icon_bottom1"><img src="../images_pc/icon/bottom/regular_single_icon.png" class="regular_icon" alt=""></div>
+
+
+
+                    </div>
+
+                    <div class="photo_box">
+                        <img src="../images_pc/noimage/main.jpg" class="photo" alt="" >
+                    </div>
+                    <div class="txtbox txt_el">
+
+
+                        <div class="txtbox_line1">
+                            <!--  Modify 障害対応No:2138 by jianwu.zhang 2015/11/23 Start -->
+                            <!--  <span class="goods_name" style="width:88%">WATER_BOTTLE1</span>  -->
+                            <span class="goods_name" style="width:90%">WATER_BOTTLE1</span>
+                            <!--  Modify 障害対応No:2138 by jianwu.zhang 2015/11/23 End -->
+                        </div>
+                        <div class="txtbox_line2">
+                            <span class="goods_demands">かってください。</span>
+                        </div>
+                        <div class="txtbox_line3">
+
+
+
+
+
+
+
+
+
+
+
+                            <span class="regular_price">2,700円</span>
+
+
+
+
+                        </div>
+
+
+
+                    </div>
+                </a>
+
+
+
+
+
+                <a class="box" data-goodsNo="5009" >
+                    <div class="ma_img"></div>
+
+                    <div class="icon_area">
+
+                        <img src="../images/goodsiconTA/list/icon_001.png" class="au_limit" alt="">
+
+                        <img src="../images/goodsiconTA/list/icon_003.png" class="au_limit" alt="">
+
+                        <img src="../images/goodsiconTA/list/icon_008.png" class="au_limit" alt="">
+
+                        <img src="../images/goodsiconTA/list/icon_cp_dc_10.png" class="au_limit" alt="">
+
+                    </div>
+
+
+                    <div class="icon_bottom">
+
+
+
+
+
+                        <div class="icon_bottom1"><img src="../images_pc/icon/bottom/regular_single_icon.png" class="regular_icon" alt=""></div>
+
+
+
+                    </div>
+
+                    <div class="photo_box">
+                        <img src="../images_pc/noimage/main.jpg" class="photo" alt="" >
+                    </div>
+                    <div class="txtbox txt_el">
+
+
+                        <div class="txtbox_line1">
+                            <!--  Modify 障害対応No:2138 by jianwu.zhang 2015/11/23 Start -->
+                            <!--  <span class="goods_name" style="width:88%">WATER_BOTTLE10</span>  -->
+                            <span class="goods_name" style="width:90%">WATER_BOTTLE10</span>
+                            <!--  Modify 障害対応No:2138 by jianwu.zhang 2015/11/23 End -->
+                        </div>
+                        <div class="txtbox_line2">
+                            <span class="goods_demands">かってください。</span>
+                        </div>
+                        <div class="txtbox_line3">
+
+
+
+
+
+
+
+
+
+
+
+                            <span class="regular_price">2,700円</span>
+
+
+
+
+                        </div>
+
+
+
+                    </div>
+                </a>
+
+
+
+
+
+                <a class="box" data-goodsNo="5010" >
+                    <div class="ma_img"></div>
+
+                    <div class="icon_area">
+
+                        <img src="../images/goodsiconTA/list/icon_001.png" class="au_limit" alt="">
+
+                        <img src="../images/goodsiconTA/list/icon_003.png" class="au_limit" alt="">
+
+                        <img src="../images/goodsiconTA/list/icon_008.png" class="au_limit" alt="">
+
+                        <img src="../images/goodsiconTA/list/icon_cp_dc_10.png" class="au_limit" alt="">
+
+                    </div>
+
+
+                    <div class="icon_bottom">
+
+
+
+
+
+                        <div class="icon_bottom1"><img src="../images_pc/icon/bottom/regular_single_icon.png" class="regular_icon" alt=""></div>
+
+
+
+                    </div>
+
+                    <div class="photo_box">
+                        <img src="../images_pc/noimage/main.jpg" class="photo" alt="" >
+                    </div>
+                    <div class="txtbox txt_el">
+
+
+                        <div class="txtbox_line1">
+                            <!--  Modify 障害対応No:2138 by jianwu.zhang 2015/11/23 Start -->
+                            <!--  <span class="goods_name" style="width:88%">WATER_BOTTLE11</span>  -->
+                            <span class="goods_name" style="width:90%">WATER_BOTTLE11</span>
+                            <!--  Modify 障害対応No:2138 by jianwu.zhang 2015/11/23 End -->
+                        </div>
+                        <div class="txtbox_line2">
+                            <span class="goods_demands">かってください。</span>
+                        </div>
+                        <div class="txtbox_line3">
+
+
+
+
+
+
+
+
+
+
+
+                            <span class="regular_price">2,700円</span>
+
+
+
+
+                        </div>
+
+
+
+                    </div>
+                </a>
+
+
+
+
+
+                <a class="box" data-goodsNo="5011" >
+                    <div class="ma_img"></div>
+
+                    <div class="icon_area">
+
+                        <img src="../images/goodsiconTA/list/icon_001.png" class="au_limit" alt="">
+
+                        <img src="../images/goodsiconTA/list/icon_003.png" class="au_limit" alt="">
+
+                        <img src="../images/goodsiconTA/list/icon_008.png" class="au_limit" alt="">
+
+                        <img src="../images/goodsiconTA/list/icon_cp_dc_10.png" class="au_limit" alt="">
+
+                    </div>
+
+
+                    <div class="icon_bottom">
+
+
+
+
+
+                        <div class="icon_bottom1"><img src="../images_pc/icon/bottom/regular_single_icon.png" class="regular_icon" alt=""></div>
+
+
+
+                    </div>
+
+                    <div class="photo_box">
+                        <img src="../images_pc/noimage/main.jpg" class="photo" alt="" >
+                    </div>
+                    <div class="txtbox txt_el">
+
+
+                        <div class="txtbox_line1">
+                            <!--  Modify 障害対応No:2138 by jianwu.zhang 2015/11/23 Start -->
+                            <!--  <span class="goods_name" style="width:88%">WATER_BOTTLE12</span>  -->
+                            <span class="goods_name" style="width:90%">WATER_BOTTLE12</span>
+                            <!--  Modify 障害対応No:2138 by jianwu.zhang 2015/11/23 End -->
+                        </div>
+                        <div class="txtbox_line2">
+                            <span class="goods_demands">かってください。</span>
+                        </div>
+                        <div class="txtbox_line3">
+
+
+
+
+
+
+
+
+
+
+
+                            <span class="regular_price">2,700円</span>
+
+
+
+
+                        </div>
+
+
+
+                    </div>
+                </a>
+
+
+
+
+
+                <a class="box" data-goodsNo="5012" >
+                    <div class="ma_img"></div>
+
+                    <div class="icon_area">
+
+                        <img src="../images/goodsiconTA/list/icon_001.png" class="au_limit" alt="">
+
+                        <img src="../images/goodsiconTA/list/icon_003.png" class="au_limit" alt="">
+
+                        <img src="../images/goodsiconTA/list/icon_008.png" class="au_limit" alt="">
+
+                        <img src="../images/goodsiconTA/list/icon_cp_dc_10.png" class="au_limit" alt="">
+
+                    </div>
+
+
+                    <div class="icon_bottom">
+
+
+
+
+
+                        <div class="icon_bottom1"><img src="../images_pc/icon/bottom/regular_single_icon.png" class="regular_icon" alt=""></div>
+
+
+
+                    </div>
+
+                    <div class="photo_box">
+                        <img src="../images_pc/noimage/main.jpg" class="photo" alt="" >
+                    </div>
+                    <div class="txtbox txt_el">
+
+
+                        <div class="txtbox_line1">
+                            <!--  Modify 障害対応No:2138 by jianwu.zhang 2015/11/23 Start -->
+                            <!--  <span class="goods_name" style="width:88%">WATER_BOTTLE13</span>  -->
+                            <span class="goods_name" style="width:90%">WATER_BOTTLE13</span>
+                            <!--  Modify 障害対応No:2138 by jianwu.zhang 2015/11/23 End -->
+                        </div>
+                        <div class="txtbox_line2">
+                            <span class="goods_demands">かってください。</span>
+                        </div>
+                        <div class="txtbox_line3">
+
+
+
+
+
+
+
+
+
+
+
+                            <span class="regular_price">2,700円</span>
+
+
+
+
+                        </div>
+
+
+
+                    </div>
+                </a>
+
+
+
+
+
+                <a class="box" data-goodsNo="5013" >
+                    <div class="ma_img"></div>
+
+                    <div class="icon_area">
+
+                        <img src="../images/goodsiconTA/list/icon_001.png" class="au_limit" alt="">
+
+                        <img src="../images/goodsiconTA/list/icon_003.png" class="au_limit" alt="">
+
+                        <img src="../images/goodsiconTA/list/icon_008.png" class="au_limit" alt="">
+
+                        <img src="../images/goodsiconTA/list/icon_cp_dc_10.png" class="au_limit" alt="">
+
+                    </div>
+
+
+                    <div class="icon_bottom">
+
+
+
+
+
+                        <div class="icon_bottom1"><img src="../images_pc/icon/bottom/regular_single_icon.png" class="regular_icon" alt=""></div>
+
+
+
+                    </div>
+
+                    <div class="photo_box">
+                        <img src="../images_pc/noimage/main.jpg" class="photo" alt="" >
+                    </div>
+                    <div class="txtbox txt_el">
+
+
+                        <div class="txtbox_line1">
+                            <!--  Modify 障害対応No:2138 by jianwu.zhang 2015/11/23 Start -->
+                            <!--  <span class="goods_name" style="width:88%">WATER_BOTTLE14</span>  -->
+                            <span class="goods_name" style="width:90%">WATER_BOTTLE14</span>
+                            <!--  Modify 障害対応No:2138 by jianwu.zhang 2015/11/23 End -->
+                        </div>
+                        <div class="txtbox_line2">
+                            <span class="goods_demands">かってください。</span>
+                        </div>
+                        <div class="txtbox_line3">
+
+
+
+
+
+
+
+
+
+
+
+                            <span class="regular_price">2,700円</span>
+
+
+
+
+                        </div>
+
+
+
+                    </div>
+                </a>
+
+
+
+
+
+                <a class="box" data-goodsNo="5001" >
+                    <div class="ma_img"></div>
+
+                    <div class="icon_area">
+
+                        <img src="../images/goodsiconTA/list/icon_001.png" class="au_limit" alt="">
+
+                        <img src="../images/goodsiconTA/list/icon_003.png" class="au_limit" alt="">
+
+                        <img src="../images/goodsiconTA/list/icon_008.png" class="au_limit" alt="">
+
+                        <img src="../images/goodsiconTA/list/icon_cp_dc_10.png" class="au_limit" alt="">
+
+                    </div>
+
+
+                    <div class="icon_bottom">
+
+
+
+
+
+                        <div class="icon_bottom1"><img src="../images_pc/icon/bottom/regular_single_icon.png" class="regular_icon" alt=""></div>
+
+
+
+                    </div>
+
+                    <div class="photo_box">
+                        <img src="../images_pc/noimage/main.jpg" class="photo" alt="" >
+                    </div>
+                    <div class="txtbox txt_el">
+
+
+                        <div class="txtbox_line1">
+                            <!--  Modify 障害対応No:2138 by jianwu.zhang 2015/11/23 Start -->
+                            <!--  <span class="goods_name" style="width:88%">WATER_BOTTLE2</span>  -->
+                            <span class="goods_name" style="width:90%">WATER_BOTTLE2</span>
+                            <!--  Modify 障害対応No:2138 by jianwu.zhang 2015/11/23 End -->
+                        </div>
+                        <div class="txtbox_line2">
+                            <span class="goods_demands">かってください。</span>
+                        </div>
+                        <div class="txtbox_line3">
+
+
+
+
+
+
+
+
+
+
+
+                            <span class="regular_price">2,700円</span>
+
+
+
+
+                        </div>
+
+
+
+                    </div>
+                </a>
+
+
+
+
+
+                <a class="box" data-goodsNo="5002" >
+                    <div class="ma_img"></div>
+
+                    <div class="icon_area">
+
+                        <img src="../images/goodsiconTA/list/icon_001.png" class="au_limit" alt="">
+
+                        <img src="../images/goodsiconTA/list/icon_003.png" class="au_limit" alt="">
+
+                        <img src="../images/goodsiconTA/list/icon_008.png" class="au_limit" alt="">
+
+                        <img src="../images/goodsiconTA/list/icon_cp_dc_10.png" class="au_limit" alt="">
+
+                    </div>
+
+
+                    <div class="icon_bottom">
+
+
+
+
+
+                        <div class="icon_bottom1"><img src="../images_pc/icon/bottom/regular_single_icon.png" class="regular_icon" alt=""></div>
+
+
+
+                    </div>
+
+                    <div class="photo_box">
+                        <img src="../images_pc/noimage/main.jpg" class="photo" alt="" >
+                    </div>
+                    <div class="txtbox txt_el">
+
+
+                        <div class="txtbox_line1">
+                            <!--  Modify 障害対応No:2138 by jianwu.zhang 2015/11/23 Start -->
+                            <!--  <span class="goods_name" style="width:88%">WATER_BOTTLE3</span>  -->
+                            <span class="goods_name" style="width:90%">WATER_BOTTLE3</span>
+                            <!--  Modify 障害対応No:2138 by jianwu.zhang 2015/11/23 End -->
+                        </div>
+                        <div class="txtbox_line2">
+                            <span class="goods_demands">かってください。</span>
+                        </div>
+                        <div class="txtbox_line3">
+
+
+
+
+
+
+
+
+
+
+
+                            <span class="regular_price">2,700円</span>
+
+
+
+
+                        </div>
+
+
+
+                    </div>
+                </a>
+
+
+
+
+
+                <a class="box" data-goodsNo="5003" >
+                    <div class="ma_img"></div>
+
+                    <div class="icon_area">
+
+                        <img src="../images/goodsiconTA/list/icon_001.png" class="au_limit" alt="">
+
+                        <img src="../images/goodsiconTA/list/icon_003.png" class="au_limit" alt="">
+
+                        <img src="../images/goodsiconTA/list/icon_008.png" class="au_limit" alt="">
+
+                        <img src="../images/goodsiconTA/list/icon_cp_dc_10.png" class="au_limit" alt="">
+
+                    </div>
+
+
+                    <div class="icon_bottom">
+
+
+
+
+
+                        <div class="icon_bottom1"><img src="../images_pc/icon/bottom/regular_single_icon.png" class="regular_icon" alt=""></div>
+
+
+
+                    </div>
+
+                    <div class="photo_box">
+                        <img src="../images_pc/noimage/main.jpg" class="photo" alt="" >
+                    </div>
+                    <div class="txtbox txt_el">
+
+
+                        <div class="txtbox_line1">
+                            <!--  Modify 障害対応No:2138 by jianwu.zhang 2015/11/23 Start -->
+                            <!--  <span class="goods_name" style="width:88%">WATER_BOTTLE4</span>  -->
+                            <span class="goods_name" style="width:90%">WATER_BOTTLE4</span>
+                            <!--  Modify 障害対応No:2138 by jianwu.zhang 2015/11/23 End -->
+                        </div>
+                        <div class="txtbox_line2">
+                            <span class="goods_demands">かってください。</span>
+                        </div>
+                        <div class="txtbox_line3">
+
+
+
+
+
+
+
+
+
+
+
+                            <span class="regular_price">2,700円</span>
+
+
+
+
+                        </div>
+
+
+
+                    </div>
+                </a>
+
+
+
+
+
+                <a class="box" data-goodsNo="5004" >
+                    <div class="ma_img"></div>
+
+                    <div class="icon_area">
+
+                        <img src="../images/goodsiconTA/list/icon_001.png" class="au_limit" alt="">
+
+                        <img src="../images/goodsiconTA/list/icon_003.png" class="au_limit" alt="">
+
+                        <img src="../images/goodsiconTA/list/icon_008.png" class="au_limit" alt="">
+
+                        <img src="../images/goodsiconTA/list/icon_cp_dc_10.png" class="au_limit" alt="">
+
+                    </div>
+
+
+                    <div class="icon_bottom">
+
+
+
+
+
+                        <div class="icon_bottom1"><img src="../images_pc/icon/bottom/regular_single_icon.png" class="regular_icon" alt=""></div>
+
+
+
+                    </div>
+
+                    <div class="photo_box">
+                        <img src="../images_pc/noimage/main.jpg" class="photo" alt="" >
+                    </div>
+                    <div class="txtbox txt_el">
+
+
+                        <div class="txtbox_line1">
+                            <!--  Modify 障害対応No:2138 by jianwu.zhang 2015/11/23 Start -->
+                            <!--  <span class="goods_name" style="width:88%">WATER_BOTTLE5</span>  -->
+                            <span class="goods_name" style="width:90%">WATER_BOTTLE5</span>
+                            <!--  Modify 障害対応No:2138 by jianwu.zhang 2015/11/23 End -->
+                        </div>
+                        <div class="txtbox_line2">
+                            <span class="goods_demands">かってください。</span>
+                        </div>
+                        <div class="txtbox_line3">
+
+
+
+
+
+
+
+
+
+
+
+                            <span class="regular_price">2,700円</span>
+
+
+
+
+                        </div>
+
+
+
+                    </div>
+                </a>
+
+
+
+
+
+                <a class="box" data-goodsNo="5005" >
+                    <div class="ma_img"></div>
+
+                    <div class="icon_area">
+
+                        <img src="../images/goodsiconTA/list/icon_001.png" class="au_limit" alt="">
+
+                        <img src="../images/goodsiconTA/list/icon_003.png" class="au_limit" alt="">
+
+                        <img src="../images/goodsiconTA/list/icon_008.png" class="au_limit" alt="">
+
+                        <img src="../images/goodsiconTA/list/icon_cp_dc_10.png" class="au_limit" alt="">
+
+                    </div>
+
+
+                    <div class="icon_bottom">
+
+
+
+
+
+                        <div class="icon_bottom1"><img src="../images_pc/icon/bottom/regular_single_icon.png" class="regular_icon" alt=""></div>
+
+
+
+                    </div>
+
+                    <div class="photo_box">
+                        <img src="../images_pc/noimage/main.jpg" class="photo" alt="" >
+                    </div>
+                    <div class="txtbox txt_el">
+
+
+                        <div class="txtbox_line1">
+                            <!--  Modify 障害対応No:2138 by jianwu.zhang 2015/11/23 Start -->
+                            <!--  <span class="goods_name" style="width:88%">WATER_BOTTLE6</span>  -->
+                            <span class="goods_name" style="width:90%">WATER_BOTTLE6</span>
+                            <!--  Modify 障害対応No:2138 by jianwu.zhang 2015/11/23 End -->
+                        </div>
+                        <div class="txtbox_line2">
+                            <span class="goods_demands">かってください。</span>
+                        </div>
+                        <div class="txtbox_line3">
+
+
+
+
+
+
+
+
+
+
+
+                            <span class="regular_price">2,700円</span>
+
+
+
+
+                        </div>
+
+
+
+                    </div>
+                </a>
+
+
+
+
+
+                <a class="box" data-goodsNo="5006" >
+                    <div class="ma_img"></div>
+
+                    <div class="icon_area">
+
+                        <img src="../images/goodsiconTA/list/icon_001.png" class="au_limit" alt="">
+
+                        <img src="../images/goodsiconTA/list/icon_003.png" class="au_limit" alt="">
+
+                        <img src="../images/goodsiconTA/list/icon_008.png" class="au_limit" alt="">
+
+                        <img src="../images/goodsiconTA/list/icon_cp_dc_10.png" class="au_limit" alt="">
+
+                    </div>
+
+
+                    <div class="icon_bottom">
+
+
+
+
+
+                        <div class="icon_bottom1"><img src="../images_pc/icon/bottom/regular_single_icon.png" class="regular_icon" alt=""></div>
+
+
+
+                    </div>
+
+                    <div class="photo_box">
+                        <img src="../images_pc/noimage/main.jpg" class="photo" alt="" >
+                    </div>
+                    <div class="txtbox txt_el">
+
+
+                        <div class="txtbox_line1">
+                            <!--  Modify 障害対応No:2138 by jianwu.zhang 2015/11/23 Start -->
+                            <!--  <span class="goods_name" style="width:88%">WATER_BOTTLE7</span>  -->
+                            <span class="goods_name" style="width:90%">WATER_BOTTLE7</span>
+                            <!--  Modify 障害対応No:2138 by jianwu.zhang 2015/11/23 End -->
+                        </div>
+                        <div class="txtbox_line2">
+                            <span class="goods_demands">かってください。</span>
+                        </div>
+                        <div class="txtbox_line3">
+
+
+
+
+
+
+
+
+
+
+
+                            <span class="regular_price">2,700円</span>
+
+
+
+
+                        </div>
+
+
+
+                    </div>
+                </a>
+
+
+
+
+
+                <a class="box" data-goodsNo="5007" >
+                    <div class="ma_img"></div>
+
+                    <div class="icon_area">
+
+                        <img src="../images/goodsiconTA/list/icon_001.png" class="au_limit" alt="">
+
+                        <img src="../images/goodsiconTA/list/icon_003.png" class="au_limit" alt="">
+
+                        <img src="../images/goodsiconTA/list/icon_008.png" class="au_limit" alt="">
+
+                        <img src="../images/goodsiconTA/list/icon_cp_dc_10.png" class="au_limit" alt="">
+
+                    </div>
+
+
+                    <div class="icon_bottom">
+
+
+
+
+
+                        <div class="icon_bottom1"><img src="../images_pc/icon/bottom/regular_single_icon.png" class="regular_icon" alt=""></div>
+
+
+
+                    </div>
+
+                    <div class="photo_box">
+                        <img src="../images_pc/noimage/main.jpg" class="photo" alt="" >
+                    </div>
+                    <div class="txtbox txt_el">
+
+
+                        <div class="txtbox_line1">
+                            <!--  Modify 障害対応No:2138 by jianwu.zhang 2015/11/23 Start -->
+                            <!--  <span class="goods_name" style="width:88%">WATER_BOTTLE8</span>  -->
+                            <span class="goods_name" style="width:90%">WATER_BOTTLE8</span>
+                            <!--  Modify 障害対応No:2138 by jianwu.zhang 2015/11/23 End -->
+                        </div>
+                        <div class="txtbox_line2">
+                            <span class="goods_demands">かってください。</span>
+                        </div>
+                        <div class="txtbox_line3">
+
+
+
+
+
+
+
+
+
+
+
+                            <span class="regular_price">2,700円</span>
+
+
+
+
+                        </div>
+
+
+
+                    </div>
+                </a>
+
+
+
+
+
+                <a class="box" data-goodsNo="5008" >
+                    <div class="ma_img"></div>
+
+                    <div class="icon_area">
+
+                        <img src="../images/goodsiconTA/list/icon_001.png" class="au_limit" alt="">
+
+                        <img src="../images/goodsiconTA/list/icon_003.png" class="au_limit" alt="">
+
+                        <img src="../images/goodsiconTA/list/icon_008.png" class="au_limit" alt="">
+
+                        <img src="../images/goodsiconTA/list/icon_cp_dc_10.png" class="au_limit" alt="">
+
+                    </div>
+
+
+                    <div class="icon_bottom">
+
+
+
+
+
+                        <div class="icon_bottom1"><img src="../images_pc/icon/bottom/regular_single_icon.png" class="regular_icon" alt=""></div>
+
+
+
+                    </div>
+
+                    <div class="photo_box">
+                        <img src="../images_pc/noimage/main.jpg" class="photo" alt="" >
+                    </div>
+                    <div class="txtbox txt_el">
+
+
+                        <div class="txtbox_line1">
+                            <!--  Modify 障害対応No:2138 by jianwu.zhang 2015/11/23 Start -->
+                            <!--  <span class="goods_name" style="width:88%">WATER_BOTTLE9</span>  -->
+                            <span class="goods_name" style="width:90%">WATER_BOTTLE9</span>
+                            <!--  Modify 障害対応No:2138 by jianwu.zhang 2015/11/23 End -->
+                        </div>
+                        <div class="txtbox_line2">
+                            <span class="goods_demands">かってください。</span>
+                        </div>
+                        <div class="txtbox_line3">
+
+
+
+
+
+
+
+
+
+
+
+                            <span class="regular_price">2,700円</span>
+
+
+
+
+                        </div>
+
+
+
+                    </div>
+                </a>
+
+
+
+
+
+                <a class="box" data-goodsNo="5015" >
+                    <div class="ma_img"></div>
+
+                    <div class="icon_area">
+
+                        <img src="../images/goodsiconTA/list/icon_001.png" class="au_limit" alt="">
+
+                        <img src="../images/goodsiconTA/list/icon_003.png" class="au_limit" alt="">
+
+                        <img src="../images/goodsiconTA/list/icon_008.png" class="au_limit" alt="">
+
+                        <img src="../images/goodsiconTA/list/icon_cp_dc_10.png" class="au_limit" alt="">
+
+                    </div>
+
+
+                    <div class="icon_bottom">
+
+
+
+
+
+                        <div class="icon_bottom1"><img src="../images_pc/icon/bottom/regular_single_icon.png" class="regular_icon" alt=""></div>
+
+
+
+                    </div>
+
+                    <div class="none_object"><span class="none_p">SOLD OUT</span></div>
+
+                    <div class="photo_box">
+                        <img src="../images_pc/noimage/main.jpg" class="photo" alt="" >
+                    </div>
+                    <div class="txtbox txt_el">
+
+
+                        <div class="txtbox_line1">
+                            <!--  Modify 障害対応No:2138 by jianwu.zhang 2015/11/23 Start -->
+                            <!--  <span class="goods_name" style="width:88%">WATER_BOTTLE16</span>  -->
+                            <span class="goods_name" style="width:90%">WATER_BOTTLE16</span>
+                            <!--  Modify 障害対応No:2138 by jianwu.zhang 2015/11/23 End -->
+                        </div>
+                        <div class="txtbox_line2">
+                            <span class="goods_demands">かってください。</span>
+                        </div>
+                        <div class="txtbox_line3">
+
+
+
+
+
+
+
+
+
+
+
+                            <span class="regular_price">1円</span>
+
+
+
+
+                        </div>
+
+
+
+                    </div>
+                </a>
+
+
+
+
+
+                <a class="box" data-goodsNo="4000" >
+                    <div class="ma_img"></div>
+
+                    <div class="icon_area">
+
+                        <img src="../images/goodsiconTA/list/icon_001.png" class="au_limit" alt="">
+
+                        <img src="../images/goodsiconTA/list/icon_003.png" class="au_limit" alt="">
+
+                        <img src="../images/goodsiconTA/list/icon_008.png" class="au_limit" alt="">
+
+                        <img src="../images/goodsiconTA/list/icon_cp_dc_10.png" class="au_limit" alt="">
+
+                    </div>
+
+
+                    <div class="icon_bottom">
+
+
+
+
+                        <div class="icon_bottom1"><img src="../images_pc/icon/bottom/regular_icon.png" class="regular_icon" alt=""></div>
+
+
+
+
+                    </div>
+
+                    <div class="none_object"><span class="none_p">SOLD OUT</span></div>
+
+                    <div class="photo_box">
+                        <img src="../images_pc/noimage/main.jpg" class="photo" alt="" >
+                    </div>
+                    <div class="txtbox txt_el">
+
+
+                        <div class="txtbox_line1">
+                            <!--  Modify 障害対応No:2138 by jianwu.zhang 2015/11/23 Start -->
+                            <!--  <span class="goods_name" style="width:88%">WATER1</span>  -->
+                            <span class="goods_name" style="width:90%">WATER1</span>
+                            <!--  Modify 障害対応No:2138 by jianwu.zhang 2015/11/23 End -->
+                        </div>
+                        <div class="txtbox_line2">
+                            <span class="goods_demands">つかわれない？</span>
+                        </div>
+                        <div class="txtbox_line3">
+
+
+
+
+
+
+
+
+
+
+
+                            <span class="regular_price">2,700円</span>
+
+
+
+
+                        </div>
+
+
+
+                    </div>
+                </a>
+
+
+
+
+
+                <a class="box" data-goodsNo="4001" >
+                    <div class="ma_img"></div>
+
+                    <div class="icon_area">
+
+                        <img src="../images/goodsiconTA/list/icon_001.png" class="au_limit" alt="">
+
+                        <img src="../images/goodsiconTA/list/icon_003.png" class="au_limit" alt="">
+
+                        <img src="../images/goodsiconTA/list/icon_008.png" class="au_limit" alt="">
+
+                        <img src="../images/goodsiconTA/list/icon_cp_dc_10.png" class="au_limit" alt="">
+
+                    </div>
+
+
+                    <div class="icon_bottom">
+
+
+
+
+                        <div class="icon_bottom1"><img src="../images_pc/icon/bottom/regular_icon.png" class="regular_icon" alt=""></div>
+
+
+
+
+                    </div>
+
+                    <div class="none_object"><span class="none_p">SOLD OUT</span></div>
+
+                    <div class="photo_box">
+                        <img src="../images_pc/noimage/main.jpg" class="photo" alt="" >
+                    </div>
+                    <div class="txtbox txt_el">
+
+
+                        <div class="txtbox_line1">
+                            <!--  Modify 障害対応No:2138 by jianwu.zhang 2015/11/23 Start -->
+                            <!--  <span class="goods_name" style="width:88%">WATER2</span>  -->
+                            <span class="goods_name" style="width:90%">WATER2</span>
+                            <!--  Modify 障害対応No:2138 by jianwu.zhang 2015/11/23 End -->
+                        </div>
+                        <div class="txtbox_line2">
+                            <span class="goods_demands">つかわれない？</span>
+                        </div>
+                        <div class="txtbox_line3">
+
+
+
+
+
+
+
+
+
+
+
+                            <span class="regular_price">2,700円</span>
+
+
+
+
+                        </div>
+
+
+
+                    </div>
+                </a>
+
+
+
+
+
+                <a class="box" data-goodsNo="4002" data-sub-goodsno="5003">
+                    <div class="ma_img"></div>
+
+                    <div class="icon_area">
+
+                        <img src="../images/goodsiconTA/list/icon_001.png" class="au_limit" alt="">
+
+                        <img src="../images/goodsiconTA/list/icon_003.png" class="au_limit" alt="">
+
+                        <img src="../images/goodsiconTA/list/icon_008.png" class="au_limit" alt="">
+
+                        <img src="../images/goodsiconTA/list/icon_cp_dc_10.png" class="au_limit" alt="">
+
+                    </div>
+
+
+                    <div class="icon_bottom">
+
+
+
+
+                        <div class="icon_bottom1"><img src="../images_pc/icon/bottom/regular_icon.png" class="regular_icon" alt=""></div>
+
+
+
+
+                        <div class="icon_bottom2"><img src="../images_pc/icon/bottom/icon_list_product_detail_arrow.png" class="regular_icon" alt=""></div>
+
+                    </div>
+
+                    <div class="photo_box">
+                        <img src="../images_pc/noimage/main.jpg" class="photo" alt="" >
+                    </div>
+                    <div class="txtbox txt_el">
+
+
+                        <!-- 水の場合 -->
+
+
+
+
+
+
+
+                        <div class="txtbox_line1">
+                            <span class="goods_name" style="width: 48%">WATER3</span>
+                            <span class="regular_price">2,700円</span>
+                        </div>
+                        <div class="txtbox_line2">
+                            <span class="goods_demands">かってください。</span>
+                            <span class="regular_price">2,700円～</span>
+                        </div>
+                        <div class="txtbox_line3">
+                        </div>
+
+
+                    </div>
+                </a>
+
+
+
+
+
+                <a class="box" data-goodsNo="4003" data-sub-goodsno="5004">
+                    <div class="ma_img"></div>
+
+                    <div class="icon_area">
+
+                        <img src="../images/goodsiconTA/list/icon_001.png" class="au_limit" alt="">
+
+                        <img src="../images/goodsiconTA/list/icon_003.png" class="au_limit" alt="">
+
+                        <img src="../images/goodsiconTA/list/icon_008.png" class="au_limit" alt="">
+
+                        <img src="../images/goodsiconTA/list/icon_cp_dc_10.png" class="au_limit" alt="">
+
+                    </div>
+
+
+                    <div class="icon_bottom">
+
+
+
+
+                        <div class="icon_bottom1"><img src="../images_pc/icon/bottom/regular_icon.png" class="regular_icon" alt=""></div>
+
+
+
+
+                        <div class="icon_bottom2"><img src="../images_pc/icon/bottom/icon_list_product_detail_arrow.png" class="regular_icon" alt=""></div>
+
+                    </div>
+
+                    <div class="photo_box">
+                        <img src="../images_pc/noimage/main.jpg" class="photo" alt="" >
+                    </div>
+                    <div class="txtbox txt_el">
+
+
+                        <!-- 水の場合 -->
+
+
+
+
+
+
+
+                        <div class="txtbox_line1">
+                            <span class="goods_name" style="width: 48%">WATER4</span>
+                            <span class="regular_price">2,700円</span>
+                        </div>
+                        <div class="txtbox_line2">
+                            <span class="goods_demands">かってください。</span>
+                            <span class="regular_price">2,700円～</span>
+                        </div>
+                        <div class="txtbox_line3">
+                        </div>
+
+
+                    </div>
+                </a>
+
+
+
+
+
+                <a class="box" data-goodsNo="4004" data-sub-goodsno="5005">
+                    <div class="ma_img"></div>
+
+                    <div class="icon_area">
+
+                        <img src="../images/goodsiconTA/list/icon_001.png" class="au_limit" alt="">
+
+                        <img src="../images/goodsiconTA/list/icon_003.png" class="au_limit" alt="">
+
+                        <img src="../images/goodsiconTA/list/icon_008.png" class="au_limit" alt="">
+
+                        <img src="../images/goodsiconTA/list/icon_cp_dc_10.png" class="au_limit" alt="">
+
+                    </div>
+
+
+                    <div class="icon_bottom">
+
+
+
+
+                        <div class="icon_bottom1"><img src="../images_pc/icon/bottom/regular_icon.png" class="regular_icon" alt=""></div>
+
+
+
+
+                        <div class="icon_bottom2"><img src="../images_pc/icon/bottom/icon_list_product_detail_arrow.png" class="regular_icon" alt=""></div>
+
+                    </div>
+
+                    <div class="photo_box">
+                        <img src="../images_pc/noimage/main.jpg" class="photo" alt="" >
+                    </div>
+                    <div class="txtbox txt_el">
+
+
+                        <!-- 水の場合 -->
+
+
+
+
+
+
+
+                        <div class="txtbox_line1">
+                            <span class="goods_name" style="width: 48%">WATER5</span>
+                            <span class="regular_price">2,700円</span>
+                        </div>
+                        <div class="txtbox_line2">
+                            <span class="goods_demands">かってください。</span>
+                            <span class="regular_price">2,700円～</span>
+                        </div>
+                        <div class="txtbox_line3">
+                        </div>
+
+
+                    </div>
+                </a>
+
+
+
+
+
+                <a class="box" data-goodsNo="4005" data-sub-goodsno="5006">
+                    <div class="ma_img"></div>
+
+                    <div class="icon_area">
+
+                        <img src="../images/goodsiconTA/list/icon_001.png" class="au_limit" alt="">
+
+                        <img src="../images/goodsiconTA/list/icon_003.png" class="au_limit" alt="">
+
+                        <img src="../images/goodsiconTA/list/icon_008.png" class="au_limit" alt="">
+
+                        <img src="../images/goodsiconTA/list/icon_cp_dc_10.png" class="au_limit" alt="">
+
+                    </div>
+
+
+                    <div class="icon_bottom">
+
+
+
+
+                        <div class="icon_bottom1"><img src="../images_pc/icon/bottom/regular_icon.png" class="regular_icon" alt=""></div>
+
+
+
+
+                        <div class="icon_bottom2"><img src="../images_pc/icon/bottom/icon_list_product_detail_arrow.png" class="regular_icon" alt=""></div>
+
+                    </div>
+
+                    <div class="photo_box">
+                        <img src="../images_pc/noimage/main.jpg" class="photo" alt="" >
+                    </div>
+                    <div class="txtbox txt_el">
+
+
+                        <!-- 水の場合 -->
+
+
+
+
+
+
+
+                        <div class="txtbox_line1">
+                            <span class="goods_name" style="width: 48%">WATER6</span>
+                            <span class="regular_price">2,700円</span>
+                        </div>
+                        <div class="txtbox_line2">
+                            <span class="goods_demands">かってください。</span>
+                            <span class="regular_price">2,700円～</span>
+                        </div>
+                        <div class="txtbox_line3">
+                        </div>
+
+
+                    </div>
+                </a>
+
+
+
+
+
+                <a class="box" data-goodsNo="4006" data-sub-goodsno="5007">
+                    <div class="ma_img"></div>
+
+                    <div class="icon_area">
+
+                        <img src="../images/goodsiconTA/list/icon_001.png" class="au_limit" alt="">
+
+                        <img src="../images/goodsiconTA/list/icon_003.png" class="au_limit" alt="">
+
+                        <img src="../images/goodsiconTA/list/icon_008.png" class="au_limit" alt="">
+
+                        <img src="../images/goodsiconTA/list/icon_cp_dc_10.png" class="au_limit" alt="">
+
+                    </div>
+
+
+                    <div class="icon_bottom">
+
+
+
+
+                        <div class="icon_bottom1"><img src="../images_pc/icon/bottom/regular_icon.png" class="regular_icon" alt=""></div>
+
+
+
+
+                        <div class="icon_bottom2"><img src="../images_pc/icon/bottom/icon_list_product_detail_arrow.png" class="regular_icon" alt=""></div>
+
+                    </div>
+
+                    <div class="photo_box">
+                        <img src="../images_pc/noimage/main.jpg" class="photo" alt="" >
+                    </div>
+                    <div class="txtbox txt_el">
+
+
+                        <!-- 水の場合 -->
+
+
+
+
+
+
+
+                        <div class="txtbox_line1">
+                            <span class="goods_name" style="width: 48%">WATER7</span>
+                            <span class="regular_price">2,700円</span>
+                        </div>
+                        <div class="txtbox_line2">
+                            <span class="goods_demands">かってください。</span>
+                            <span class="regular_price">2,700円～</span>
+                        </div>
+                        <div class="txtbox_line3">
+                        </div>
+
+
+                    </div>
+                </a>
+
+
+
+
+
+                <a class="box" data-goodsNo="4007" data-sub-goodsno="5008">
+                    <div class="ma_img"></div>
+
+                    <div class="icon_area">
+
+                        <img src="../images/goodsiconTA/list/icon_001.png" class="au_limit" alt="">
+
+                        <img src="../images/goodsiconTA/list/icon_003.png" class="au_limit" alt="">
+
+                        <img src="../images/goodsiconTA/list/icon_008.png" class="au_limit" alt="">
+
+                        <img src="../images/goodsiconTA/list/icon_cp_dc_10.png" class="au_limit" alt="">
+
+                    </div>
+
+
+                    <div class="icon_bottom">
+
+
+
+
+                        <div class="icon_bottom1"><img src="../images_pc/icon/bottom/regular_icon.png" class="regular_icon" alt=""></div>
+
+
+
+
+                        <div class="icon_bottom2"><img src="../images_pc/icon/bottom/icon_list_product_detail_arrow.png" class="regular_icon" alt=""></div>
+
+                    </div>
+
+                    <div class="photo_box">
+                        <img src="../images_pc/noimage/main.jpg" class="photo" alt="" >
+                    </div>
+                    <div class="txtbox txt_el">
+
+
+                        <!-- 水の場合 -->
+
+
+
+
+
+
+
+                        <div class="txtbox_line1">
+                            <span class="goods_name" style="width: 48%">WATER8</span>
+                            <span class="regular_price">2,700円</span>
+                        </div>
+                        <div class="txtbox_line2">
+                            <span class="goods_demands">かってください。</span>
+                            <span class="regular_price">2,700円～</span>
+                        </div>
+                        <div class="txtbox_line3">
+                        </div>
+
+
+                    </div>
+                </a>
+
+
+
+
+
+                <a class="box" data-goodsNo="1038" >
+                    <div class="ma_img"></div>
+
+
+                    <div class="icon_bottom">
+
+
+
+
+
+                        <div class="icon_bottom1"><img src="../images_pc/icon/bottom/regular_single_icon.png" class="regular_icon" alt=""></div>
+
+
+
+                    </div>
+
+                    <div class="photo_box">
+                        <img src="../images_pc/noimage/main.jpg" class="photo" alt="" >
+                    </div>
+                    <div class="txtbox txt_el">
+
+
+                        <div class="txtbox_line1">
+                            <!--  Modify 障害対応No:2138 by jianwu.zhang 2015/11/23 Start -->
+                            <!--  <span class="goods_name" style="width:88%">PR_TEST_A_04</span>  -->
+                            <span class="goods_name" style="width:90%">PR_TEST_A_04</span>
+                            <!--  Modify 障害対応No:2138 by jianwu.zhang 2015/11/23 End -->
+                        </div>
+                        <div class="txtbox_line2">
+                            <span class="goods_demands"></span>
+                        </div>
+                        <div class="txtbox_line3">
+
+
+
+
+
+
+
+
+
+
+
+                            <span class="regular_price">4,320円</span>
+
+
+
+
+                        </div>
+
+
+
+                    </div>
+                </a>
+
+
+
+
+
+                <a class="box" data-goodsNo="1039" >
+                    <div class="ma_img"></div>
+
+
+                    <div class="icon_bottom">
+
+
+
+
+
+                        <div class="icon_bottom1"><img src="../images_pc/icon/bottom/regular_single_icon.png" class="regular_icon" alt=""></div>
+
+
+
+                    </div>
+
+                    <div class="photo_box">
+                        <img src="../images_pc/noimage/main.jpg" class="photo" alt="" >
+                    </div>
+                    <div class="txtbox txt_el">
+
+
+                        <div class="txtbox_line1">
+                            <!--  Modify 障害対応No:2138 by jianwu.zhang 2015/11/23 Start -->
+                            <!--  <span class="goods_name" style="width:88%">PR_TEST_A_05</span>  -->
+                            <span class="goods_name" style="width:90%">PR_TEST_A_05</span>
+                            <!--  Modify 障害対応No:2138 by jianwu.zhang 2015/11/23 End -->
+                        </div>
+                        <div class="txtbox_line2">
+                            <span class="goods_demands"></span>
+                        </div>
+                        <div class="txtbox_line3">
+
+
+
+
+
+
+
+
+
+
+
+                            <span class="regular_price">6,480円</span>
+
+
+
+
+                        </div>
+
+
+
+                    </div>
+                </a>
+
+
+
+
+
+                <a class="box" data-goodsNo="1040" >
+                    <div class="ma_img"></div>
+
+
+                    <div class="icon_bottom">
+
+
+
+
+
+                        <div class="icon_bottom1"><img src="../images_pc/icon/bottom/regular_single_icon.png" class="regular_icon" alt=""></div>
+
+
+
+                    </div>
+
+                    <div class="photo_box">
+                        <img src="../images_pc/noimage/main.jpg" class="photo" alt="" >
+                    </div>
+                    <div class="txtbox txt_el">
+
+
+                        <div class="txtbox_line1">
+                            <!--  Modify 障害対応No:2138 by jianwu.zhang 2015/11/23 Start -->
+                            <!--  <span class="goods_name" style="width:88%">PR_TEST_B_01</span>  -->
+                            <span class="goods_name" style="width:90%">PR_TEST_B_01</span>
+                            <!--  Modify 障害対応No:2138 by jianwu.zhang 2015/11/23 End -->
+                        </div>
+                        <div class="txtbox_line2">
+                            <span class="goods_demands"></span>
+                        </div>
+                        <div class="txtbox_line3">
+
+
+
+
+
+
+
+
+
+
+
+                            <span class="regular_price">1,618円</span>
+
+
+
+
+                        </div>
+
+
+
+                    </div>
+                </a>
+
+
+
+
+
+                <a class="box" data-goodsNo="1200" >
+                    <div class="ma_img"></div>
+
+                    <div class="icon_area">
+
+                        <img src="../images/goodsiconTA/list/icon_020.png" class="au_limit" alt="">
+
+                        <img src="../images/goodsiconTA/list/icon_021.png" class="au_limit" alt="">
+
+                        <img src="../images/goodsiconTA/list/icon_022.png" class="au_limit" alt="">
+
+                    </div>
+
+
+                    <div class="icon_bottom">
+
+
+
+
+
+                        <div class="icon_bottom1"><img src="../images_pc/icon/bottom/regular_single_icon.png" class="regular_icon" alt=""></div>
+
+
+
+                    </div>
+
+                    <div class="photo_box">
+                        <img src="../../defaultShop/images/goods/32570/1200/nice.jpg" class="photo" alt="" >
+                    </div>
+                    <div class="txtbox txt_el">
+
+
+                        <div class="txtbox_line1">
+                            <!--  Modify 障害対応No:2138 by jianwu.zhang 2015/11/23 Start -->
+                            <!--  <span class="goods_name" style="width:88%">MK_TEST_1</span>  -->
+                            <span class="goods_name" style="width:90%">MK_TEST_1</span>
+                            <!--  Modify 障害対応No:2138 by jianwu.zhang 2015/11/23 End -->
+                        </div>
+                        <div class="txtbox_line2">
+                            <span class="goods_demands"></span>
+                        </div>
+                        <div class="txtbox_line3">
+
+
+
+
+
+
+
+
+
+
+
+                            <span class="regular_price">648円</span>
+
+
+
+
+                        </div>
+
+
+
+                    </div>
+                </a>
+
+
+
+
+
+                <a class="box" data-goodsNo="1420" >
+                    <div class="ma_img"></div>
+
+                    <div class="icon_area">
+
+                        <img src="../images/goodsiconTA/list/icon_001.png" class="au_limit" alt="">
+
+                        <img src="../images/goodsiconTA/list/icon_008.png" class="au_limit" alt="">
+
+                        <img src="../images/goodsiconTA/list/icon_016.png" class="au_limit" alt="">
+
+                    </div>
+
+
+                    <div class="icon_bottom">
+
+
+
+
+
+                        <div class="icon_bottom1"><img src="../images_pc/icon/bottom/regular_single_icon.png" class="regular_icon" alt=""></div>
+
+
+
+                    </div>
+
+                    <div class="photo_box">
+                        <img src="../../defaultShop/images/goods/32571/1420/616.png" class="photo" alt="" >
+                    </div>
+                    <div class="txtbox txt_el">
+
+
+                        <div class="txtbox_line1">
+                            <!--  Modify 障害対応No:2138 by jianwu.zhang 2015/11/23 Start -->
+                            <!--  <span class="goods_name" style="width:88%">商品18（表示test）_PR_TEST_B_02</span>  -->
+                            <span class="goods_name" style="width:90%">商品18（表示test）_PR_TEST_B_02</span>
+                            <!--  Modify 障害対応No:2138 by jianwu.zhang 2015/11/23 End -->
+                        </div>
+                        <div class="txtbox_line2">
+                            <span class="goods_demands">ひやひや</span>
+                        </div>
+                        <div class="txtbox_line3">
+
+
+
+
+
+
+
+
+
+
+
+                            <span class="regular_price">753円</span>
+
+
+
+
+                        </div>
+
+
+
+                    </div>
+                </a>
+
+
+
+
+
+                <a class="box" data-goodsNo="2258" >
+                    <div class="ma_img"></div>
+
+                    <div class="icon_area">
+
+                        <img src="../images/goodsiconTA/list/icon_001.png" class="au_limit" alt="">
+
+                        <img src="../images/goodsiconTA/list/icon_008.png" class="au_limit" alt="">
+
+                        <img src="../images/goodsiconTA/list/icon_015.png" class="au_limit" alt="">
+
+                        <img src="../images/goodsiconTA/list/icon_cp_dc_05.png" class="au_limit" alt="">
+
+                    </div>
+
+
+                    <div class="icon_bottom">
+
+
+
+
+                        <div class="icon_bottom1"><img src="../images_pc/icon/bottom/regular_icon.png" class="regular_icon" alt=""></div>
+
+
+
+
+                    </div>
+
+                    <div class="photo_box">
+                        <img src="../../defaultShop/images/goods/2/2258/goods.png" class="photo" alt="" >
+                    </div>
+                    <div class="txtbox txt_el">
+
+
+                        <div class="txtbox_line1">
+                            <!--  Modify 障害対応No:2138 by jianwu.zhang 2015/11/23 Start -->
+                            <!--  <span class="goods_name" style="width:88%">ST2_0026</span>  -->
+                            <span class="goods_name" style="width:90%">ST2_0026</span>
+                            <!--  Modify 障害対応No:2138 by jianwu.zhang 2015/11/23 End -->
+                        </div>
+                        <div class="txtbox_line2">
+                            <span class="goods_demands">ほんまもん</span>
+                        </div>
+                        <div class="txtbox_line3">
+
+
+
+
+
+
+
+
+
+
+
+                            <span class="regular_price">216円</span>
+
+
+
+
+                        </div>
+
+
+
+                    </div>
+                </a>
+
+
+            </div>
+
+            <!-- ページナビケタ -->
+
+
+
+
+
+
+
+
+        </div>
+
+        <!-- ログインダイアログ -->
+        <div class="popup_lgn3" style="display: none;">
+            <div class="popup_contain_1">
+
+
+
+                <p id="pop_text3" class="pop_text">"安心・安全の食材特集"<br/>関連商品を契約中の方限定の商品となります<br/>ログインして購入を続けますか？</p>
+
+
+                <div class="bottom_center">
+                    <button class="cancel_lgn ma_btn1" type="button" name="">いいえ</button>
+                    <button class="yes_btn ma_btn2" type="button" name="" data-disp-no="003001">はい</button>
+                </div>
+            </div>  <!-- popup_contain_1 div end -->
+        </div> <!-- popup_lgn3 div end -->
+
+        <div class="popup_lgn4" style="display: none;">
+            <div class="popup_contain_1">
+
+
+
+                <p id="pop_text4" class="pop_text">"安心・安全の食材特集"<br/>関連の同時購入商品を<br/>契約中の方のみ購入可能です</p>
+
+
+                <div class="bottom_center">
+                    <button class="yes_btn ma_btn2" type="button" style="position:relative; left:24%" name="" onclick="location.href='../top/CSfTop.jsp'">閉じる</button>
+                </div>
+            </div>  <!-- popup_contain_1 div end -->
+        </div> <!-- popup_lgn4 div end -->
+
+        <input type="hidden" name="limit" id="limit" value="30">
+        <script>
+            var domLimit = document.querySelector('#limit');
+        </script>
+        <!-- <input type="text" name="totalcount" id="totalcount" value="112"> -->
+        <input type="hidden" name="totalcount" id="totalcount" value="112">
+        <div class="hiddenDiv" name="totalcount" id="totalcount">112</div>
+        <script>
+            var domTotalcount = document.querySelector('#totalcount');
+            alert("domTotalcount1:"+domTotalcount.value);
+        </script>
+        <input type="hidden" name="nextKey" value="31">
+        <input type="hidden" name="selectTp" value="1">
+
+        <input type="hidden" name="pageNo" id="pageNo" value="1">
+        <input type="hidden" name="cursor" id="cursor" value="0">
+        <input type="hidden" name="num_coordinate_x" id="num_coordinate_x" value="0">
+
+
+
+
+        <div class="popup_lgn2" style="display: none;">
+            <div class="popup_contain_1">
+                <p class="pop_text">ログアウトしますか？</p>
+                <div class="bottom_center">
+                    <button class="cancel_lgn ma_btn1" type="button" name="">いいえ</button>
+                    <button class="yes_btn ma_btn2" type="button" name="" onclick="location.href='../member/CVMmLogout.jsp?stopshopping=Y&clickLogout=Y'">はい</button>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="shopping_window" style="display: none;">
+            <div class="popup_contain_1">
+                <p class="pop_text">ショッピングを終了してよろしいですか？</p>
+                <div class="bottom_center">
+                    <button class="shopping_none ma_btn1" type="button" name="">いいえ</button>
+
+
+                    <button class="yes_btn ma_btn2" type="button" name=""  onclick="location.href='../common/CVCoCmnFooter.jsp'">はい</button>
+
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="c_link_wrap">
+            <a href="https://web.wm.auone.jp/lx/" class="commonlink1 ma_clickarea">au WALLET Market (LUXA) へ</a>
+        </div>
+
+        <!-- Adobe Analytics start -->
+        <div id="scimage" style="visibility: hidden;z-index:2;position:absolute;top:-100px;left:-100px;">
+            <script type="text/javascript" src="../js_pc/s_code_vm.js"></script>
+            <script type="text/javascript">
+                //<![CDATA[
+                s.pageName="商品一覧(トップ)";
+                s.prop49="nostore";
+                /************* DO NOT ALTER ANYTHING BELOW THIS LINE ! **************/
+                var s_code=s.t();if(s_code)document.write(s_code)
+                //]]>
+            </script>
+            <script type="text/javascript">
+                //<![CDATA[
+                if(navigator.appVersion.indexOf('MSIE')>=0)document.write(unescape('%3C')+'\!-'+'-')
+                //]]>
+            </script>
+        </div>
+
+        <!-- Adobe Analytics end -->
+
+
+        <!-- footer -->
+
+
+
+
+
+    </div>
+
+
+    <div class="pagetop_wrap"  style="width:1000px;">
+        <a id="pagetop" class="ma_a">ページ上部へ</a>
+    </div>
+
+    <nav class="ft_nav" style="width:1000px;margin:0 auto">
+
+        <ul>
+
+
+            <li><a href="https://127.0.0.1:18443/defaultShop/member/CVMmLogin.jsp" class="ma_a">au IDでログイン</a></li>
+
+            <li><a class="ma_a" href="http://127.0.0.1:18080/defaultShop/info/CVSfHelp.jsp"
+            >ヘルプ</a>
+            </li>
+            <li><a class="ma_a" href="http://127.0.0.1:18080/defaultShop/info/CVSfPolicy.jsp"
+            >利用規約</a>
+            </li>
+            <li><a class="ma_a" href="http://www.kddi.com/corporate/kddi/public/privacy/">プライバシーポリシー</a>
+            </li>
+            <li><a class="ma_a" href="http://127.0.0.1:18080/defaultShop/info/CVSfLaw.jsp"
+            >特定商取引法に関する表示</a>
+            </li>
+        </ul>
+    </nav>
+
+
+
+
+
+</div>
+</div>
+
+<input type="hidden" name="token" value="5d46b71e34eb8202f4bf66ae74c5270e7207dd1b">
+</body>
+
+
+<footer> Copyright © KDDI CORPORATION, All Rights Reserved. </footer>
+<script type="text/javascript" src="../js_pc/pagetop.js"></script>
+
+</html>
+
+
+<script>
+    var domTotalcount = document.querySelector('#totalcount');
+    alert("domTotalcount2:"+domTotalcount.value);
+</script>
