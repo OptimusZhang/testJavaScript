@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="../../lib/js/jquery/jquery.js"></script>
+    <style>
+        .container {
+            min-width: 800px;
+            width: 100%;
+        }
+        a{
+            color: black;
+        }
+        table {
+            width:100%;
+        }
+        .title {
+            font-size:13px;
+            text-align: right;
+            padding-top:5px;
+        }
+        .title_link {
+            text-align: center;
+            vertical-align: ;
+            width:50px;
+            color: black;
+        }
+        .title_hao123 {
+            width:60px;
+            color: black;
+        }
+        .title_moreProduct {
+            width:70px;
+            color: black;
+        }
+
+        .title_moreProduct a {
+            display: inline-block;
+            line-height: 24px;
+            width: 60px;
+            background: #38f;
+            color: white;
+            text-decoration:none;
+        }
+        .title_moreProduct:hover a {
+            display: inline-block;
+            line-height: 24px;
+            width: 60px;
+            background: #38f;
+            color: white;
+            text-decoration:none;
+        }
+        .title_setting {
+            position: relative;
+        }
+        .a_parent {
+            position: absolute;
+            width:70px;
+            height: 120px;
+            text-align: center;
+            top:30px;
+            left:-10px;
+            opacity:0;
+        }
+        .a_parent a {
+            display: block;
+            width:70px;
+            height: 30px;
+            line-height: 30px;
+            vertical-align: middle;
+        }
+        .a_parent a:hover {
+            background-color:#398bfb ;
+            color: white;
+        }
+
+        .title_setting:hover>.a_parent{
+            border:1px solid #d1d1d1;
+            opacity:1;
+        }
+        .arrow{
+            position: absolute;
+            border:10px solid;
+            width:0;
+            border-color: transparent transparent #d1d1d1;
+            top:-21px;
+            left:0;right:0;
+            margin:0 auto;
+        }
+
+        .arrow:before{
+            content: "";
+            position: absolute;
+            border:10px solid;
+            border-color: transparent transparent white;
+            left:-10px;top:-9px;
+        }
+    </style>
+</head>
+<body>
+<table cellpadding="0" cellspacing="0">
+
+    <tr>
+        <td class="title">
+            <table cellpadding="0" cellspacing="0">
+                <tr>
+                    <td></td>
+                    <td class="title_link"><a href=""><strong>糯米</strong></a></td>
+                    <td class="title_link"><a href=""><strong>新闻</strong></a></td>
+                    <td class="title_link title_hao123"><a href=""><strong>hao123</strong></a></td>
+                    <td class="title_link"><a href=""><strong>地图</strong></a></td>
+                    <td class="title_link"><a href=""><strong>视频</strong></a></td>
+                    <td class="title_link"><a href=""><strong>贴吧</strong></a></td>
+                    <td class="title_link"><a href="">登录</a></td>
+                    <td class="title_link title_setting">
+                        <a href="">设置</a>
+                        <div class="a_parent">
+                            <span class="arrow"></span>
+                            <a>设置1</a>
+                            <a>设置2</a>
+                            <a>设置3</a>
+                            <a>设置4</a>
+                        </div>
+                    </td>
+                    <td class="title_link title_moreProduct">
+                        <a href="">更多产品</a>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+
+    <tr>
+        <td>2</td>
+    </tr>
+    <tr>
+        <td>3</td>
+    </tr>
+</table>
+</body>
+</html>

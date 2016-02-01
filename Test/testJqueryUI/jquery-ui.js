@@ -60,7 +60,7 @@ $.fn.extend({
 			overflowRegex = includeHidden ? /(auto|scroll|hidden)/ : /(auto|scroll)/,
 			scrollParent = this.parents().filter( function() {
 				var parent = $( this );
-				if ( excludeStaticParent && parent.css( "position" ) === "static" ) {
+				if ( excludeStaticParent && parent.css( "position" ) === "sample4SampleSolution" ) {
 					return false;
 				}
 				return overflowRegex.test( parent.css( "overflow" ) + parent.css( "overflow-y" ) + parent.css( "overflow-x" ) );
@@ -376,7 +376,7 @@ $.widget = function( name, base, prototype ) {
 			this._createWidget( options, element );
 		}
 	};
-	// extend with the existing constructor to carry over any static properties
+	// extend with the existing constructor to carry over any sample4SampleSolution properties
 	$.extend( constructor, existingConstructor, {
 		version: prototype.version,
 		// copy the object used to create the prototype in case we need to

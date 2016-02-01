@@ -45,60 +45,82 @@
     "log4javascript": "~1.4.9",
     "requirejs": "~2.1.20",
     "spinjs": "~2.3.2",
-    "require-handlebars-plugin": "~0.11.3"
+    "require-handlebars-plugin": "~0.11.3",
+    "qunit": "~1.20.0"
   },
 
   "exportsOverride": {
     "jquery": {
-      "lib/js": "dist/jquery.js"
+      "js": "dist/jquery.js"
     },
     "underscore": {
-      "lib/js": "underscore.js"
+      "js": "underscore.js"
     },
     "backbone": {
-      "lib/js": "backbone.js"
+      "js": "backbone.js"
     },
     "backbone.babysitter": {
-      "lib/js": "lib/backbone.babysitter.js"
+      "js": "lib/backbone.babysitter.js"
     },
     "backbone.wreqr": {
-      "lib/js": "lib/backbone.wreqr.js"
+      "js": "lib/backbone.wreqr.js"
     },
     "marionette": {
-      "lib/js": "lib/backbone.marionette.js"
+      "js": "lib/backbone.marionette.js"
     },
     "requirejs": {
-      "lib/js": "require.js"
+      "js": "require.js"
     },
     "require-handlebars-plugin": {
-      "lib/js": "hbs.js"
+      "js": "hbs.js"
     },
     "bootstrap": {
-      "lib/js": "dist/js/bootstrap.js",
-      "lib/css": "dist/css/bootstrap.css*",
-      "lib/css/fonts": "dist/fonts/*"
+      "js": "dist/js/bootstrap.js",
+      "css": "dist/css/bootstrap.css*",
+      "css/fonts": "dist/fonts/*"
     },
     "chartjs": {
-      "lib/js": "Chart.js"
+      "js": "Chart.js"
     },
     "d3": {
-      "lib/js": "d3.js"
+      "js": "d3.js"
     },
     "i18next": {
-      "lib/js": "i18next.js"
+      "js": "i18next.js"
     },
     "jquery-ui": {
-      "lib/js": "jquery-ui.js"
+      "js": "jquery-ui.js"
     },
     "log4javascript": {
-      "lib/js": "log4javascript.js"
+      "js": "log4javascript.js"
     },
     "spinjs": {
-      "lib/js": "spin.js"
+      "js": "spin.js"
     },
     "swiper": {
-      "lib/js": "dist/js/swiper.js",
-      "lib/css": "dist/css/swiper.css"
+      "js": "dist/js/swiper.js",
+      "css": "dist/css/swiper.css"
+    },
+    "qunit": {
+      "js": "qunit/qunit.js",
+      "css": "qunit/qunit.css"
+    },
+    "handlebars":  {
+      "js": "handlebars.js"
+    },
+    "bootstrap-select":  {
+      "js": "dist/js/bootstrap-select.js",
+      "js/i18n": "dist/js/i18n/*.min.js",
+      "css": "dist/css/bootstrap-select.css"
+    },
+    "bootstrap-dialog":  {
+      "js": "dist/js/bootstrap-dialog.js",
+      "css": "dist/css/bootstrap-dialog.css"
+    },
+    "bootstrap-datepicker": {
+      "js": "dist/js/bootstrap-datepicke.js",
+      "locals": "dist/locals/*.min.js",
+      "css": "dist/css/bootstrap-datepicke.css"
     }
   }
 }

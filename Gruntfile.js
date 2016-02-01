@@ -9,7 +9,7 @@ module.exports = function(grunt) {
     bower: {
       install: {
         options: {
-          targetDir: './static',  // A directory where you want to keep your Bower packages.
+          targetDir: './lib',  // A directory where you want to keep your Bower packages.
           layout: 'byType',       // Type: string or function Default value: byType
                                   // There are two built-in named layouts: byType and byComponent.
                                   // Reference: https://github.com/yatskevich/grunt-bower-task
@@ -21,7 +21,7 @@ module.exports = function(grunt) {
         }
       }
     },
-    // require-handlebars-plugin/hbs‚ªbower‚¾‚ÆƒRƒs[‚Å‚«‚È‚¢‚Ì‚Ågrunt‚©‚çÀ{‚·‚é
+    // require-handlebars-plugin/hbs
     copy: {
       main: {
         files: [
@@ -29,7 +29,7 @@ module.exports = function(grunt) {
             expand: true,
             cwd: 'bower_components/require-handlebars-plugin/',
             src: ['hbs/*'],
-            dest: 'static/js/require-handlebars-plugin'
+            dest: 'lib/js/require-handlebars-plugin'
           }
         ]
       }

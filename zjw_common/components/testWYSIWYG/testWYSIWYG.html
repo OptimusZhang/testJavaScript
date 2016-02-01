@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>What you see is what you get</title>
+    <script src="../../utils/ZJWUI.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .RE_container {
+            margin: 10px auto;
+            position: relative;
+            overflow: auto;
+            width:500px;
+            height: 300px;
+            border: 1px solid #ccc;
+        }
+
+        .RE_header {
+            position: fixed;
+            width:500px;
+            height: 80px;
+            border-bottom: 1px solid #ccc;
+            background-color: #EEEEEE;
+            z-index: 2;
+        }
+
+        .RE_header:before, .RE_header:after {
+            content: " ";
+            clear: both;
+        }
+
+        .RE_button_grp {
+            float: left;
+            margin: 3px;
+            border-radius: 4px;
+        }
+
+        button.RE_control_button {
+            float: left;
+            min-width: 28px;
+            vertical-align: middle;
+            text-align: center;
+            font-family: "Meiryo UI";
+            font-size: 14px;
+            line-height: 1.2;
+            padding: 3px 8px 6px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+            background-color: #FFFFFF;
+        }
+
+        .RE_control_button:first-child {
+            border-radius: 4px 0 0 4px;
+        }
+
+        .RE_control_button:last-child {
+            border-radius: 0 4px 4px 0;
+        }
+
+        .RE_control_button:not(:first-child) {
+            border-left: none;
+        }
+
+        .RE_control_button:hover {
+            background: #e6e6e6;
+            border-color: #adadad;
+        }
+
+        .RE_control_button:active {
+            color: #333;
+            background: #e6e6e6;
+            border: 1px solid #adadad;
+            box-shadow: inset 0 3px 5px rgba(0, 0, 0, .125);
+        }
+
+        .bold {
+            font-weight: bold;
+        }
+
+        .italic {
+            font-weight: bold;
+            font-style: oblique;
+            text-align: left;
+        }
+
+        .underline {
+            font-weight: bold;
+            text-decoration: underline;
+        }
+
+        .RE_content {
+            position: absolute;
+            top: 81px;bottom:0;left:0;right:0;
+            box-sizing: border-box;
+            padding: 3px 10px;
+            z-index: 1;
+        }
+
+        .RE_content div {
+            margin: -3px -10px;
+            padding: 3px 10px;
+        }
+    </style>
+</head>
+<body>
+<div class="RE_container">
+    <div class="RE_header">
+        <div class="RE_button_grp">
+            <button class="RE_control_button bold" id="bold">B</button>
+            <button class="RE_control_button italic" id="italic"><i>I</i></button>
+            <button class="RE_control_button underline" id="underline">U</button>
+        </div>
+        <div type="button" class="RE_button_grp">
+            <button class="RE_control_button">1</button>
+            <button class="RE_control_button">2</button>
+            <button class="RE_control_button">3</button>
+            <button class="RE_control_button">4</button>
+            <button class="RE_control_button">5</button>
+            <button class="RE_control_button">6</button>
+            <button class="RE_control_button">7</button>
+            <button class="RE_control_button">8</button>
+            <button class="RE_control_button">9</button>
+        </div>
+    </div>
+    <div class="RE_content" contenteditable="true" id="RE_content">
+
+    </div>
+
+
+</div>
+<script>
+    var contentArea = ZJWUI.query("#RE_content");
+    var bold_click = function (evt) {
+
+        contentArea.focus();
+        document.execCommand('bold', false, null);
+    };
+
+    var italic_click = function (evt) {
+        contentArea.focus();
+        document.execCommand('italic', false, null);
+    };
+
+    var underline_click = function (evt) {
+        contentArea.focus();
+        document.execCommand('underline', false, null);
+    };
+
+    ZJWUI.query("#bold").addEventListener("click", bold_click, false);
+    ZJWUI.query("#italic").addEventListener("click", italic_click, false);
+    ZJWUI.query("#underline").addEventListener("click", underline_click, false);
+
+</script>
+</body>
+</html>

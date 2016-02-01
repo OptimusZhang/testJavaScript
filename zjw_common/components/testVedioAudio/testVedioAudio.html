@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../../utils/ZJWUI.js"></script>
+    <style>
+        .mediaPlayer{
+            border:1px solid #EEEEEE;
+            width:400px;
+            height:400px;
+        }
+        .video{
+            position: relative;
+            width:300px;
+            height:200px;
+            max-width: 100%;
+            border:1px solid #CCCCCC;
+            box-sizing: border-box;
+        }
+        video#player{
+            width:100%;
+            height:100%;
+            background: #000;
+        }
+        #goToPlayer img {
+            position: absolute;
+            width:50px;
+            height:50px;
+            top:0;bottom:0;left:0;right:0;
+            margin: auto;
+            z-index: 2;
+        }
+        .controls{
+            font-family: "Meiryo UI";
+            width:300px;
+            height:40px;
+            color: #FFF;
+            background: #000;
+            border:1px solid #CCCCCC;
+            padding:5px 10px;
+            box-sizing: border-box;
+        }
+
+        .controls span{
+            font-size: 8px;
+            font-weight: bold;
+        }
+
+        #video-btn {
+            outline:none;
+            width:50px;
+            height:25px;
+            border:1px solid #CCCCCC;
+            border-radius:12px;
+            background: #FFFFFF;
+        }
+        #video-btn:hover {
+            background: #EEEEEE;
+        }
+        #video-btn:active {
+            box-shadow: inset 0 3px 10px #AAAAAA;
+        }
+
+        .progressBar {
+            display: inline-block;
+            position: relative;
+            width: 100px;
+            height: 10px;
+            background: #ffffff;
+        }
+        .timeBar
+        {
+            position: absolute;
+            width: 0;
+            height: 10px;
+            top: 0;left: 0;
+            background-color: rgba(18, 27, 255, 1);
+        }
+
+    </style>
+</head>
+<body>
+<div class="mediaPlayer">
+    <div class="video">
+        <video id="player">
+            <source src="../../../lib/video/sample.webm" type="video/webm">
+            Video player is not available.
+        </video>
+        <div id="goToPlayer"><img src="../../../lib/img/video/goToPlay.jpg" /></div>
+    </div>
+    <div class="controls">
+        <button id="video-btn">Play</button>
+        <div class="progressBar"><div class="timeBar"></div></div>
+        <span class="duration"><span id="currenttime">0</span><span>/</span><span id="duration"></span></span>
+
+    </div>
+</div>
+<script type="text/javascript">
+    var player = ZJWUI.query("#player");
+    var btn = ZJWUI.query("#video-btn");
+    var videoArea = ZJWUI.query(".video");
+
+
+    player.addEventListener('canplaythrough', function(){
+        var duration = ZJWUI.query("#duration");
+        duration.innerHTML = player.duration;
+    }, false);
+
+    var playOrPause = function(){
+        var icon_goToPlayer = ZJWUI.query("#goToPlayer");
+        if (player.paused) {
+            icon_goToPlayer.style.display = "none";
+            player.play();
+            btn.innerHTML = 'Pause';
+        } else {
+            icon_goToPlayer.style.display = "block";
+            player.pause();
+            btn.innerHTML = 'Play';
+        }
+    };
+    btn.addEventListener('click', playOrPause, false);
+    videoArea.addEventListener('click', playOrPause, false);
+
+    setInterval(function () {
+        var currentTime = ZJWUI.query("#currenttime");
+        var timeBar = ZJWUI.query(".timeBar");
+
+        currentTime.innerHTML = player.currentTime;
+
+        var percentage = 100 * player.currentTime / player.duration;
+        timeBar.style.width = percentage + '%';
+    }, 250);
+
+
+</script>
+</body>
+</html>

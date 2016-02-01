@@ -1,0 +1,285 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>emotion_test</title>
+    <style type="text/css">
+        #test_1 {
+            width: 100%;
+            height: 120px;
+            line-height: 20px;
+            font-size: 20px;
+            overflow-y: scroll;
+            border: solid 1px #ccc;
+        }
+        #test_1 img {
+            width: 40px;
+            height: 40px;
+            vertical-align: bottom;
+        }
+        .emo_panel {
+            overflow: hidden;
+            background: #ccc;
+            padding: 1px 0 1px 1px;
+        }
+        .emo_panel .one_emo {
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            margin-right: 1px;
+            float: left;
+            background-position: center center;
+            background-size: 100% auto;
+            cursor: pointer;
+        }
+        .emo_panel .one_emo:hover {
+            opacity: 0.8;
+        }
+    </style>
+</head>
+<body>
+
+<div id="btns">
+    <input type="button" value="getLen" class="getLen"/>
+    <input type="button" value="getHtml" class="getHtml"/>
+    <input type="button" value="getTrimHtml" class="getTrimHtml"/>
+    <input type="button" value="getSel" class="getSel"/>
+    <input type="button" value="setEnd" class="setEnd"/>
+</div>
+<div>
+    <input type="text" id="txt001">
+</div>
+<div id="testEmo">
+    <div class="emo_panel" onmousedown="return false" ontouchstart="return false" unselectable="on">
+        <div class="one_emo" data-emo="emo_1.png" style="background-image: url(emo/emo_1.png)"></div>
+        <div class="one_emo" data-emo="emo_2.png" style="background-image: url(emo/emo_2.png)"></div>
+        <div class="one_emo" data-emo="emo_3.png" style="background-image: url(emo/emo_3.png)"></div>
+    </div>
+    <div class="emo_input" id="test_1" contenteditable="true"></div>
+</div>
+
+
+
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript">
+    function Emo (id) {
+        if (typeof jQuery !== "function" || typeof $ !== "function") {
+            throw new Error("jqery not found");
+        }
+        var $obj = $(document.getElementById(id));
+        this.$panel = $obj.find(".emo_panel");
+        this.$content = $obj.find(".emo_input");
+    };
+    Emo.prototype.init = function () {
+        var _this = this;
+
+        this.$panel.find(".one_emo").click(function (e) {
+            var status = false;
+            var notIE = false;
+            var sel = null;
+            var range = null;
+            var url = "";
+            var str = "";
+
+            if (this.dataset) {
+                url = this.dataset.emo;
+            } else {
+                url = this.getAttribute("data-emo");
+            }
+
+            str = '<img class="emo" src="sample/emo/'+url+'"/>';
+            notIE = document.queryCommandSupported("insertHtml");
+            sel = document.getSelection();
+
+
+            if (sel.rangeCount == 0) {
+                console.log("setCaretEnd called..");
+                _this.setCaretEnd();
+            } else {
+                /*
+                 range = sel.getRangeAt(0);
+                 if (range.startContainer != _this.$content[0]) {
+                 _this.setCaretEnd();
+                 }
+                 */
+            }
+
+            //内容为空时firefox会自动补<br>
+            if (_this.$content[0].innerHTML == "<br>") {
+                _this.$content[0].innerHTML = "";
+            }
+
+
+            if (notIE) {	//chrome,firefox
+                status = document.execCommand('insertHTML', false, str);
+                if (status) {
+                    console.log(1);
+                }
+                else {
+                    console.log(2);
+                    _this.setCaretEnd();
+                    status = document.execCommand('insertHTML', false, str);
+                }
+            } else {	//ie
+                status = document.execCommand('insertImage', false, './emo/'+url);
+                if (status) {
+                    console.log(11);
+                }
+                else {
+                    console.log(12);
+                    _this.setCaretEnd();
+                    status = document.execCommand('insertImage', false, './emo/'+url);
+                }
+                _this.setCaretAfter();
+            }
+        });
+    };
+    //IE
+    //插入表情之后将光标定位到当前表情之后
+    Emo.prototype.setCaretAfter = function () {
+        var obj = this.$content[0];
+        var chdLen = obj.childNodes.length;
+        var lastNode = obj.childNodes[chdLen-1];
+
+
+        var sel = document.getSelection();
+        var next = null;
+        var range = document.createRange();
+
+        //直接插入图片、图片后插入图片
+        if (sel.focusNode == obj) {
+            console.log("ie0");
+            range.setStart(obj, sel.focusOffset);
+            range.setEnd(obj, sel.focusOffset);
+            sel.removeAllRanges();
+            sel.addRange(range);
+            this.$content[0].focus();
+        } else {
+            next = sel.anchorNode.nextSibling;
+
+            //文字后插入图片
+            if (next && next.nodeName == "IMG") {
+                console.log("ie1");
+                range.setStartAfter(next);
+                range.setEndAfter(next);
+
+                //文字中插入图片
+            } else if (sel.focusNode.nodeName == "P") {
+                console.log("ie2");
+                range.setStart(sel.focusNode, sel.focusNode.childNodes.length);
+                range.setEnd(sel.focusNode, sel.focusNode.childNodes.length);
+
+                //图片之间插入图片
+            } else {
+                console.log("ie3");
+                range.setStartBefore(sel.focusNode);
+                range.setEndBefore(sel.focusNode);
+            }
+            sel.removeAllRanges();
+            sel.addRange(range);
+            this.$content[0].focus();
+        }
+
+    };
+    //光标设置到末尾
+    Emo.prototype.setCaretEnd = function () {
+        var obj = this.$content[0];
+        var chdLen = obj.childNodes.length;
+        var lastNode = obj.childNodes[chdLen-1];
+
+        var range = document.createRange();
+        console.log(chdLen);
+
+        this.$content[0].focus();
+
+        if (chdLen == 0) {
+            range.setStart(obj, 0);
+            range.setEnd(obj, 0);
+        } else {
+            if (lastNode.nodeType == 3) {
+                range.setStart(lastNode, lastNode.length);
+                range.setEnd(lastNode, lastNode.length);
+            } else {
+                range.setStart(obj, chdLen);
+                range.setEnd(obj, chdLen);
+            }
+        }
+        console.log(range);
+
+        var sel = window.getSelection();
+        sel.removeAllRanges();
+        sel.addRange(range);
+
+    };
+    //输入长度计算，表情按1个长度计算
+    Emo.prototype.getLen = function () {
+        var obj = this.$content[0];
+        var chdLen = obj.childNodes.length;
+        console.log(obj.childNodes);
+        var len = 0;
+        for (var i = 0; i < chdLen; i++) {
+            if (obj.childNodes[i].nodeType == 3) {
+                len += obj.childNodes[i].length;
+            }
+            if (obj.childNodes[i].childNodes.length != 0 && obj.childNodes[i].childNodes[0].nodeType == 3) {
+                len += obj.childNodes[i].childNodes[0].length;
+            }
+            if (obj.childNodes[i].nodeName == "IMG") {
+                len += 1;
+            }
+        }
+        console.log("len : " + len);
+    };
+    //获取html
+    Emo.prototype.getHtml = function () {
+        var str = this.$content.html();
+        console.log(str);
+    };
+    //获取修剪后的html
+    Emo.prototype.getTrimHtml = function () {
+        var str = this.$content.html();
+        if (str.match(/<div><br><\/div>$/)) {
+            str = str.replace(/(<div><br><\/div>)+$/,"");
+        } else if (str.match(/<p><br><\/p>$/)) {
+            str = str.replace(/(<p><br><\/p>)+$/,"");
+        }
+        str = str.replace(/<br>$/,"");
+        console.log(str);
+    };
+    //test
+    //获取selection和range对象
+    Emo.prototype.getSel = function () {
+        var sel = document.getSelection();
+        var range = null;
+        if (sel.rangeCount != 0) {
+            range = sel.getRangeAt(0);
+        }
+        console.log(sel);
+        console.log(range);
+    };
+
+
+    //init
+    $(document).ready(function () {
+        var oEmo = new Emo("testEmo");
+        oEmo.init();
+
+        $("#btns .getLen").click(function () {
+            oEmo.getLen();
+        });
+        $("#btns .getHtml").click(function () {
+            oEmo.getHtml();
+        });
+        $("#btns .getTrimHtml").click(function () {
+            oEmo.getTrimHtml();
+        });
+        $("#btns .getSel").click(function () {
+            oEmo.getSel();
+        });
+        $("#btns .setEnd").click(function () {
+            oEmo.setCaretEnd();
+        });
+    });
+</script>
+</body>
+</html>
