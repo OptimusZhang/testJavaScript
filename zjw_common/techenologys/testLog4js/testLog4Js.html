@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Log4js Example</title>
+    <script src="../../../lib/js/log4js/log4js.js"></script>
+</head>
+<body>
+<script>
+    var myLogger = new Log4js.getLogger("myCategory");
+    myLogger.setLevel(Log4js.Level.WARNING);
+    myLogger.addAppender(new Log4js.FileAppender("C:\\abc.log"));
+
+    myLogger.info('an info');
+    myLogger.warn('a warning');
+    myLogger.error('an error');
+</script>
+
+
+
+</body>
+</html>

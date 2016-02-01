@@ -121,6 +121,9 @@
       "js": "dist/js/bootstrap-datepicke.js",
       "locals": "dist/locals/*.min.js",
       "css": "dist/css/bootstrap-datepicke.css"
+    },
+    "log4js":{
+      "js":"log4js/src/main/js/log4js.js"
     }
   }
 }
