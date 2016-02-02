@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>testClosure</title>
+</head>
+<body>
+<script>
+
+    // ClosureExample01.htm
+    (function () {
+        function createFunctions() {
+            var result = new Array();
+            for (var i = 0; i < 10; i++) {
+                result[i] = function (num) {
+                    return num;
+                }(i);
+            }
+            return result;
+        }
+        var rs = createFunctions();
+        for (var j = 0; j < 10; j++) {
+            console.log('rs[' + j + ']:' + rs[j]);
+        }
+    })();
+
+
+    // ClosureExample02.htm
+    (function () {
+        function createFunctions() {
+            var result = new Array();
+            for (var i = 0; i < 10; i++) {
+                result[i] = function () {
+                    return i;
+                }
+            }
+            return result;
+        }
+        var rs = createFunctions();
+        for (var j = 0; j < 10; j++) {
+            console.log('rs[' + j + ']:' + rs[j]);
+        }
+    })();
+
+    //ThisObjectExample01.htm
+    (function () {
+        var name = "The Window";
+        var object = {
+            name: "My Object",
+            getNameFunc: function () {
+                return function () {
+                    return this.name;
+                };
+            }
+        };
+        alert(object.getNameFunc()()); // The Window
+    })();
+
+    (function () {
+        //ThisObjectExample02.htm
+        var name = "The Window";
+        var object = {
+            name: "My Object",
+            getNameFunc: function () {
+                var that = this;
+                return function () {
+                    return that.name;
+                };
+            }
+        };
+        alert(object.getNameFunc()()); // My Object
+    })();
+
+    (function () {
+        //ThisObjectExample03.htm
+        var name = "The Window";
+        var object = {
+            name: "My Object",
+            getName: function () {
+                return this.name;
+            }
+        };
+        alert(object.getName()); // My Object
+        alert((object.getName)()); // My Object
+        alert((object.newFunc = object.getName)()); // The Window
+    })();
+</script>
+
+</body>
+</html>

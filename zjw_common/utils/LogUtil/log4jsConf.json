@@ -1,0 +1,34 @@
+{
+  "appenders": [
+    {
+      "category": "console",
+      "type": "console"
+    },
+    {
+      "category": "log_file",
+      "type": "file",
+      "filename": "./logs/testNodeJs.log",
+      "maxlogsize": 1024,
+      "backup": 100
+    },
+    {
+      "category": "date_file",
+      "type": "dateFile",
+      "filename": "./logs/date-files/date",
+      "alwaysIncludePattern": true,
+      "pattern": "-yyyy-MM-dd-hh.log"
+    }
+  ],
+  "levels": {
+    "log_file": "DEBUG",
+    "date_file": "INFO",
+    "console": "ALL"
+  },
+  "replaceConsole": true,
+
+  "logCategories": {
+    "CONSOLE": "console",
+    "LOGFILE": "log_file",
+    "DATEFILE": "date_file"
+  }
+}
