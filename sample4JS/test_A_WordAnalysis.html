@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JS高级-词法分析</title>
+</head>
+<body>
+<script>
+
+
+    // ==================================================
+    //所谓词法分析：
+    //第一步：分析参数
+    //第二部：分析变量声明
+    //第三部：分析函数声明
+    //
+    //具体步骤
+    //    0：生成Active Object（简称AO：活动对象）
+    //    1：分析参数：
+    //        根据形参形成AO属性，如果没有实参，则为undefined
+    //        如果有实参，则值为实参的值
+    //    2：分析变量声明（如：var age）
+    //        如果AO上还没有age属性，则添加AO属性，值是undefined
+    //        如果AO上已经有age属性，则不作任何动作。
+    //    3：分析函数声明，如function foo(){}
+    //       则把函数赋值给AO.foo属性。如果此前foo已存在，则被无情覆盖。
+    // ==================================================
+
+
+
+    // ==================================================
+    // 例1
+    // 你是javascript高手吗?进来看看
+    // ==================================================
+    function a(b) {
+        alert(b);   // function b(){...}
+        function b() {
+            alert(b);
+        }
+
+        b();    // function b(){...}
+    }
+    a(1);
+
+    //    学习完例1～例3后，进行该题的分析
+    //    词法分析过程：
+    //      0：AO={}
+    //      1：分析参数AO={b:1}
+    //      2：分析变量声明：因为没有声明变量，什么也不做
+    //      3：分析函数声明：AO={b:function (){...}}
+    //
+    //    执行过程：
+    //      alert(b)    //function b(){...}
+    //      b();
+    //      alert(b)    //function b(){...}
+
+    // ==================================================
+    // 例2
+    // 词法分析-简单
+    // ==================================================
+    function sayAge(age) {
+        alert("sayAge：" + age);
+    }
+    sayAge(5); //5
+    sayAge();  //undefined (不是age is not defined)
+
+    //    例2的解析：
+    //    1.词法分析过程
+    //      AO{age: undefined}
+    //    2.运行过程
+    //      sayAge(5) ---->  AO.age=5; alert(AO.age); //5
+    //      sayAge() ---->   AO.age=undefined alert(AO.age) //undefined
+
+    // ==================================================
+    // 例3
+    // 词法分析
+    // ==================================================
+    function sayAge2(age) {
+        var age = 99;
+        alert("sayAge2：" + age);
+    }
+
+    sayAge2(5); //99
+    sayAge2();   //99
+
+    //    分析过程：
+    //      0：形成AO{}
+    //      1：分析形参 AO={age:5}
+    //      2：分析变量声明 age已经存在，则不做动作。
+    //
+    //    执行过程：从上而下
+    //      AO.age=99
+    //      alert(AO.age) //99
+
+
+    // ==================================================
+    // 例4
+    // 词法分析
+    // ==================================================
+
+    function sayHello(greet) {
+        var greet = "hello";
+        alert("sayHello1-1:" + greet);  // functino greet(){...}
+        function greet() {
+        }
+
+        alert("sayHello1-2:" + greet);   // functino greet(){...}
+    }
+    sayHello(null);
+
+    //    词法分析过程：
+    //      0：AO={}
+    //      1：分析参数： AO={greet：null}
+    //      2：分析变量： 因为AO已经有greet属性，所以不做动作
+    //      3：分析函数： AO={greet：function(){...}}
+    //
+    //    执行过程：
+    //      greet=hello  --->  AO={greet: "hello"}
+    //      alert(hello) // hello
+    //      alert(hello) // hello
+
+</script>
+
+
+</body>
+</html>

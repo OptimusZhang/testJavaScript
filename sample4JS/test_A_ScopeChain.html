@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JS高级-作用域链</title>
+</head>
+<body>
+<script>
+
+    // ==================================================
+    //    所谓作用域链：
+    //        就是函数由内到外，各函数产生的AO链
+    // ==================================================
+    //    重点：
+    //    生命变量var的作用
+    //    var 是在函数运行的上下文中生命一个变量，如果不加var则仅仅是一个赋值操作。
+    //    赋值操作会沿着作用域链由内而外进行赋值操作，如果最终到window都没有找到变量，
+    //    则在windwow下新建该变量。
+    //    所以如果没有var生命一个变量不要狭隘的理解新建了一个全局变量，参照例3
+    //    函数的执行分为，
+    //          词法分析阶段
+    //          执行阶段
+    //    词法分析阶段，会将函数声明和变量生命进行解析和预处理
+
+    // ==================================================
+    // 例1
+    // ==================================================
+    var c = 5;
+    function t1() {
+        var d = 6;
+
+        function t2() {
+            var e = 7;
+            var d = 3;
+            alert(c + d + e);
+        }
+
+        t2();
+    }
+    t1();
+
+    // ==================================================
+    // 例2
+    // ==================================================
+    alert("f1:" + window.f);    //undefined
+    alert("g1:" + window.g);    //undefined
+
+    function t3() {
+        //f没有加var，那么f仅仅是一个赋值操作，
+        // 因此寻找t3作用域内的函数，没找到就向上查询，
+        // 直至window，最终没找到的话，会赋值在window下新建d变量，window.d
+        f = 5;
+        var g = 6;
+    }
+
+    t3();
+
+    alert("f2:" + window.f);    //5
+    alert("g2:" + window.g);    //undefined
+
+    // ==================================================
+    // 例3
+    // ==================================================
+    function f1() {
+        var h;
+
+        function f2() {
+            h = 5;
+            i = 6;
+        }
+
+        f2();
+    }
+    f1();
+    alert("i:" + window.i); // 6
+    alert("h:" + window.h); // undefined
+    //    alert("h:" + h); // h is not undefined(error)
+    // 注意
+    //    以window.xxx引用全局变量,寻找不到,作为作为某个属性不存在,返回undefined.
+    //    而直接以xxx引用某变量，寻找不到，则是报XXX is not undefined错误。
+
+
+    // ==================================================
+    // 作用域考试
+    //    这是一个极其容易出错，有极其基础的面试题。
+    // ==================================================
+
+    var str1 = 'global';
+    function func1() {
+        console.log("str1:" + str1);    // global
+//        console.log("str2:" + str2);    // str2 is not defined
+        str2 = 'local';
+    }
+    func1();
+
+    var str3 = 'global';
+    function func2() {
+        console.log("str3:" + str3);    // global
+        console.log("str4:" + str4);    // undefined
+        var str4 = 'local';
+    }
+    func2();
+
+    //    分析：
+    //    js代码是自上而下执行的。在fun2执行前，会经历词法分析期和运行期。
+    //    在执行之前会有一个“词法分析过程”.
+    //    以上面的代码为例。
+    //    第一步：先分析func2函数
+    //    func2{
+    //        var str4     // 分析出func2中有str4局部变量，
+    //    }
+    //    第二部：执行func2函数
+    //    所以上面的var str4 = 'local'如下：
+    //    function func2() {
+    //        var str4;
+    //        console.log("str3:" + str3);
+    //        console.log("str4:" + str4);
+    //        str4 = 'local';
+    //    }
+
+    // ==================================================
+    // 你是javascript高手吗?进来看看
+    // ==================================================
+
+    function a(b) {
+        alert(b);   // function b(){...}
+        function b() {
+            alert(b);
+        }
+
+        b();    // function b(){...}
+    }
+    a(1);
+
+    //    解析
+    //    词法分析是关键。
+    function sayAge(age) {
+        alert(age);
+    }
+    sayAge(5); //
+    sayAge();
+
+    //    所谓词法分析
+    //    第一步：    分析参数
+    //    第二部：    分析变量声明
+    //    第三部：    分析函数声明
+
+
+</script>
+
+</body>
+</html>

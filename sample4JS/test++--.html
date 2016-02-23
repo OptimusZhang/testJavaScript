@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<input type="text" name="age" id="ag" value="0">
+<input type="button" onclick="grow1()" value="长大1">
+<input type="button" onclick="grow2()" value="长大2">
+<input type="button" onclick="grow3()" value="长大3">
+<script>
+
+    // ++a 先吧变量a加1，在把a返回
+    // a++ 先返回a，在把变量a加1
+
+    function grow1(){
+        var age = document.getElementById("ag").value;
+        age = parseInt(age); //ECMASCRIPT global function
+        age += 1;
+        document.getElementById("ag").value = age;//在使用age之前已经长了一岁
+    }
+
+    function grow2(){
+        var age = document.getElementById("ag").value;
+        age = parseInt(age); //ECMASCRIPT global function
+        document.getElementById("ag").value = ++age;
+    }
+
+    function grow3(){
+        var age = document.getElementById("ag").value;
+        age = parseInt(age); //ECMASCRIPT global function
+        document.getElementById("ag").value = age++;// Text框的值用也不会变，age++始终返回+之前的值（0）。
+    }
+
+    //另一个Sample
+    document.write('<br/>');
+    var a = 1;
+    var b = a--;
+    document.write("b" + b + '<br/>');
+    document.write("a" + a + '<br/>');
+
+    a = 1;
+    b = --a;
+    document.write("b" + b + '<br/>');
+    document.write("a" + a + '<br/>');
+
+</script>
+
+</body>
+</html>

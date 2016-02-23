@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+
+    //JS的&&和||返回的是短路运算，返回短路时点的变量值，而不是一个布尔值
+
+    var house = 0;
+    var car = 1;
+
+    alert(car || house);
+    alert("Boolean:" + Boolean(car && house));
+
+
+    var car2 = 1;
+    var house2 = 2;
+    alert(car2 && house2);
+
+    alert("Boolean:" + Boolean(car2 && house2));
+
+</script>
+
+</body>
+</html>

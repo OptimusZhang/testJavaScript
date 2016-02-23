@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>test Timer</title>
+</head>
+<body>
+<input type="button" value="my button setTimeOut" id="my-btn-timeout">
+<div id="message" style="visibility: hidden">show message!</div>
+<input type="button" value="my button setInterval" id="my-btn-interval">
+<div id="intervalCounter"></div>
+<script>
+    'use strict';
+    var btn_timeout = document.getElementById('my-btn-timeout');
+    btn_timeout.onclick = function(){
+        setTimeout(function(){
+            document.getElementById("message").style.visibility = "visible"
+        }, 250);
+    };
+
+    var btn_interval = document.getElementById('my-btn-interval');
+    var intervalCounter = document.getElementById('intervalCounter');
+    var intervalFunc = function(i){
+        return function (){
+            i++;
+            var countdiv = document.createElement("div");
+            countdiv.innerHTML = i;
+            intervalCounter.appendChild(countdiv);
+            if (i < 20) {
+                setTimeout(intervalFunc(i), 250);
+            }
+        }
+    };
+    btn_interval.onclick = function(){
+        intervalCounter.removeChild(intervalCounter.childNodes);
+        setTimeout(intervalFunc(0), 250);
+    }
+
+</script>
+
+</body>
+</html>

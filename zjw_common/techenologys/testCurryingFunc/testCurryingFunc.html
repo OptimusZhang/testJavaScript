@@ -3,9 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <title>testCurryingFunc</title>
+
 </head>
 <body>
+    <input type="button" value="my button pattern3" id="my-btn-pattern3">
+    <input type="button" value="my button pattern4" id="my-btn-pattern4">
+    <script src="../../utils/EventUtil.js"></script>
     <script>
+        // pattern 1
         (function (){
             function add(n1, n2) {
                 return n1 + n2;
@@ -20,17 +25,71 @@
         })();
 
 
+        // pattern 2
         (function (){
             function curry(fn) {
                 var args = Array.prototype.slice.call(arguments, 1);
+                return function(){
+                    var innerArgs = Array.prototype.slice.call(arguments);
+                    var finalsArgs = args.concat(innerArgs);
+                    return fn.apply(null, finalsArgs);
+                }
             }
+
+            function add(n1, n2){
+                return n1+n2;
+            }
+            var curriedAdd = curry(add, 5);
+            alert("curriedAdd 1:" + curriedAdd(3));
+
+
+            var curriedAdd2 = curry(add, 5, 10);
+            alert("curriedAdd 2:" + curriedAdd2());
         })();
 
+        // pattern 3
+        (function(){
+            function bind(fn, context) {
+                var args = Array.prototype.slice.call(arguments, 2);
+                return function (){
+                    var innerArgs = Array.prototype.slice.call(arguments);
+                    var finalArgs = args.concat(innerArgs);
+                    return fn.apply(context, finalArgs);
+                }
+            }
 
+            var handler = {
+                message: "Event handled",
+                handleClick: function(name, event){
+                    alert(this.message + ":" + name + ":" + event.type);
+                }
+            };
 
+            var btn  = document.getElementById("my-btn-pattern3");
+            EventUtil.addHandler(btn, "click", bind(handler.handleClick, handler, "my-btn-pattern3"));
+        })();
 
+        // pattern 4 ECMAScript5 bind()
+        (function(){
+            function bind(fn, context) {
+                var args = Array.prototype.slice.call(arguments, 2);
+                return function (){
+                    var innerArgs = Array.prototype.slice.call(arguments);
+                    var finalArgs = args.concat(innerArgs);
+                    return fn.apply(context, finalArgs);
+                }
+            }
 
+            var handler = {
+                message: "Event handled",
+                handleClick: function(name, event){
+                    alert(this.message + ":" + name + ":" + event.type);
+                }
+            };
 
+            var btn  = document.getElementById("my-btn-pattern4");
+            EventUtil.addHandler(btn, "click", handler.handleClick.bind(handler, "my-btn-pattern4"));
+        })();
     </script>
 
 
