@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JS高级-this</title>
+</head>
+<body>
+<script>
+
+    //    JS中函数的4中调用方式，决定了this值的不同
+    //    1.作为普通函数被调用时，this --> window
+    //    2.作为对象的方法被调用时，this --> 对象
+    //    3.作为构造函数被调用时，this --> 实例化的新对象
+    //    4.当函数通过call，apply调用时，this --> call方法的第一个参数（用于改变上下文）。
+
+    // ==================================================
+    // 例1
+    // 函数作为普通函数被调用时，this --> window
+    // ==================================================
+    (function () {
+        console.log("===========例1===========");
+        function t1() {
+            this.xx = 999;
+        }
+
+        t1();
+        console.log(window.xx)
+    })();
+
+    // ==================================================
+    // 例2
+    // 函数作为对象的方法来调用时，this --> 该对象
+    // ==================================================
+    (function () {
+        console.log("===========例2===========");
+        var obj = {
+            x2: 111,
+            y2: 222,
+            t2: function () {
+                console.log(this.x2);
+            }
+        };
+
+        window.x2 = 333;
+        obj.t2(); //111
+        var dog = {
+            x2: 'wangwang'
+        };
+        dog.t2 = obj.t2;
+        dog.t2();   // wangwang
+    })();
+
+    (function () {
+        console.log("===========例2-2===========");
+        window.XXX = "window.XXX";
+
+        fun = function () {
+            console.log(this.XXX);
+        };
+
+        var obj2 = {
+            XXX: "obj2.XXX",
+            fun: function () {
+                console.log(this.XXX);
+            }
+        };
+        var obj = {
+            XXX: "obj1.XXX",
+            run: function () {
+                obj2.fun(); // 此时fun的母体对象为obj2,则指向obj2.XXX
+                fun(); //此时fun没有母体对象，则他属于window,因此指向window.XXX
+            }
+        };
+        obj.run();
+    })();
+
+
+    // ==================================================
+    // 例3
+    // 当函数做为构造函数被调用来创建新对象时，new foo()，this --> 新对象
+    // ==================================================
+    (function () {
+        console.log("===========例3===========");
+
+        window.name = "God";
+        function Dog(name, age) {
+            this.name = name;
+            this.age = age;
+            this.sayName = function () {
+                console.log(this.name);
+            };
+        }
+
+        var dog = new Dog("huzi", 2);
+        dog.sayName(); // huzi    此时this.name指向新对象dog
+    })();
+
+    //    new Dog是发生了以下几个步骤：
+    //    1. 系统创建了一个新对象{}
+    //    2. 把this指向该新对象
+    //    3. 执行Dog函数
+    //    4. 返回该新对象
+    (function () {
+        console.log("===========例3-2===========");
+
+        function Pig() {
+            this.age = '99';
+            return 'abc';
+        }
+
+        var pig = new Pig();
+        console.log(pig); //Pig {age:99}
+    })();
+
+    // ==================================================
+    // 例4
+    // 当函数被call，apply调用时，this --> call的第一个参数用来改变上下文
+    // ==================================================
+    (function () {
+        console.log("===========例4===========");
+        //语法格式:  foo.call(context, arg1, arg2 ...)
+
+        window.age = 100;
+        function t(num) {
+            console.log("我的真实年龄是：" + this.age);
+            console.log("但是我一般告诉别人：" + (this.age + num));
+        }
+        var human = {
+            name : "李四",
+            age: 28
+        };
+        human.t = t;
+        human.t(-10); //我的真实年龄是28，但是我一般告诉别人我18
+
+        var wangwu = {
+            name: "wangwu",
+            age:30
+        };
+        t(-10); //我的真实年龄是100，但是我一般告诉别人我90
+        t.call(human, -10);//我的真实年龄是28，但是我一般告诉别人我18
+        t.call(wangwu, -10);//我的真实年龄是30，但是我一般告诉别人我20
+        human.t.call(wangwu, -10);//我的真实年龄是30，但是我一般告诉别人我20
+
+
+
+
+
+
+    })();
+
+
+
+</script>
+
+</body>
+</html>

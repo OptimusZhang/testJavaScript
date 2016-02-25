@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!--<script src="./Security.js"></script>-->
+</head>
+<body>
+
+<script>
+
+    function _symbolTransform(value) {
+        return value.replace(/['\\\\]/g, function(char) {
+            return {"'":"''", "\\":"\\\\"}[char];
+        });
+    }
+
+
+    var str = "'\\abc''d\\\\";
+    alert(_symbolTransform(str));
+
+</script>
+
+
+</body>
+</html>
