@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    // 书写匿名函数的几种方式
+    // (fun(){}())
+//    (function(){
+//        alert("this is anonymous function!: (function(){}())")
+//    }());
+
+//    (fun(){})()
+//    (function(){
+//        alert("this is anonymous function!: (function(){}())")
+//    }());
+
+    function createFunction() {
+        var result = new Array();
+        for (var i=0; i<10; i++) {
+            result[i] = function (i) {
+                return i;
+            }
+        }
+
+        return result;
+    }
+    var result = createFunction();
+    for(index in result){
+        alert(result[index]());
+    };
+
+
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>js_高级_闭包的用法</title>
+</head>
+<body>
+
+    <script>
+        /**
+            例一
+            穿越
+        */
+//        有姐妹俩,大桃花和小桃花相继出生,
+//                有一次小桃花在河边洗衣服,出现奇特星像&#45;&#45;十字连珠,小桃花穿越到了清朝.
+//                还进宫见到了四阿哥,身边有一群宫女,和小桃花妹相称.
+//                四阿哥问:"小桃花,你的姐姐是谁?"
+//        小桃花怎么答?
+        function clouser(){
+
+            var sister = "大桃花";
+
+            var mySister = function(){
+                return sister;
+            };
+            return mySister;
+
+        }
+
+        function daQingGong(){
+            var sister = "大福晋";
+
+            var mySister = clouser();
+
+            alert("例一");
+            alert(mySister());
+        }
+
+        daQingGong();
+
+
+    </script>
+
+
+    <script>
+        /**
+         例二
+         闭包计数器
+         */
+        var counter = (function () {
+            var cnt = 0;
+            return function(){
+                return ++cnt;
+            };
+        })();
+
+        alert(counter());
+        alert(counter());
+        alert(counter());
+
+    </script>
+
+    <script>
+        /**
+         例三
+         面向对象-封装(私有属性)
+         */
+        var Girl = function(){
+            var name="宝玉";
+            this.age=20;
+
+            this.sayName = function(){
+                alert(name);
+            };
+
+            this.sayAage = function(){
+                alert(this.age);
+            };
+        }
+
+        var girl = new Girl();
+        girl.sayAage();
+        girl.sayName();
+        alert(girl.age);
+        alert(girl.name);
+
+    </script>
+
+
+    <script>
+        /**
+         例四
+         测试题
+         */
+        (function(){
+            for(var i=0,arr=[]; i<4;i++) {
+                arr.push(function(){alert(i)});
+            }
+
+            arr[0]();
+            arr[1]();
+            arr[2]();
+            arr[3]();
+        })();
+
+
+    </script>
+
+
+
+
+
+
+
+</body>
+
+
+</html>

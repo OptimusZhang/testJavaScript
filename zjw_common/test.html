@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="/testJavaScript/lib/js/requirejs/require.js" data-main="./main" ></script>
+</head>
+<body>
+<input type="button" id="my-button" value="try to click">
+<script>
+    var click = function(){
+        var fun = function () {};
+        var arr = [1,2,3];
+        var reg = new RegExp("\d", "g");
+        var str = "abc";
+        var und;
+        var nul = null;
+        console.log("fun isArrray?:" + ZJWUI.isArray(fun));
+        console.log("arr isArrray?:" + ZJWUI.isArray(arr));
+        console.log("reg isArrray?:" + ZJWUI.isArray(reg));
+        console.log("str isArrray?:" + ZJWUI.isArray(str));
+        console.log("und isArrray?:" + ZJWUI.isArray(und));
+        console.log("nul isArrray?:" + ZJWUI.isArray(nul));
+    };
+    document.getElementById("my-button").addEventListener('click', click, false);
+</script>
+
+
+</body>
+</html>

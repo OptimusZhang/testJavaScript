@@ -6,15 +6,15 @@ define(['./ZJWCore.js'], function(ZJWUI){
 
     // to avoid the bug about the Array in multipul frames.
     ZJWUI.isArray = function (value) {
-        return Object.prototype.toString.call(value) == 'Object Array';
+        return Object.prototype.toString.call(value).toLowerCase() == '[object array]';
     };
 
     // to avoid the bug about the RegExp,use bellow to check a function.
-    ZJWUI.isFunction = function () {
-        return Object.prototype.toString.call(value) == 'Object Function';
+    ZJWUI.isFunction = function (value) {
+        return Object.prototype.toString.call(value).toLowerCase() == '[object function]';
     };
 
-    ZJWUI.isRegExp = function () {
-        return Object.prototype.toString.call(value) == 'Object RegExp';
+    ZJWUI.isRegExp = function (value) {
+        return Object.prototype.toString.call(value).toLowerCase() == '[object regexp]';
     };
 });
