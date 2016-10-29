@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>lineJoin bevel round miter </title>
+    <style>
+        #myCanvas {
+            width: 500px;
+            height: 500px;
+            border: 1px solid black;
+        }
+    </style>
+    <script type="application/javascript" src="canvas.common.js"></script>
+</head>
+<body>
+<canvas id="myCanvas">您的浏览器不支持Canvas,请升级您的浏览器至最新版本.</canvas>
+<script>
+    if (ZJWUI.canvas.isCanvasSupported()) {
+        var myCanvas = document.getElementById('myCanvas');
+        myCanvas.width = 500;
+        myCanvas.height = 500;
+
+        var ctx = myCanvas.getContext('2d');
+
+        // lineJoin指线条弯折时,拐角的效果
+        ctx.lineJoin = 'bevel';
+        ctx.lineWidth = 10;
+        ctx.beginPath();
+        ctx.moveTo(100, 100);
+        ctx.lineTo(300, 200);
+        ctx.lineTo(100, 300);
+        ctx.stroke();
+
+        ctx.beginPath();
+        ctx.lineJoin = 'round';
+        ctx.lineWidth = 10;
+        ctx.moveTo(100, 150);
+        ctx.lineTo(300, 250);
+        ctx.lineTo(100, 350);
+        ctx.stroke();
+
+        ctx.beginPath();
+        ctx.lineJoin = 'miter';
+        ctx.lineWidth = 10;
+        ctx.moveTo(100, 200);
+        ctx.lineTo(300, 300);
+        ctx.lineTo(100, 400);
+        ctx.stroke();
+
+
+
+        // miterLimit和lineJoin='miter'要配合使用
+        ctx.beginPath();
+        ctx.lineJoin = 'miter';
+        ctx.miterLimit = 2;
+        ctx.lineWidth = 10;
+        ctx.moveTo(100, 250);
+        ctx.lineTo(300, 350);
+        ctx.lineTo(100, 450);
+        ctx.stroke();
+
+
+    }
+
+</script>
+
+
+</body>
+</html>

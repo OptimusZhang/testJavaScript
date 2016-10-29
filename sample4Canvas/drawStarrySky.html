@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>画一个星空</title>
+    <style>
+        #myCanvas {
+            width: 500px;
+            height: 500px;
+            border: 1px solid black;
+        }
+    </style>
+    <script type="application/javascript" src="canvas.common.js"></script>
+</head>
+<body>
+<div><canvas id="myCanvas">您的浏览器不支持Canvas,请升级您的浏览器至最新版本.</canvas></div>
+<script>
+    if (ZJWUI.canvas.isCanvasSupported()) {
+        var myCanvas = document.getElementById('myCanvas');
+        myCanvas.width = 500;
+        myCanvas.height = 500;
+
+        var ctx = myCanvas.getContext('2d');
+
+        // 用矩形画一个背影是黑色的天空.
+        ctx.fillStyle = 'black';
+        ctx.fillRect(0, 0, myCanvas.width, myCanvas.height);
+
+
+        //画一片星星(200个)
+        for(var len = 200 ;len--;) {
+            var x = myCanvas.width * Math.random();
+            var y = myCanvas.height * Math.random();
+            var zoom = Math.random() * 10;
+            var rotation = Math.random() * 360;
+            var styleOptions = {
+                fillStyle: "#fb3",
+                strokeStyle: '#fb5'
+            };
+            ZJWUI.canvas.drawStar(ctx,  x, y , zoom, rotation, styleOptions);
+        }
+
+    }
+
+</script>
+
+
+</body>
+</html>

@@ -4,7 +4,7 @@
 define(['./ZJWCore.js'], function(ZJWUI){
     'use strict';
 
-    // to avoid the bug about the Array in multipul frames.
+    // to avoid the bug about the Array in multi frames.
     ZJWUI.isArray = function (value) {
         return Object.prototype.toString.call(value).toLowerCase() == '[object array]';
     };

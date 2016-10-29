@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>测试fillStyle & strokeStyle</title>
+    <style>
+        #myCanvas {
+            width: 500px;
+            height: 500px;
+            border: 1px solid black;
+        }
+    </style>
+    <script type="application/javascript" src="canvas.common.js"></script>
+</head>
+<body>
+<canvas id="myCanvas">您的浏览器不支持Canvas,请升级您的浏览器至最新版本.</canvas>
+<script>
+    if (ZJWUI.canvas.isCanvasSupported()) {
+        var myCanvas = document.getElementById('myCanvas');
+        myCanvas.width = 500;
+        myCanvas.height = 500;
+
+        var ctx = myCanvas.getContext('2d');
+
+        //draw rect
+        var x_lt = 100;
+        var y_lt = 100;
+        var rectWidth = 200;
+        var rectHeight = 200;
+        var fillColor = '#058';
+        var strokeColor = 'black';
+        var lineWidth = 10;
+
+        ZJWUI.canvas.drawRect(ctx, x_lt, y_lt, rectWidth, rectHeight, fillColor, strokeColor, lineWidth);
+
+        ZJWUI.canvas.drawRect(ctx, 200, 200, 200, 200, "rgba(0, 256, 0, 0.5)");
+    }
+
+</script>
+
+
+</body>
+</html>

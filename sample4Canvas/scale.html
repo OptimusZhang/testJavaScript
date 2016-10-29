@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>scale</title>
+    <style>
+        #myCanvas {
+            width: 500px;
+            height: 500px;
+            border: 1px solid black;
+        }
+    </style>
+    <script type="application/javascript" src="canvas.common.js"></script>
+</head>
+<body>
+<div><canvas id="myCanvas">您的浏览器不支持Canvas,请升级您的浏览器至最新版本.</canvas></div>
+<script>
+    if (ZJWUI.canvas.isCanvasSupported()) {
+        var myCanvas = document.getElementById('myCanvas');
+        myCanvas.width = 500;
+        myCanvas.height = 500;
+
+        var ctx = myCanvas.getContext('2d');
+
+        ctx.lineWidth = 5;
+        // 1:1
+//        ctx.save();
+        ctx.scale(1, 1);
+        ctx.strokeRect(50, 50, 100, 100);
+//        ctx.restore();
+        // 2:2
+//        ctx.save();
+        ctx.scale(2, 2);
+        ctx.strokeRect(50, 50, 200, 200);
+        ctx.restore();
+        // 1:1
+//        ctx.save();
+        ctx.scale(3, 3);
+        ctx.strokeRect(50, 50, 300, 300);
+//        ctx.restore();
+
+        //使用缩放,除了会放大图形,还会放大边线,放大起始坐标, 需要注意
+    }
+
+</script>
+
+
+</body>
+</html>

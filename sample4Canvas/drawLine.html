@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>draw a line</title>
+    <style>
+        #myCanvas {
+            width: 500px;
+            height: 500px;
+            border: 1px solid black;
+        }
+    </style>
+    <script type="application/javascript" src="canvas.common.js"></script>
+</head>
+<body>
+<canvas id="myCanvas">您的浏览器不支持Canvas,请升级您的浏览器至最新版本.</canvas>
+<script>
+    if (ZJWUI.canvas.isCanvasSupported()){
+        var myCanvas = document.getElementById('myCanvas');
+        myCanvas.width = 500;
+        myCanvas.height = 500;
+
+        var context = myCanvas.getContext('2d');
+        context.moveTo(50, 50);
+        context.lineTo(250, 250);
+        context.lineTo(50, 450);
+        context.lineWidth = 20;
+        context.strokeStyle = 'red';
+        context.stroke();
+
+        context.moveTo(150, 50);
+        context.lineTo(350, 250);
+        context.lineTo(150, 450);
+        context.lineWidth = 20;
+        context.strokeStyle = 'yellow';
+        context.stroke();
+
+        context.moveTo(250, 50);
+        context.lineTo(450, 250);
+        context.lineTo(250, 450);
+        context.lineWidth = 20;
+        context.strokeStyle = '#058';
+        context.stroke();
+
+        // canvas是基于状态的,stroke并不会清空之前的状态,所以最后一次context的stroke重绘了三条线,并使用#058的颜色.
+    }
+
+</script>
+
+
+
+</body>
+</html>

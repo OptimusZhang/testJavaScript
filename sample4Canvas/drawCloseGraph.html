@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>画封闭图形</title>
+    <style>
+        #myCanvas {
+            width: 500px;
+            height: 1000px;
+            border: 1px solid black;
+        }
+    </style>
+    <script type="application/javascript" src="canvas.common.js"></script>
+</head>
+<body>
+<canvas id="myCanvas">您的浏览器不支持Canvas,请升级您的浏览器至最新版本.</canvas>
+<script>
+    if (ZJWUI.canvas.isCanvasSupported()) {
+        var myCanvas = document.getElementById('myCanvas');
+        myCanvas.width = 500;
+        myCanvas.height = 1000;
+
+        var ctx = myCanvas.getContext('2d');
+        ctx.beginPath();
+        ctx.lineTo(50, 150);
+        ctx.lineTo(250, 150);
+        ctx.lineTo(250, 50);
+        ctx.lineTo(450, 250);
+        ctx.lineTo(250, 450);
+        ctx.lineTo(250, 350);
+        ctx.lineTo(50, 350);
+        ctx.lineTo(50, 150);
+        ctx.closePath();    // closePath会自动连接当前坐标至起始位置.
+
+        ctx.lineWidth = 10;
+        ctx.strokeStyle = '#068';
+        ctx.fillStyle = '#060';
+
+        ctx.fill();       //通常先画填充,后画边线,否则边线的粗为设置值的一半.
+        ctx.stroke();
+
+
+        //draw rect
+        var x_lt = 100;
+        var y_lt = 600;
+        var rectWidth = 300;
+        var rectHeight = 200;
+        var fillColor = '#058';
+        var strokeColor = 'black';
+        var lineWidth = 10;
+
+        ZJWUI.canvas.drawRect(ctx, x_lt, y_lt, rectWidth, rectHeight, fillColor, strokeColor, lineWidth);
+    }
+
+</script>
+
+
+</body>
+</html>

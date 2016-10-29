@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>draw line使用三种颜色绘制折线</title>
+    <style>
+        #myCanvas {
+            width: 500px;
+            height: 500px;
+            border: 1px solid black;
+        }
+    </style>
+    <script type="application/javascript" src="canvas.common.js"></script>
+</head>
+<body>
+<canvas id="myCanvas">您的浏览器不支持Canvas,请升级您的浏览器至最新版本.</canvas>
+<script>
+    if (ZJWUI.canvas.isCanvasSupported()){
+        var myCanvas = document.getElementById('myCanvas');
+        myCanvas.width = 500;
+        myCanvas.height = 500;
+
+        var context = myCanvas.getContext('2d');
+
+        context.lineWidth = 20;
+
+        context.beginPath();            // 第一个beginPath可以省略.
+        context.lineTo(50, 50);         // beginPath之后的lineTo相当于moveTo,因为beginPath会清空当前绘笔的坐标.
+        context.lineTo(250, 250);
+        context.lineTo(50, 450);
+        context.strokeStyle = 'red';
+        context.stroke();
+
+        context.beginPath();
+        context.moveTo(150, 50);
+        context.lineTo(350, 250);
+        context.lineTo(150, 450);
+        context.strokeStyle = 'yellow';
+        context.stroke();
+
+        context.beginPath();
+        context.moveTo(250, 50);
+        context.lineTo(450, 250);
+        context.lineTo(250, 450);
+        context.strokeStyle = '#058';
+        context.stroke();
+
+        // beginPath会分割三次操作,并且会基于上一次context的状态进行绘制,
+        // 如果属性被重新设定,则会使用新设置的属性进行绘制.
+    }
+
+</script>
+
+
+
+</body>
+</html>

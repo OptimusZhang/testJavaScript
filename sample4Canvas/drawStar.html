@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>画一个五角星</title>
+    <style>
+        #myCanvas {
+            width: 500px;
+            height: 500px;
+            border: 1px solid black;
+        }
+    </style>
+    <script type="application/javascript" src="canvas.common.js"></script>
+</head>
+<body>
+
+<div style="border: 1px solid;display: inline-block;"><img src="./imgs/drawStar.jpg" alt="" width="500px" height="330px"></div>
+<div>按照上图思路进行五角星的绘制</div>
+<div><canvas id="myCanvas">您的浏览器不支持Canvas,请升级您的浏览器至最新版本.</canvas></div>
+<script>
+    if (ZJWUI.canvas.isCanvasSupported()) {
+        var myCanvas = document.getElementById('myCanvas');
+        myCanvas.width = 500;
+        myCanvas.height = 500;
+
+        var ctx = myCanvas.getContext('2d');
+
+        options = {
+            lineWidth: 10,
+            strokeStyle: "rgba(0, 250, 0, 0.8)"
+        };
+
+        var drawStar = function (ctx, offsetX, offsetY, radiusOuter, radiusInner, rotation, options) {
+            var startDegL = 18,
+                    startDegS = 54,
+                    degPer = 360 / 5,
+                    PI = Math.PI;
+
+            if (typeof rotation === "object") {
+                options = rotation;
+                rotation = 0;
+            }
+
+            ctx.beginPath();
+            for (var i = 0; i < 5; i++) {
+                ctx.lineTo(radiusOuter * Math.cos((startDegL + i * degPer - rotation) * PI / 180) + offsetX,
+                        -radiusOuter * Math.sin((startDegL + i * degPer - rotation) * PI / 180) + offsetY);
+                ctx.lineTo(radiusInner * Math.cos((startDegS + i * degPer - rotation) * PI / 180) + offsetX,
+                        -radiusInner * Math.sin((startDegS + i * degPer - rotation) * PI / 180) + offsetY);
+            }
+
+            ctx.closePath();
+            if (options && options instanceof Object) {
+                ctx.lineWidth = options.lineWidth;
+                ctx.strokeStyle = options.strokeStyle;
+
+                if (options.fillStyle){
+                    ctx.fillStyle = options.fillStyle;
+                    ctx.fill();
+                }
+            }
+            ctx.stroke();
+
+        };
+
+        ZJWUI.canvas.drawStar(ctx, 250, 250, 200, 100, 10, options);
+    }
+
+</script>
+
+
+</body>
+</html>

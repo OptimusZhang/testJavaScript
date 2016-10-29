@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>save restore</title>
+    <style>
+        #myCanvas {
+            width: 500px;
+            height: 500px;
+            border: 1px solid black;
+        }
+    </style>
+    <script type="application/javascript" src="canvas.common.js"></script>
+</head>
+<body>
+<div><canvas id="myCanvas">您的浏览器不支持Canvas,请升级您的浏览器至最新版本.</canvas></div>
+<script>
+    if (ZJWUI.canvas.isCanvasSupported()) {
+        var myCanvas = document.getElementById('myCanvas');
+        myCanvas.width = 500;
+        myCanvas.height = 500;
+
+        var ctx = myCanvas.getContext('2d');
+
+        // restore和save要成对实现, restore是目的是为了将ctx的状态回退到save时点.
+        ctx.save();
+        ctx.translate(100, 100);
+        ctx.fillRect(0, 0, 200, 200);
+        ctx.restore();
+
+
+        ctx.fillStyle = 'green';
+        ctx.translate(110, 110);
+        ctx.fillRect(0, 0, 200, 200);
+
+
+
+
+
+    }
+
+</script>
+
+
+</body>
+</html>

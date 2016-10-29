@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form id="my-form" method="get">
+    <input type="text" name="input1">
+    <input type="text" name="input2">
+    <input type="checkbox" name="sex" value="1">
+    <input type="checkbox" name="sex" value="2">
+
+    <input type="submit" value="submit">
+</form>
+<script src="../lib/js/jquery/jquery.js" ></script>
+<script>
+    var myForm = document.querySelector('#my-form');
+    var formData = new FormData(myForm[0]);
+    console.log("FORM-DATA:" + formData);
+
+    myForm[0].addEventListener('submit', function (event) {
+        $.ajax({
+            url:"/abc/foo",
+            data:formData,
+            method:'GET'
+        });
+        event.preventDefault();
+    })
+</script>
+
+</body>
+</html>

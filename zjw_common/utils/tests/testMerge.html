@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    var merge = function(to, from) {
+        for (var key in from) {
+            console.log("key:"+ key);
+            if (key in to) {
+                if (typeof to[key] === 'object'
+                        && Object.prototype.toString.call(to[key]).toLowerCase() === '[object object]'
+                        && !to[key].length) {
+                    merge(to[key], from[key]);
+                } else {
+                    to[key] = from[key];
+                }
+            } else {
+                to[key] = from[key];
+            }
+        }
+
+        return to;
+    };
+
+    var from = {
+        "string": "tom",
+        "array": [1,2,3,4,5],
+        "object": {
+            name:"obj.name"
+        }
+    };
+
+    var to = {
+        "string": "com",
+        "array": [1,2,3],
+        "object":{}
+    };
+
+    to = merge(to, from);
+
+    console.log(to);
+
+</script>
+
+</body>
+</html>

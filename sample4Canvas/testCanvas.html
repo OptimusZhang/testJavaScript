@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #myCanvas {
+            /*width: 500px;*/
+            /*height: 500px;*/
+            border: 1px solid black;
+        }
+    </style>
+    <script type="application/javascript" src="canvas.common.js"></script>
+</head>
+<body>
+    <canvas id="myCanvas">您的浏览器不支持Canvas,请升级您的浏览器至最新版本.</canvas>
+
+    <script>
+        var myCanvas = document.getElementById('myCanvas');
+        myCanvas.width = 500;
+        myCanvas.height = 500;
+
+        if(ZJWUI.canvas.isCanvasSupported()) {
+            var ctx = myCanvas.getContext('2d');
+            ctx.beginPath();
+
+
+            var R = 200,
+                    r = 100,
+                    PI = Math.PI;
+
+            ctx.lineWidth = 10;
+            ctx.strokeStyle = "red";
+            for(var i = 0; i < 5; i++)
+            {
+                ctx.lineTo(R * Math.cos((18 + 72*i)*PI/180) + 250, -R * Math.sin((18 + 72*i)*PI/180)+250);
+                ctx.lineTo(r * Math.cos((54+72*i)*PI/180) + 250, -r * Math.sin((54+72*i)*PI/180)+250);
+            }
+            ctx.closePath();
+            ctx.stroke();
+
+        }
+
+    </script>
+
+
+</body>
+</html>
