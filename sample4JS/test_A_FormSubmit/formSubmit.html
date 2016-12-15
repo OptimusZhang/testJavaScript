@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>test form submit</title>
+    <link rel="stylesheet" href="/testJavaScript/deps/bootstrap/css/bootstrap.css">
+    <style>
+        .big-image {
+            width: 400px;
+            height: 200px;
+        }
+    </style>
+</head>
+<body>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xs-12">
+            <p>
+            <h1>表单的默认行为:<kbd>Enter</kbd> & <kbd>Submit</kbd></h1></p>
+            <p>本sample用来说明表单中回车与表单提交之间的各种暧昧关系.~~</p>
+        </div>
+    </div>
+    <!-- form & txt(*1) -->
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="panel panel-info">
+                <div class="panel-heading"><strong class="text-uppercase">part 1:</strong>form & txt(*1)
+                </div>
+                <div class="panel-body">
+                    <form class="form-horizontal">
+                        <div class="form-group">
+                            <label for="txt1" class="col-sm-2 control-label">txt1</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="txt1" placeholder="input type='txt'"/>
+                            </div>
+                        </div>
+                    </form>
+                    <blockquote>
+                        <footer>结论:在表单只有一个input元素时,在该元素上按下enter会触发表单提交.</footer>
+                    </blockquote>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- form & txt(*n) -->
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="panel panel-info">
+                <div class="panel-heading"><strong class="text-uppercase">part 2:</strong>form & txt(*n)
+                </div>
+                <div class="panel-body">
+                    <form class="form-horizontal">
+                        <div class="form-group">
+                            <label for="txt2" class="col-sm-2 control-label">txt2</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="txt2" placeholder="input type='txt'"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="txt3" class="col-sm-2 control-label">txt3</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="txt3" placeholder="input type='txt'"/>
+                            </div>
+                        </div>
+                    </form>
+                    <blockquote>
+                        <footer>结论:在表单有多个input元素的情况下,在input元素上按下enter键
+                            <mark><u>不会</u></mark>
+                            触发表单提交.
+                        </footer>
+                    </blockquote>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- form & txt(*1) & button(*1) -->
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="panel panel-info">
+                <div class="panel-heading"><strong class="text-uppercase">part 3:</strong>form & txt(*1) & button(*1)
+                </div>
+                <div class="panel-body">
+                    <form class="form-horizontal">
+                        <div class="form-group">
+                            <label for="txt4" class="col-sm-2 control-label">txt4</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="txt4" placeholder="input type='txt'"/>
+                            </div>
+                        </div>
+                        <button class="btn btn-info first">button no type(first)</button>
+                    </form>
+                    <p>
+                    <blockquote>
+                        <footer>结论:在表单有一个input和一个button的情况下,在input元素中按下enter键会触发按钮的click和表单的submit事件.</footer>
+                    </blockquote>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- form & txt(*2) & button(*1) -->
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="panel panel-info">
+                <div class="panel-heading"><strong class="text-uppercase">part 4:</strong>form & txt(*2) & button(*1)
+                </div>
+                <div class="panel-body">
+                    <form class="form-horizontal">
+                        <div class="form-group">
+                            <label for="txt5" class="col-sm-2 control-label">txt5</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="txt5" placeholder="input type='txt'"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="txt6" class="col-sm-2 control-label">txt6</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="txt6" placeholder="input type='txt'"/>
+                            </div>
+                        </div>
+                        <button class="btn btn-info first">button no type(first)</button>
+                    </form>
+                    <p>
+                    <blockquote>
+                        <footer>结论:在表单有多个input和一个button的情况下,在
+                            <mark><u>任意</u></mark>
+                            input元素中按下enter键都会触发按钮的click和表单的submit事件.
+                        </footer>
+                    </blockquote>
+                    </p>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- form & txt(*n) & button(*n) -->
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="panel panel-info">
+                <div class="panel-heading"><strong class="text-uppercase">part 5:</strong>form & txt(*n) & button(*n)
+                </div>
+                <div class="panel-body">
+                    <form class="form-horizontal">
+                        <div class="form-group">
+                            <label for="txt7" class="col-sm-2 control-label">txt7</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="txt7" placeholder="input type='txt'"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="txt8" class="col-sm-2 control-label">txt8</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="txt8" placeholder="input type='txt'"/>
+                            </div>
+                        </div>
+                        <button class="btn btn-info first">button no type(first)</button>
+                        <button class="btn btn-warning second">button no type(second)</button>
+                    </form>
+                    <p>
+                    <blockquote>
+                        <footer>结论:在表单有多个input和多个button的情况下,在
+                            <mark><u>任意</u></mark>
+                            input元素中按下enter键只会触发
+                            <mark><u>第一个</u></mark>
+                            按钮的click和表单的submit事件.
+                        </footer>
+                    </blockquote>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- form & txt(*n) & button[type='button'](*n) -->
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="panel panel-info">
+                <div class="panel-heading"><strong class="text-uppercase">part 6:</strong>form & txt(*n) &
+                    button[type='button'](*n)
+                </div>
+                <div class="panel-body">
+                    <form class="form-horizontal">
+                        <div class="form-group">
+                            <label for="txt9" class="col-sm-2 control-label">txt9</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="txt9" placeholder="input type='txt'"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="txt10" class="col-sm-2 control-label">txt10</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="txt10" placeholder="input type='txt'"/>
+                            </div>
+                        </div>
+                        <button class="btn btn-info first" type="button">button [type=button](first)</button>
+                        <button class="btn btn-warning second" type="button">button [type=button](second)</button>
+                    </form>
+                    <p>
+                    <blockquote>
+                        <footer>结论:<br>
+                            1.非submit类型的按钮不会触发表单的提交.<br>
+                            2.表单中的input元素的enter键不会触发非submit按钮的click事件.
+                        </footer>
+                    </blockquote>
+                    </p>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- form & txt(*n) & button[type='button'](*1) & button[type='submit'](*2) -->
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="panel panel-info">
+                <div class="panel-heading"><strong class="text-uppercase">part 7:</strong>form & txt(*n) &
+                    button[type='button'](*1) & button[type='submit'](*2)
+                </div>
+                <div class="panel-body">
+                    <form class="form-horizontal">
+                        <div class="form-group">
+                            <label for="txt11" class="col-sm-2 control-label">txt11</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="txt11" placeholder="input type='txt'"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="txt12" class="col-sm-2 control-label">txt12</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="txt12" placeholder="input type='txt'"/>
+                            </div>
+                        </div>
+                        <button class="btn btn-info first" type="button">button [type=button](first)</button>
+                        <button class="btn btn-warning second" type="submit">button [type=submit](second)</button>
+                        <button class="btn btn-success third" type="submit">button [type=submit](third)</button>
+                    </form>
+                    <p>
+                    <blockquote>
+                        <footer>结论:<br>
+                            1.非submit类型的按钮不会触发表单的提交,submit类型的按钮会触发表单的提交<br>
+                            2.表单中的input元素的enter键不会触发非submit按钮的click事件,但是会触发submit类型按钮中第一个按钮的click事件
+                        </footer>
+                    </blockquote>
+                    </p>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- button 的黑认属性-->
+    <div class="row">
+        <div class="col-sm-4">
+            <a href="javascript:void(0)">
+                <img src="./propertiesOfButton.jpg" alt="" class="img-resoponsive img-thumbnail">
+            </a>
+        </div>
+        <div class="col-sm-8">
+            <h1 class="media-heading">
+                <code>&lt;button&gt;</code>的默认类型为<code>"submit"</code>
+            </h1>
+        </div>
+    </div>
+
+
+</div>
+
+
+<script>
+    var forms = document.querySelectorAll('form');
+    for (var index in forms) {
+        forms[index].onsubmit = function () {
+            alert("form submitted.");
+            return false;
+        }
+    }
+
+    var firstButtons = document.querySelectorAll('.first');
+    for (var index in firstButtons) {
+        firstButtons[index].onclick = function () {
+            alert("first button clicked.");
+        }
+    }
+
+    var secondButtons = document.querySelectorAll('.second');
+    for (var index in secondButtons) {
+        secondButtons[index].onclick = function () {
+            alert("second button clicked.");
+        }
+    }
+
+    var thirdButtons = document.querySelectorAll('.third');
+    for (var index in thirdButtons) {
+        thirdButtons[index].onclick = function () {
+            alert("third button clicked.");
+        }
+    }
+</script>
+</body>
+</html>

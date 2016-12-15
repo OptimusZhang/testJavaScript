@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>HTML5 Self Learning</title>
+    <script type="text/javascript" src="./js/jquery/jquery.js"></script>
+</head>
+<body>
+
+<p style="font-size:18pt; font-weight: bolder">The Advantages and disadvantages of HTML5</p>
+<div>
+    <span style="padding-left:25px">Advantages</span><br />
+    <span style="padding-left:50px">跨平台，兼容PC和移动端</span><br />
+    <span style="padding-left:50px">标准的统一，不必再考虑浏览器的兼容性，只要浏览器支持HTML5</span><br />
+    <span style="padding-left:50px">用户体验好，不用现在和安装APP，通过URL访问即可</span><br />
+    <br />
+    <span style="padding-left:25px">Disadvantages</span><br />
+    <span style="padding-left:50px">浏览器的通用性，有些旧的浏览器不支持HTML5，如IE9</span><br />
+    <span style="padding-left:50px">移动端领域发挥还不够出色，尤其是移动游戏，动画方面，Android不如IOS</span><br />
+</div>
+
+
+
+
+
+</body>
+
+<script>
+    var CreateCar = function (type) {
+
+        var Tank = function(name){
+            this.name = name;
+        }
+
+        if (type === "tank") {
+            Car.prototype.ring = function(){
+                alert("honghong");
+            }
+
+            Car.prototype.wheelsAccount = 12;
+
+            Car.prototype.pao = true;
+        }
+        else if (type = "truck") {
+            Car.prototype.ring = function(){
+                alert("bangbang");
+            }
+
+            Car.prototype.wheelsAccount = 4;
+        }
+        return Car;
+    }
+
+    var Tank = new Car("tank");
+    var Truck = new Car("truck");
+
+    var tank  = new Tank();
+
+</script>
+</html>
