@@ -17,7 +17,7 @@
 
         var myIDB;
 
-        (function() {
+        (function() {{
             console.debug("init myIDB ...");
             var indexedDB = window.indexedDB || window.msIndexedDB;
             if (!indexedDB) {
@@ -91,7 +91,7 @@
 
         var _addEventListeners = function () {
             console.debug("_addEventListeners ...");
-            _initDb();
+            ();
 
             $('#register-form-reset').click(function(evt){
                 _resetActionStatus();

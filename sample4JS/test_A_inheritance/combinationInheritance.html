@@ -1,0 +1,38 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>combination inheritance</title>
+    </head>
+    <body>
+        <script>
+            var SuperType = function(name) {
+                this.name = name;
+            }
+
+            SuperType.prototype.sayName = function () {
+                alert(this.name);
+            }
+
+            var SubType = function (name) {
+                SuperType.call(this, name);      // 注意:此处为SubType上添加了属性name
+                this.age = 12;
+            }
+
+            var proto = SubType.prototype = new SuperType();    // 注意:此处为SubType的原型上也添加了name,造成了浪费
+            SubType.prototype.constructor = SubType;  // 修改constructor的指向为当前Class
+            SubType.prototype.sayAge = function () {
+                alert(this.age);
+            }
+
+            var parent = new SuperType('Tom');
+            parent.sayName();   // Tom
+            console.log(parent.constructor)  // SuperType(function)
+
+            var child = new SubType('Kate');
+            child.sayName();    // Kate
+            child.sayAge();     // 12
+            console.log(child.constructor)  // SubType(function)
+
+        </script>
+    </body>
+</html>

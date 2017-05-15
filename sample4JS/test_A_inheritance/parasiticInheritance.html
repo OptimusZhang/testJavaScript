@@ -1,0 +1,40 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>parasitic inheritance</title>
+    </head>
+    <body>
+        <script>
+            var SuperType = function(name) {
+                this.name = name;
+            }
+
+            SuperType.prototype.sayName = function () {
+                alert(this.name);
+            }
+
+            var SubType = function (name) {
+                SuperType.call(this, name);      // 注意:此处为SubType上添加了属性name
+                this.age = 12;
+            }
+
+            // 注意:此处为使用Object.create的构造函数来获取SuperType的原型对象的实例.的原型上也添加了name,
+            //     从而避免了组合继承时,
+            var prototype = SubType.prototype = Object.create(SuperType.prototype);    
+            prototype.constructor = SubType;  // 修改constructor的指向为当前Class
+            prototype.sayAge = function () {
+                alert(this.age);
+            }
+
+            var parent = new SuperType('Tom');
+            parent.sayName();   // Tom
+            console.log(parent.constructor)  // SuperType(function)
+
+            var child = new SubType('Kate');
+            child.sayName();    // Kate
+            child.sayAge();     // 12
+            console.log(child.constructor)  // SubType(function)
+
+        </script>
+    </body>
+</html>

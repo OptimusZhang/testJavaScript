@@ -1,0 +1,20 @@
+<html>
+    <head>
+        <title>js读取文件</title>
+    </head>
+    <body>
+        <input type="file" onchange="readFile(this.files)">
+        <script>
+            function readFile(files) {
+                var reader = new FileReader();
+                reader.onload = function() {
+                    document.querySelector('body').innerHTML = '<pre>' + this.result +'</pre>'; 
+                }
+                reader.readAsText(files[0]);
+
+            }
+        </script>nw
+
+    </body>
+
+</html>

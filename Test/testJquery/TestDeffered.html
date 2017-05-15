@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../../deps/jquery/jquery.js"></script>
+</head>
+<body>
+<script>
+    $(function(){
+        var deffer = $.Deferred();
+
+        var getDateFun = function () {
+            console.log("getDateFun");
+            setTimeout(function(){
+                console.log("reserve");
+                deffer.resolve("OK");
+            }, 3000);
+//            setTimeout(function(){
+//                console.log("reject");
+//                deffer.reject("NG");
+//            }, 6000);
+
+            return deffer.promise();
+        };
+        var promise = getDateFun();
+
+        var renderFun = function(){
+            console.log("renderFun");
+
+            setTimeout(function(){
+                promise.done(function(data){
+                    console.log("promise.done"+data);
+                });
+                promise.fail(function(data){
+                    console.log("promise.fail"+data);
+                })
+            },10000);
+//
+//            promise.then(function(data){
+//                console.log("promise.then"+data);
+//            })
+
+        };
+
+        renderFun();
+    });
+
+
+
+
+</script>
+
+
+</body>
+</html>

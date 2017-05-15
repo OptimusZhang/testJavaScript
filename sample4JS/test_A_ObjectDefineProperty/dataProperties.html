@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>数据属性</title>
+</head>
+<body>
+<script>
+
+    //ECMAScript的属性分为两种:数据属性和访问器属性
+
+    // 数据属性有以下4个描述其行为的特性
+    // 1.[[Configurable]] 定义能否通过delete删除属性来重新定义属性, 能否修改属性的特性[[Enumerable, Writable(可以设置为false), Value]],或者把属性修改为访问器属性
+    // 2.[[Enumerable]] 定义能否通过for-in来枚举属性
+    // 3.[[Writable]] 定义能否修改属性的值
+    // 4.[[Value]] 用来存放属性的值
+    // 1,2,3默认为true, Value默认为undefined
+
+    // sample1
+    var person  = {};
+    Object.defineProperty(person, 'name', {
+        configurable: true,
+        writable: false,
+        value: 'Nicholas'
+    });
+    console.log(person.name);   // Nicholas
+    person.name = 'Tom first time';
+    console.log(person.name);   // Nicholas
+
+    Object.defineProperty(person, 'name', {
+        writable: true,
+    });
+
+    person.name = 'Tom second time';
+    console.log(person.name);   // Tom second time
+
+    Object.defineProperty(person, 'name', {
+        configurable: false,     // configurable设定为false后,只能修改writable属性为false否则会抛异常
+        writable: true          
+    })
+
+    person.name = 'Tom third time';
+    console.log(person.name);   // Tom third time
+
+    Object.defineProperty(person, 'name', {
+        writable: false
+    })
+
+    person.name = 'Tom forth time';
+    console.log(person.name);   // Tom third time
+
+    Object.defineProperty(person, 'name', {     // 程序中止! Uncaught TypeError: Cannot redefine property: name
+        writable: true
+    })
+
+    console.log(person.name);   // Tom third time
+    
+</script>
+
+</body>
+</html>

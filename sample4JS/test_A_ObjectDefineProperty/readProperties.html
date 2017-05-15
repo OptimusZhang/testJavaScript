@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>访问器属性</title>
+</head>
+<body>
+<script>
+
+    //ECMAScript的属性分为两种:数据属性和访问器属性
+
+    // 数据属性有以下4个描述其行为的特性
+    // 1.[[Configurable]] 定义能否通过delete删除属性来重新定义属性, 能否修改属性的特性[[Enumerable, Get, Set]],或者把属性修改为数据属性.
+    // 2.[[Enumerable]] 定义能否通过for-in来枚举属性
+    // 3.[[Get]] 在读取属性时调用的方法,默认为undefined. // 只指定getter,属性变为只读属性
+    // 4.[[Set]] 在设置属性时调用的方法,默认为undefined. // 只指定setter,属性变为只写属性
+
+    // sample1
+    var book = {
+        _year: 2003,
+        edition: 1
+    }
+
+    Object.defineProperty(book, 'year', {
+        get: function () {
+            return this._year;
+        },
+        
+        set: function (year) {
+            if (year > 2004) {
+                this._year = year;
+                this.edition += year - 2004;
+            }
+        }
+    });
+
+
+    book.year = 2004;
+    console.log("book.year = 2004 >> year:" + book.year);   // 2003
+    console.log("book.year = 2004 >> _year:" + book._year); // 2003
+    console.log("book.year = 2004 >> _year:" + book.edition); // 1
+
+
+    book.year = 2005;
+    console.log("book.year = 2005 >> year:" + book.year);   // 2005
+    console.log("book.year = 2005 >> _year:" + book._year); // 2005
+    console.log("book.year = 2005 >> _year:" + book.edition); // 2
+    
+</script>
+
+</body>
+</html>

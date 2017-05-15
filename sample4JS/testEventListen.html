@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>测试用html事件,dom0级事件,dom2级事件来监听事件</title>
+</head>
+<body>
+<button id="target" onclick="aaa()">Clickme</button>
+<script>
+    var target = document.getElementById('target');
+
+    function aaa(){
+        alert(1);
+    }
+
+
+    target.addEventListener('click', function(){
+        alert(4);
+    });
+
+    target.addEventListener('click', function(){
+        alert(5);
+    });
+
+    target.onclick = function(){
+        alert(3);
+    };
+
+    target.onclick = function(){
+        alert(2);
+    }
+
+</script>
+</body>
+</html>
